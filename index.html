@@ -401,155 +401,137 @@
 
         let currentUserActive = null;
 
-        // =========================================================================
-// 1. DATA MASTER BPKDM PAI KELAS 1-6 LENGKAP (SEMESTER 1 & 2)
+       // =========================================================================
+// 1. DATA MASTER MATERI POKOK BPKDM PAI KELAS 1-6 LENGKAP
 // =========================================================================
 const DATA_BPKDM_PAI = {
-    "1": {
-        semester_1: [
-            "Bab 1: Aku Cinta Al-Qur'an (Surah Al-Fatihah, Hijaiyah, Harakat)",
-            "Bab 2: Mengenal Rukun Iman (Mengimani Allah SWT)",
-            "Bab 3: Kasih Sayang (Sifat Allah SWT, Nabi Muhammad SAW, & Sesama)",
-            "Bab 4: Bersih Itu Sehat (Istinja', Wudu, Kebersihan Lingkungan)",
-            "Bab 5: Kisah Nabi Adam AS (Penciptaan Manusia Pertama)"
-        ],
-        semester_2: [
-            "Bab 6: Surah An-Nas (Melafalkan, Menghafal, Pesan Pokok)",
-            "Bab 7: Mengenal Allah SWT (Asmaul Husna: Al-Hafiz & Al-Wali)",
-            "Bab 8: Aku Anak Mandiri (Mandiri, Percaya Diri, Disiplin)",
-            "Bab 9: Ayo Belajar dan Berdoa (Adab & Doa Harian Belajar)",
-            "Bab 10: Kisah Nabi Idris AS (Keteladanan Nabi yang Cerdas)"
-        ]
-    },
-    "2": {
-        semester_1: [
-            "Bab 1: Senangnya Belajar Surah Al-A'laq",
-            "Bab 2: Allah SWT Maha Pencipta (Asmaul Husna: Al-Malik, Al-Quddus, As-Salam)",
-            "Bab 3: Hidup Bersih dan Tertib (Di Rumah & Sekolah)",
-            "Bab 4: Mari Berwudu (Tata Cara, Niat, Doa, Hal yang Membatalkan)",
-            "Bab 5: Kisah Nabi Nuh AS (Kesabaran & Ketaatan)"
-        ],
-        semester_2: [
-            "Bab 6: Ayo Belajar Surah An-Nasr",
-            "Bab 7: Allah SWT Maha Mengetahui (Asmaul Husna: Al-Alim & Al-Khabir)",
-            "Bab 8: Senangnya Berakhlak Terpuji (Jujur, Tanggung Jawab, Peduli)",
-            "Bab 9: Ibadah Salat (Pengertian, Gerakan, Bacaan Salat Wajib)",
-            "Bab 10: Kisah Nabi Ibrahim AS & Nabi Ismail AS (Keteladanan Berkurban)"
-        ]
-    },
-    "3": {
-        semester_1: [
-            "Bab 1: Asyiknya Belajar Surah Al-Qadr",
-            "Bab 2: Allah SWT Maha Sempurna (Sifat Wajib & Mustahil, Asmaul Husna: Al-Ahad, As-Samad)",
-            "Bab 3: Bersyukur kepada Allah SWT (Makna & Implementasi Syukur)",
-            "Bab 4: Ketentuan Salat (Syarat Sah, Rukun, Hal yang Membatalkan)",
-            "Bab 5: Kisah Nabi Muhammad SAW (Percaya Diri & Mandiri Berdagang)"
-        ],
-        semester_2: [
-            "Bab 6: Belajar Surah Al-Kausar",
-            "Bab 7: Indahnya Nama-nama Allah SWT (Asmaul Husna: Al-Wahhab, Al-Alim, As-Sami')",
-            "Bab 8: Perilaku Terpuji (Rendah Hati, Dermawan, Pemaaf)",
-            "Bab 9: Zikir dan Doa (Tata Cara Setelah Salat)",
-            "Bab 10: Kisah Nabi Luth AS & Nabi Ya'qub AS (Menyampaikan Kebenaran & Kesabaran)"
-        ]
-    },
-    "4": {
-        semester_1: [
-            "Bab 1: Al-Qur'an Surah Al-Hujurat Ayat 13 (Keragaman Manusia)",
-            "Bab 2: Mengenal Asmaul Husna (Al-Malik, Al-Aziz, Al-Quddus, As-Salam, Al-Mu'min)",
-            "Bab 3: Aku Anak Saleh (Amanah, Jujur, Disiplin di Rumah & Sekolah)",
-            "Bab 4: Mari Berpuasa (Ketentuan Ramadhan, Syarat Wajib, Hikmah)",
-            "Bab 5: Asal-Usul Penyebaran Islam (Sejarah Wali Songo & Dakwah)"
-        ],
-        semester_2: [
-            "Bab 6: Melafalkan Surah At-Tin",
-            "Bab 7: Beriman kepada Rasul Allah (Sifat Wajib Rasul & Ulul Azmi)",
-            "Bab 8: Menghindari Akhlak Tercela (Sombong, Iri Dengki, Berbohong)",
-            "Bab 9: Ketentuan Zakat (Zakat Fitrah & Zakat Mal/Harta)",
-            "Bab 10: Kisah Nabi Ayub AS & Nabi Musa AS (Menghadapi Cobaan & Keadilan)"
-        ]
-    },
-    "5": {
-        semester_1: [
-            "Bab 1: Mari Mengaji Surah Al-'Alaq & Al-Qadr (Hukum Bacaan Tajwid)",
-            "Bab 2: Percaya kepada Hari Akhir (Kiamat & Hikmah Beriman)",
-            "Bab 3: Indahnya Nama Allah SWT (Al-Qayyum, Al-Muhyi, Al-Mumit, Al-Ba'its)",
-            "Bab 4: Berbagai Ketentuan Salat Sunah (Rawatib, Tarawih, Witir, Jamaah)",
-            "Bab 5: Kisah Keteladanan Nabi Daud AS & Nabi Sulaiman AS (Kebijaksanaan & Syukur)"
-        ],
-        semester_2: [
-            "Bab 6: Indahnya Saling Menghargai (Q.S. Al-Kafirun & Toleransi)",
-            "Bab 7: Mari Berinfak dan Sedekah (Manfaat bagi Masyarakat)",
-            "Bab 8: Senang Menuntut Ilmu (Dalil & Keutamaan Menuntut Ilmu)",
-            "Bab 9: Perilaku Terpuji (Tawadu, Ikhlas, Pemaaf)",
-            "Bab 10: Khulafaur Rasyidin (Abu Bakar, Umar, Utsman, Ali R.A)"
-        ]
-    },
-    "6": {
-        semester_1: [
-            "Bab 1: Belajar Al-Qur'an Hadis (Surah Ad-Dhuha & Keutamaan Memberi)",
-            "Bab 2: Lebih Dekat dengan Allah SWT (Al-Ghaffar, Al-Afwu, As-Shamad, Al-Muqtadir, Al-Muqaddim, Al-Baqi)",
-            "Bab 3: Qada dan Qadar (Takdir Allah SWT)",
-            "Bab 4: Zakat, Infak, dan Sedekah (Penerapan di Masyarakat)",
-            "Bab 5: Keteladanan Sahabat Nabi (Umar bin Khattab & Abu Bakar)"
-        ],
-        semester_2: [
-            "Bab 6: Menyikapi Keberagaman (Q.S. Al-Hujurat Ayat 13 & Hadis)",
-            "Bab 7: Ayo Membayar Zakat (Fikih Zakat Mal, Fitrah & Mustahik)",
-            "Bab 8: Indahnya Berakhlak Mulia (Adab Bertamu, Medsos, & Menjaga Lisan)",
-            "Bab 9: Meneladani Rasulullah SAW (Membangun Masyarakat Madinah)",
-            "Bab 10: Tokoh Islam di Nusantara (Ulama dalam Perkembangan Islam Indonesia)"
-        ]
-    }
+    "1": [
+        "Bab 1: Aku Cinta Al-Qur'an (Surah Al-Fatihah, Hijaiyah, Harakat)",
+        "Bab 2: Mengenal Rukun Iman (Mengimani Allah SWT)",
+        "Bab 3: Kasih Sayang (Sifat Allah SWT, Nabi Muhammad SAW, & Sesama)",
+        "Bab 4: Bersih Itu Sehat (Istinja', Wudu, Kebersihan Lingkungan)",
+        "Bab 5: Kisah Nabi Adam AS (Penciptaan Manusia Pertama)",
+        "Bab 6: Surah An-Nas (Melafalkan, Menghafal, Pesan Pokok)",
+        "Bab 7: Mengenal Allah SWT (Asmaul Husna: Al-Hafiz & Al-Wali)",
+        "Bab 8: Aku Anak Mandiri (Mandiri, Percaya Diri, Disiplin)",
+        "Bab 9: Ayo Belajar dan Berdoa (Adab & Doa Harian Belajar)",
+        "Bab 10: Kisah Nabi Idris AS (Keteladanan Nabi yang Cerdas)"
+    ],
+    "2": [
+        "Bab 1: Senangnya Belajar Surah Al-A'laq",
+        "Bab 2: Allah SWT Maha Pencipta (Asmaul Husna: Al-Malik, Al-Quddus, As-Salam)",
+        "Bab 3: Hidup Bersih and Tertib (Di Rumah & Sekolah)",
+        "Bab 4: Mari Berwudu (Tata Cara, Niat, Doa, Hal yang Membatalkan)",
+        "Bab 5: Kisah Nabi Nuh AS (Kesabaran & Ketaatan)",
+        "Bab 6: Ayo Belajar Surah An-Nasr",
+        "Bab 7: Allah SWT Maha Mengetahui (Asmaul Husna: Al-Alim & Al-Khabir)",
+        "Bab 8: Senangnya Berakhlak Terpuji (Jujur, Tanggung Jawab, Peduli)",
+        "Bab 9: Ibadah Salat (Pengertian, Gerakan, Bacaan Salat Wajib)",
+        "Bab 10: Kisah Nabi Ibrahim AS & Nabi Ismail AS (Keteladanan Berkurban)"
+    ],
+    "3": [
+        "Bab 1: Asyiknya Belajar Surah Al-Qadr",
+        "Bab 2: Allah SWT Maha Sempurna (Sifat Wajib & Mustahil, Asmaul Husna: Al-Ahad, As-Samad)",
+        "Bab 3: Bersyukur kepada Allah SWT (Makna & Implementasi Syukur)",
+        "Bab 4: Ketentuan Salat (Syarat Sah, Rukun, Hal yang Membatalkan)",
+        "Bab 5: Kisah Nabi Muhammad SAW (Percaya Diri & Mandiri Berdagang)",
+        "Bab 6: Belajar Surah Al-Kausar",
+        "Bab 7: Indahnya Nama-nama Allah SWT (Asmaul Husna: Al-Wahhab, Al-Alim, As-Sami')",
+        "Bab 8: Perilaku Terpuji (Rendah Hati, Dermawan, Pemaaf)",
+        "Bab 9: Zikir dan Doa (Tata Cara Setelah Salat)",
+        "Bab 10: Kisah Nabi Luth AS & Nabi Ya'qub AS (Menyampaikan Kebenaran & Kesabaran)"
+    ],
+    "4": [
+        "Bab 1: Al-Qur'an Surah Al-Hujurat Ayat 13 (Keragaman Manusia)",
+        "Bab 2: Mengenal Asmaul Husna (Al-Malik, Al-Aziz, Al-Quddus, As-Salam, Al-Mu'min)",
+        "Bab 3: Aku Anak Saleh (Amanah, Jujur, Disiplin di Rumah & Sekolah)",
+        "Bab 4: Mari Berpuasa (Ketentuan Ramadhan, Syarat Wajib, Hikmah)",
+        "Bab 5: Asal-Usul Penyebaran Islam (Sejarah Wali Songo & Dakwah)",
+        "Bab 6: Melafalkan Surah At-Tin",
+        "Bab 7: Beriman kepada Rasul Allah (Sifat Wajib Rasul & Ulul Azmi)",
+        "Bab 8: Menghindari Akhlak Tercela (Sombong, Iri Dengki, Berbohong)",
+        "Bab 9: Ketentuan Zakat (Zakat Fitrah & Zakat Mal/Harta)",
+        "Bab 10: Kisah Nabi Ayub AS & Nabi Musa AS (Menghadapi Cobaan & Keadilan)"
+    ],
+    "5": [
+        "Bab 1: Mari Mengaji Surah Al-'Alaq & Al-Qadr (Hukum Bacaan Tajwid)",
+        "Bab 2: Percaya kepada Hari Akhir (Kiamat & Hikmah Beriman)",
+        "Bab 3: Indahnya Nama Allah SWT (Al-Qayyum, Al-Muhyi, Al-Mumit, Al-Ba'its)",
+        "Bab 4: Berbagai Ketentuan Salat Sunah (Rawatib, Tarawih, Witir, Jamaah)",
+        "Bab 5: Kisah Keteladanan Nabi Daud AS & Nabi Sulaiman AS (Kebijaksanaan & Syukur)",
+        "Bab 6: Indahnya Saling Menghargai (Q.S. Al-Kafirun & Toleransi)",
+        "Bab 7: Mari Berinfak dan Sedekah (Manfaat bagi Masyarakat)",
+        "Bab 8: Senang Menuntut Ilmu (Dalil & Keutamaan Menuntut Ilmu)",
+        "Bab 9: Perilaku Terpuji (Tawadu, Ikhlas, Pemaaf)",
+        "Bab 10: Khulafaur Rasyidin (Abu Bakar, Umar, Utsman, Ali R.A)"
+    ],
+    "6": [
+        "Bab 1: Belajar Al-Qur'an Hadis (Surah Ad-Dhuha & Keutamaan Memberi)",
+        "Bab 2: Lebih Dekat dengan Allah SWT (Al-Ghaffar, Al-Afwu, As-Shamad, Al-Muqtadir, Al-Muqaddim, Al-Baqi)",
+        "Bab 3: Qada dan Qadar (Takdir Allah SWT)",
+        "Bab 4: Zakat, Infak, dan Sedekah (Penerapan di Masyarakat)",
+        "Bab 5: Keteladanan Sahabat Nabi (Umar bin Khattab & Abu Bakar)",
+        "Bab 6: Menyikapi Keberagaman (Q.S. Al-Hujurat Ayat 13 & Hadis)",
+        "Bab 7: Ayo Membayar Zakat (Fikih Zakat Mal, Fitrah & Mustahik)",
+        "Bab 8: Indahnya Berakhlak Mulia (Adab Bertamu, Medsos, & Menjaga Lisan)",
+        "Bab 9: Meneladani Rasulullah SAW (Membangun Masyarakat Madinah)",
+        "Bab 10: Tokoh Islam di Nusantara (Ulama dalam Perkembangan Islam Indonesia)"
+    ]
 };
 
 let currentUserActive = null;
 
 // =========================================================================
-// 2. INTEGRASI MANAJEMEN AUTENTIKASI & EVENT LISTENER KELAS
+// 2. FUNGSI UTAMA: SINKRONISASI MATERI POKOK PER BAB
+// =========================================================================
+function sinkronisasiKelasGlobal(nomorKelas) {
+    if (!nomorKelas) return;
+    console.log(`Menyinkronkan Materi Pokok BPKDM untuk Kelas: ${nomorKelas}`);
+    
+    const daftarBab = DATA_BPKDM_PAI[nomorKelas];
+    if (!daftarBab) {
+        console.warn(`Data Materi untuk Kelas ${nomorKelas} tidak ditemukan.`);
+        return;
+    }
+    
+    // Deteksi elemen dropdown target untuk Materi Pokok / Bab
+    // Kode ini memeriksa segala kemungkinan ID elemen perangkat inti Anda
+    const selectMateriPokok = document.getElementById("pilihan-bab") || 
+                              document.getElementById("select-materi-pokok") || 
+                              document.getElementById("pilihan-bab-sem1") ||
+                              document.getElementById("select-elemen-inti");
+    
+    if (selectMateriPokok) {
+        selectMateriPokok.innerHTML = '<option value="">-- Pilih Materi Pokok / Bab --</option>';
+        
+        daftarBab.forEach((materi, index) => {
+            let opt = document.createElement("option");
+            opt.value = `bab_${index + 1}`;
+            opt.innerText = materi;
+            selectMateriPokok.appendChild(opt);
+        });
+        console.log(`Berhasil memuat ${daftarBab.length} Bab ke dalam dropdown.`);
+    } else {
+        console.error("PERINGATAN: Elemen Dropdown untuk memuat Perangkat Inti / Bab tidak ditemukan di HTML.");
+    }
+    
+    localStorage.setItem("kelas_aktif_bpkdm", nomorKelas);
+}
+
+// =========================================================================
+// 3. INTEGRASI AUTENTIKASI (FIREBASE LIFECYCLE)
 // =========================================================================
 document.addEventListener("DOMContentLoaded", () => {
-    // Jalankan sistem pengikat deteksi perubahan dropdown kelas
-    aktifkanPendeteksiPerubahanKelas();
-
     setTimeout(() => {
-        if (!window.authService) {
-            console.error("Firebase SDK belum siap di lingkup global window.");
-            return;
-        }
+        if (!window.authService) return;
 
         if (typeof window.authService.onAuthStateChanged === 'function') {
             window.authService.onAuthStateChanged(window.authService.auth, async (user) => {
                 jalankanAlurAuth(user);
             });
-        } else {
-            console.warn("Metode onAuthStateChanged tidak ditemukan. Menjalankan fallback...");
-            const intervalCekUser = setInterval(() => {
-                const userLokal = window.authService.auth ? window.authService.auth.currentUser : null;
-                if (userLokal) {
-                    jalankanAlurAuth(userLokal);
-                    clearInterval(intervalCekUser);
-                }
-            }, 1000);
         }
     }, 1000);
 });
-
-// FUNGSI BARU: Memastikan setiap kali dropdown kelas diganti, isi Bab langsung berubah otomatis
-function aktifkanPendeteksiPerubahanKelas() {
-    const targetIds = ["pilih-tingkat-kelas", "select-kelas", "select-kelas-perangkat"];
-    
-    targetIds.forEach(id => {
-        const elemenKelas = document.getElementById(id);
-        if (elemenKelas) {
-            console.log(`Pendeteksi otomatis dipasang pada elemen ID: ${id}`);
-            // Hapus listener lama jika ada agar tidak double
-            elemenKelas.removeEventListener("change", ketikaKelasDiubah);
-            // Pasang listener aktif
-            elemenKelas.addEventListener("change", ketikaKelasDiubah);
-        }
-    });
-}
 
 async function jalankanAlurAuth(user) {
     const loginScreen = document.getElementById("login-screen");
@@ -559,150 +541,71 @@ async function jalankanAlurAuth(user) {
     if (user) {
         currentUserActive = user;
         if (emailDisplay) emailDisplay.innerText = user.email;
-        
         if (loginScreen) loginScreen.classList.add("hidden");
         if (mainApp) mainApp.classList.remove("hidden");
         
-        // Pemicu awal saat baru berhasil masuk
-        const selectKelas = document.getElementById("pilih-tingkat-kelas") || document.getElementById("select-kelas") || document.getElementById("select-kelas-perangkat");
-        if (selectKelas && selectKelas.value) {
-            sinkronisasiKelasGlobal(selectKelas.value);
+        // Picu otomatisasi pengisian awal berdasarkan kelas yang sedang terpilih saat ini
+        const dropdownKelas = document.getElementById("select-kelas");
+        if (dropdownKelas && dropdownKelas.value) {
+            sinkronisasiKelasGlobal(dropdownKelas.value);
         }
         
-        if (typeof muatDariCloud === "function") {
-            await muatDariCloud();
-        } else if (typeof muatDataLokal === "function") {
-            muatDataLokal();
-        }
+        if (typeof muatDariCloud === "function") await muatDariCloud();
     } else {
         currentUserActive = null;
-        if (emailDisplay) emailDisplay.innerText = "Guest";
-        
         if (loginScreen) loginScreen.classList.remove("hidden");
         if (mainApp) mainApp.classList.add("hidden");
     }
 }
 
 // =========================================================================
-// 3. FUNGSI HANDLER TOMBOL MASUK & DAFTAR
+// 4. HANDLER TOMBOL MASUK & DAFTAR
 // =========================================================================
 async function handleLogin() {
     const emailInput = document.getElementById("auth-email");
     const passwordInput = document.getElementById("auth-password");
-    const errBox = document.getElementById("auth-error");
-    
     if (!emailInput || !passwordInput) return;
 
-    const email = emailInput.value.trim();
-    const password = passwordInput.value;
-    
-    if (!email || !password) {
-        tampilkanError("Email dan kata sandi wajib diisi!");
-        return;
-    }
-    
     try {
-        if (errBox) errBox.classList.add("hidden");
-        await window.authService.signInWithEmailAndPassword(window.authService.auth, email, password);
+        tampilkanError(""); // Reset error
+        await window.authService.signInWithEmailAndPassword(window.authService.auth, emailInput.value.trim(), passwordInput.value);
     } catch (error) {
-        console.error("Gagal Login:", error);
         tampilkanError("Gagal Masuk: " + menerjemahkanErrorFirebase(error.code));
     }
 }
 
 async function handleRegister() {
-    const email = document.getElementById("auth-email").value.trim();
-    const password = document.getElementById("auth-password").value;
-    
-    if (!email || !password) {
-        tampilkanError("Email dan kata sandi wajib diisi untuk mendaftar!");
-        return;
-    }
+    const emailInput = document.getElementById("auth-email");
+    const passwordInput = document.getElementById("auth-password");
+    if (!emailInput || !passwordInput) return;
     
     try {
-        await window.authService.createUserWithEmailAndPassword(window.authService.auth, email, password);
-        alert("Pendaftaran akun berhasil! Anda otomatis masuk.");
+        await window.authService.createUserWithEmailAndPassword(window.authService.auth, emailInput.value.trim(), passwordInput.value);
+        alert("Pendaftaran akun berhasil!");
     } catch (error) {
-        console.error("Gagal Register:", error);
         tampilkanError("Gagal Daftar: " + menerjemahkanErrorFirebase(error.code));
     }
 }
 
-// =========================================================================
-// 4. LOGIKA AUTO-FILL BPKDM PAI BERDASARKAN KELAS YANG DIPILIH
-// =========================================================================
-function sinkronisasiKelasGlobal(nomorKelas) {
-    console.log(`Menyinkronkan materi otomatis untuk tingkat Kelas: ${nomorKelas}`);
-    
-    const dataMateri = DATA_BPKDM_PAI[nomorKelas];
-    if (!dataMateri) {
-        console.warn(`Data materi untuk Kelas ${nomorKelas} tidak terdaftar.`);
-        return;
-    }
-    
-    // Sesuaikan dengan kemungkinan nama ID menu perangkat inti Anda
-    const selectBabSatu = document.getElementById("pilihan-bab-sem1") || document.getElementById("select-elemen-inti") || document.getElementById("pilihan-bab");
-    const selectBabDua = document.getElementById("pilihan-bab-sem2");
-    
-    if (selectBabSatu) {
-        selectBabSatu.innerHTML = '<option value="">-- Pilih Bab Semester 1 --</option>';
-        dataMateri.semester_1.forEach((bab, index) => {
-            let opt = document.createElement("option");
-            opt.value = `bab_${index + 1}`;
-            opt.innerText = bab;
-            selectBabSatu.appendChild(opt);
-        });
-    }
-    
-    if (selectBabDua) {
-        selectBabDua.innerHTML = '<option value="">-- Pilih Bab Semester 2 --</option>';
-        dataMateri.semester_2.forEach((bab, index) => {
-            let opt = document.createElement("option");
-            opt.value = `bab_${index + 6}`;
-            opt.innerText = bab;
-            selectBabDua.appendChild(opt);
-        });
-    }
-    
-    localStorage.setItem("kelas_aktif_bpkdm", nomorKelas);
-}
-
-function ketikaKelasDiubah(event) {
-    const kelasTerpilih = event.target.value;
-    if (kelasTerpilih) {
-        sinkronisasiKelasGlobal(kelasTerpilih);
-    }
-}
-
-// =========================================================================
-// 5. FUNGSI UTILITAS PENDUKUNG (ERROR BOX & TRANSLATOR)
-// =========================================================================
 function tampilkanError(pesan) {
     const errBox = document.getElementById("auth-error");
     if (errBox) {
-        errBox.innerText = pesan;
-        errBox.classList.remove("hidden");
-    } else {
-        alert(pesan);
+        if(pesan) {
+            errBox.innerText = pesan;
+            errBox.classList.remove("hidden");
+        } else {
+            errBox.classList.add("hidden");
+        }
     }
 }
 
 function menerjemahkanErrorFirebase(code) {
     switch (code) {
-        case "auth/invalid-email":
-            return "Format alamat email tidak valid.";
-        case "auth/user-disabled":
-            return "Akun ini telah dinonaktifkan.";
+        case "auth/invalid-email": return "Format email salah.";
         case "auth/user-not-found":
         case "auth/wrong-password":
-        case "auth/invalid-credential":
-            return "Email atau kata sandi salah.";
-        case "auth/email-already-in-use":
-            return "Email ini sudah terdaftar dengan akun lain.";
-        case "auth/weak-password":
-            return "Kata sandi terlalu lemah (minimal 6 karakter).";
-        default:
-            return "Terjadi kesalahan sistem internal (" + code + ").";
+        case "auth/invalid-credential": return "Email atau password salah.";
+        default: return "Kendala sistem internal (" + code + ").";
     }
 }
 </script>
