@@ -506,9 +506,12 @@ const DATA_BPKDM_PAI = {
 let currentUserActive = null;
 
 // =========================================================================
-// 2. INTEGRASI MANAJEMEN AUTENTIKASI (FIREBASE LIFECYCLE)
+// 2. INTEGRASI MANAJEMEN AUTENTIKASI & EVENT LISTENER KELAS
 // =========================================================================
 document.addEventListener("DOMContentLoaded", () => {
+    // Jalankan sistem pengikat deteksi perubahan dropdown kelas
+    aktifkanPendeteksiPerubahanKelas();
+
     setTimeout(() => {
         if (!window.authService) {
             console.error("Firebase SDK belum siap di lingkup global window.");
@@ -520,7 +523,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 jalankanAlurAuth(user);
             });
         } else {
-            console.warn("Metode onAuthStateChanged tidak ditemukan. Menjalankan fallback state...");
+            console.warn("Metode onAuthStateChanged tidak ditemukan. Menjalankan fallback...");
             const intervalCekUser = setInterval(() => {
                 const userLokal = window.authService.auth ? window.authService.auth.currentUser : null;
                 if (userLokal) {
@@ -531,6 +534,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 1000);
 });
+
+// FUNGSI BARU: Memastikan setiap kali dropdown kelas diganti, isi Bab langsung berubah otomatis
+function aktifkanPendeteksiPerubahanKelas() {
+    const targetIds = ["pilih-tingkat-kelas", "select-kelas", "select-kelas-perangkat"];
+    
+    targetIds.forEach(id => {
+        const elemenKelas = document.getElementById(id);
+        if (elemenKelas) {
+            console.log(`Pendeteksi otomatis dipasang pada elemen ID: ${id}`);
+            // Hapus listener lama jika ada agar tidak double
+            elemenKelas.removeEventListener("change", ketikaKelasDiubah);
+            // Pasang listener aktif
+            elemenKelas.addEventListener("change", ketikaKelasDiubah);
+        }
+    });
+}
 
 async function jalankanAlurAuth(user) {
     const loginScreen = document.getElementById("login-screen");
@@ -544,13 +563,12 @@ async function jalankanAlurAuth(user) {
         if (loginScreen) loginScreen.classList.add("hidden");
         if (mainApp) mainApp.classList.remove("hidden");
         
-        // Cek ID elemen alternatif agar tidak membuat sistem macet
+        // Pemicu awal saat baru berhasil masuk
         const selectKelas = document.getElementById("pilih-tingkat-kelas") || document.getElementById("select-kelas") || document.getElementById("select-kelas-perangkat");
         if (selectKelas && selectKelas.value) {
             sinkronisasiKelasGlobal(selectKelas.value);
         }
         
-        // Proteksi jika fungsi muatDariCloud belum didefinisikan di atas
         if (typeof muatDariCloud === "function") {
             await muatDariCloud();
         } else if (typeof muatDataLokal === "function") {
@@ -622,7 +640,8 @@ function sinkronisasiKelasGlobal(nomorKelas) {
         return;
     }
     
-    const selectBabSatu = document.getElementById("pilihan-bab-sem1") || document.getElementById("select-elemen-inti");
+    // Sesuaikan dengan kemungkinan nama ID menu perangkat inti Anda
+    const selectBabSatu = document.getElementById("pilihan-bab-sem1") || document.getElementById("select-elemen-inti") || document.getElementById("pilihan-bab");
     const selectBabDua = document.getElementById("pilihan-bab-sem2");
     
     if (selectBabSatu) {
