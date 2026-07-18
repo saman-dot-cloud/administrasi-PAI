@@ -393,37 +393,53 @@
 
         // AUTH HANDLERS
         // ================= INTEGRASI UTAMA FIREBASE AUTH & FLOW =================
+// ================= INTEGRASI UTAMA FIREBASE AUTH & FLOW =================
 document.addEventListener("DOMContentLoaded", () => {
-    // Memberikan jeda singkat memastikan SDK Firebase module di window telah ter-ekspos
+    // Memberikan jeda waktu agar SDK Firebase di window selesai dimuat sempurna
     setTimeout(() => {
+        // 1. Cek apakah objek authService ada
         if (!window.authService) {
-            console.error("Firebase SDK gagal dimuat. Periksa koneksi atau konfigurasi CDN.");
+            console.error("Firebase SDK gagal dimuat di window. Periksa jaringan Anda.");
             return;
         }
         
+        // 2. DETEKSI OTOMATIS STRUKTUR FUNGSI FIREBASE (ANTI CRASH)
+        let fAuth = window.authService.auth;
+        let metodeAuth = null;
+
+        if (typeof window.authService.onAuthStateChanged === "function") {
+            // Jalur A: Jika fungsi menempel langsung di authService
+            metodeAuth = window.authService.onAuthStateChanged;
+        } else if (window.firebase && window.firebase.auth) {
+            // Jalur B: Jika menggunakan Firebase versi lama (v8 kebawah)
+            fAuth = window.firebase.auth();
+            metodeAuth = fAuth.onAuthStateChanged.bind(fAuth);
+        } else {
+            console.error("Metode onAuthStateChanged tidak ditemukan pada objek Firebase Anda.");
+            alert("Eror Autentikasi: Struktur library Firebase tidak cocok. Silakan cek susunan script.");
+            return;
+        }
+
+        // 3. JALANKAN PROSES PENDETEKSI STATUS LOGIN
         try {
-            // PERBAIKAN UTAMA: Memanggil onAuthStateChanged langsung dari authService dengan benar
-            window.authService.onAuthStateChanged(window.authService.auth, async (user) => {
+            metodeAuth(fAuth, async (user) => {
                 const loginScreen = document.getElementById("login-screen");
                 const mainApp = document.getElementById("main-app");
                 
                 if (user) {
                     currentUserActive = user;
                     
-                    // Pastikan elemen text email ini ada di HTML Anda untuk menampilkan nama pengguna
                     const emailDisplay = document.getElementById("user-display-email");
                     if (emailDisplay) emailDisplay.innerText = user.email;
                     
-                    // Alihkan tampilan layar
                     if (loginScreen) loginScreen.classList.add("hidden");
                     if (mainApp) mainApp.classList.remove("hidden");
                     
-                    // Sinkronisasi data ke database internal
                     if (typeof muatDariCloud === "function") await muatDariCloud();
                     if (typeof sinkronisasiKelasGlobal === "function") sinkronisasiKelasGlobal("1");
-                    
                 } else {
                     currentUserActive = null;
+                    
                     const emailDisplay = document.getElementById("user-display-email");
                     if (emailDisplay) emailDisplay.innerText = "Guest";
                     
@@ -431,10 +447,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (mainApp) mainApp.classList.add("hidden");
                 }
             });
-        } catch (err) {
-            console.error("Gagal menginisialisasi listener Auth Firebase:", err);
+        } catch (e) {
+            console.error("Gagal menjalankan fungsi auth:", e);
         }
-    }, 1000);
+    }, 1000); // Jeda waktu 1 detik
 });
 
         async function handleLogin() {
