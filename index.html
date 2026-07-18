@@ -392,26 +392,50 @@
         let currentUserActive = null;
 
         // AUTH HANDLERS
-        document.addEventListener("DOMContentLoaded", () => {
-            setTimeout(() => {
-                window.authService.onAuthStateChanged(window.authService.auth, async (user) => {
-                    if (user) {
-                        currentUserActive = user;
-                        document.getElementById("user-display-email").innerText = user.email;
-                        document.getElementById("login-screen").classList.add("hidden");
-                        document.getElementById("main-app").classList.remove("hidden");
-                        
-                        // Tarik data spesifik milik User ID ini dari cloud
-                        await muatDariCloud();
-                        sinkronisasiKelasGlobal("1");
-                    } else {
-                        currentUserActive = null;
-                        document.getElementById("login-screen").classList.remove("hidden");
-                        document.getElementById("main-app").classList.add("hidden");
-                    }
-                });
-            }, 1500);
-        });
+        // ================= INTEGRASI UTAMA FIREBASE AUTH & FLOW =================
+document.addEventListener("DOMContentLoaded", () => {
+    // Memberikan jeda singkat memastikan SDK Firebase module di window telah ter-ekspos
+    setTimeout(() => {
+        if (!window.authService) {
+            console.error("Firebase SDK gagal dimuat. Periksa koneksi atau konfigurasi CDN.");
+            return;
+        }
+        
+        try {
+            // PERBAIKAN UTAMA: Memanggil onAuthStateChanged langsung dari authService dengan benar
+            window.authService.onAuthStateChanged(window.authService.auth, async (user) => {
+                const loginScreen = document.getElementById("login-screen");
+                const mainApp = document.getElementById("main-app");
+                
+                if (user) {
+                    currentUserActive = user;
+                    
+                    // Pastikan elemen text email ini ada di HTML Anda untuk menampilkan nama pengguna
+                    const emailDisplay = document.getElementById("user-display-email");
+                    if (emailDisplay) emailDisplay.innerText = user.email;
+                    
+                    // Alihkan tampilan layar
+                    if (loginScreen) loginScreen.classList.add("hidden");
+                    if (mainApp) mainApp.classList.remove("hidden");
+                    
+                    // Sinkronisasi data ke database internal
+                    if (typeof muatDariCloud === "function") await muatDariCloud();
+                    if (typeof sinkronisasiKelasGlobal === "function") sinkronisasiKelasGlobal("1");
+                    
+                } else {
+                    currentUserActive = null;
+                    const emailDisplay = document.getElementById("user-display-email");
+                    if (emailDisplay) emailDisplay.innerText = "Guest";
+                    
+                    if (loginScreen) loginScreen.classList.remove("hidden");
+                    if (mainApp) mainApp.classList.add("hidden");
+                }
+            });
+        } catch (err) {
+            console.error("Gagal menginisialisasi listener Auth Firebase:", err);
+        }
+    }, 1000);
+});
 
         async function handleLogin() {
             const email = document.getElementById("auth-email").value.trim();
