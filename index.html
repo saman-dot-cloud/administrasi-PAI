@@ -11,10 +11,15 @@
     
     <!-- SDK Firebase App dan Services (v10+) -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
+  // 1. Pastikan Anda mengimpor onAuthStateChanged dari firebase-auth
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { 
+    getAuth, 
+    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword, 
+    signOut, 
+    onAuthStateChanged // <-- PASTIKAN INI ADA
+  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         // ================= GANTI DENGAN KONFIGURASI FIREBASE ANDA =================
         const firebaseConfig = {
             apiKey: "AIzaSyCo1JeONo7cnbHoMyew6jJvUR27yI2B64I",
@@ -28,12 +33,17 @@
 
         // Inisialisasi Firebase
         const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+  const auth = getAuth(app);
 
-        // Ekspos fungsi ke window agar bisa diakses oleh tombol HTML biasa
-        window.authService = { auth, db, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, doc, setDoc, getDoc };
-    </script>
+  // 2. PERBAIKAN UTAMA: Daftarkan semua fungsi ke dalam window.authService
+  window.authService = {
+    auth: auth,
+    signInWithEmailAndPassword: signInWithEmailAndPassword,
+    createUserWithEmailAndPassword: createUserWithEmailAndPassword,
+    signOut: signOut,
+    onAuthStateChanged: onAuthStateChanged // <-- WAJIB DITULIS DI SINI AGAR TIDAK EROR LAGI
+  };
+</script>
 
     <style>
         @media print {
