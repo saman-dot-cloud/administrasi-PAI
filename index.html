@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Si PAI v2026 - PAI & Budi Pekerti Cloud</title>
+    <title>Si PAI v2026 - Perencanaan Pembelajaran Mendalam</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- FontAwesome for Icons -->
@@ -112,30 +112,43 @@
                     <div class="grid grid-cols-3 gap-3">
                         <div class="col-span-2">
                             <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Nama Instansi / Sekolah</label>
-                            <input type="text" id="cfg-nama-sekolah" value="SD Negeri Nusantara" oninput="simpanConfigSekolah()" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
+                            <input type="text" id="cfg-nama-sekolah" value="SDN CIRACAS 11 PAGI" oninput="simpanConfigSekolah()" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Tahun Ajaran</label>
                             <input type="text" id="cfg-tahun-ajaran" value="2026/2027" placeholder="e.g. 2026/2027" oninput="simpanConfigSekolah()" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-bold text-center outline-none focus:ring-2 focus:ring-emerald-500/20">
                         </div>
                     </div>
-                    <div class="border-t border-slate-100 pt-3">
-                        <label class="block text-xs font-bold text-slate-800 uppercase mb-2 text-emerald-700">Identitas Kepala Sekolah</label>
-                        <div class="flex flex-col gap-2">
-                            <input type="text" id="cfg-nama-kepsek" value="H. Ahmad Syarif, M.Pd." placeholder="Nama Kepala Sekolah" oninput="simpanConfigSekolah()" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
-                            <input type="text" id="cfg-nip-kepsek" value="19750824 200003 1 002" placeholder="NIP Kepala Sekolah" oninput="simpanConfigSekolah()" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Semester</label>
+                            <select id="cfg-semester" onchange="simpanConfigSekolah()" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium bg-white outline-none focus:ring-2 focus:ring-emerald-500/20">
+                                <option value="I">I (Ganjil)</option>
+                                <option value="II" selected>II (Genap)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Mata Pelajaran</label>
+                            <input type="text" id="cfg-mapel" value="PAI & Budi Pekerti" oninput="simpanConfigSekolah()" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
                         </div>
                     </div>
                     <div class="border-t border-slate-100 pt-3">
-                        <label class="block text-xs font-bold text-slate-800 uppercase mb-2 text-teal-700">Identitas Guru PAI & BP</label>
+                        <label class="block text-xs font-bold text-slate-800 uppercase mb-2 text-emerald-700">Identitas Kepala Sekolah</label>
                         <div class="flex flex-col gap-2">
-                            <input type="text" id="cfg-nama-guru" value="Aminah S.Pd.I." placeholder="Nama Guru PAI" oninput="simpanConfigSekolah()" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
-                            <input type="text" id="cfg-nip-guru" value="19881210 201504 2 003" placeholder="NIP Guru PAI (Jika Ada)" oninput="simpanConfigSekolah()" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
+                            <input type="text" id="cfg-nama-kepsek" value="Dian Rosdianingsih, M.Pd" placeholder="Nama Kepala Sekolah" oninput="simpanConfigSekolah()" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
+                            <input type="text" id="cfg-nip-kepsek" value="197012032008012014" placeholder="NIP Kepala Sekolah" oninput="simpanConfigSekolah()" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
+                        </div>
+                    </div>
+                    <div class="border-t border-slate-100 pt-3">
+                        <label class="block text-xs font-bold text-slate-800 uppercase mb-2 text-teal-700">Identitas Guru</label>
+                        <div class="flex flex-col gap-2">
+                            <input type="text" id="cfg-nama-guru" value="Siti Aminah, S.Pd." placeholder="Nama Guru" oninput="simpanConfigSekolah()" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
+                            <input type="text" id="cfg-nip-guru" value="198812102015042003" placeholder="NIP Guru (Jika Ada)" oninput="simpanConfigSekolah()" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
                         </div>
                     </div>
                 </div>
 
-                <!-- SUB-PANEL: INPUT SISWA BATCH / COPY-PASTE -->
+                <!-- SUB-PANEL: INPUT SISWA BATCH -->
                 <div id="form-sub-siswa" class="hidden flex flex-col gap-4">
                     <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 p-3 rounded-lg flex items-start gap-2">
                         <i class="fa-solid fa-paste text-xs mt-0.5"></i>
@@ -143,7 +156,7 @@
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Area Paste Data Siswa</label>
-                        <textarea id="siswa-bulk-input" rows="6" placeholder="Contoh format Excel (Nama [Spasi/Tab] L/P):&#10;Muhammad Ali	L&#10;Siti Aisyah	P&#10;&#10;Atau format teks manual:&#10;Budi Santoso, L&#10;Lani Wijaya, P" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs font-mono outline-none focus:ring-2 focus:ring-emerald-500/20 resize-none"></textarea>
+                        <textarea id="siswa-bulk-input" rows="6" placeholder="Contoh format Excel... " class="w-full border border-slate-200 rounded-lg p-2.5 text-xs font-mono outline-none focus:ring-2 focus:ring-emerald-500/20 resize-none"></textarea>
                     </div>
                     <button onclick="prosesBulkInputSiswa()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider py-2.5 rounded-lg transition shadow-md flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-arrows-spin"></i> Proses & Masukkan Rombel
@@ -154,9 +167,7 @@
                 <div id="form-sub-absensi" class="hidden flex flex-col gap-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Pilih Siswa</label>
-                        <select id="absensi-nama-select" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium bg-white outline-none focus:ring-2 focus:ring-emerald-500/20">
-                            <!-- Diisi dinamis dari database siswa rombel aktif -->
-                        </select>
+                        <select id="absensi-nama-select" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium bg-white outline-none focus:ring-2 focus:ring-emerald-500/20"></select>
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                         <div>
@@ -173,10 +184,6 @@
                             <input type="date" id="absensi-tanggal" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
                         </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Catatan Sikap / Jurnal</label>
-                        <textarea id="absensi-catatan" rows="2" placeholder="Mengikuti KBM dengan sangat baik..." class="w-full border border-slate-200 rounded-lg p-2.5 text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500/20 resize-none"></textarea>
-                    </div>
                     <button onclick="tambahDataAbsensi()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider py-2.5 rounded-lg transition shadow-md flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-floppy-disk"></i> Rekam Absensi
                     </button>
@@ -186,9 +193,7 @@
                 <div id="form-sub-nilai" class="hidden flex flex-col gap-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Pilih Siswa</label>
-                        <select id="nilai-nama-select" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium bg-white outline-none focus:ring-2 focus:ring-emerald-500/20">
-                            <!-- Diisi dinamis -->
-                        </select>
+                        <select id="nilai-nama-select" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium bg-white outline-none focus:ring-2 focus:ring-emerald-500/20"></select>
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                         <div>
@@ -196,28 +201,31 @@
                             <select id="nilai-jenis" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-semibold bg-white outline-none focus:ring-2 focus:ring-emerald-500/20">
                                 <option value="Formatif">Formatif</option>
                                 <option value="Sumatif Lingkup">Sumatif Bab</option>
-                                <option value="Sumatif Akhir">Sumatif Akhir</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Nilai (0-100)</label>
-                            <input type="number" id="nilai-angka" min="0" max="100" placeholder="85" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-bold outline-none focus:ring-2 focus:ring-emerald-500/20">
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Nilai</label>
+                            <input type="number" id="nilai-angka" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-bold outline-none focus:ring-2 focus:ring-emerald-500/20">
                         </div>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Materi / Bab</label>
-                        <input type="text" id="nilai-kompetensi" placeholder="Contoh: Bab 1 Huruf Hijaiyah" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
                     </div>
                     <button onclick="tambahDataNilai()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider py-2.5 rounded-lg transition shadow-md flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-circle-check"></i> Rekam Nilai
                     </button>
                 </div>
 
-                <!-- SUB-PANEL: MODUL AJAR -->
-                <div id="form-sub-modul" class="hidden flex flex-col gap-4">
+                <!-- SUB-PANEL: MODUL AJAR (MENDALAM FORMAT) -->
+                <div id="form-sub-modul" class="hidden flex flex-col gap-4 max-h-[70vh] overflow-y-auto custom-scrollbar p-0.5">
                     <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Elemen Inti PAI</label>
-                        <select id="select-elemen-inti" onchange="updateOtomatisCP()" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-semibold bg-white outline-none focus:ring-2 focus:ring-emerald-500/20">
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Alokasi Waktu</label>
+                        <input type="text" id="modul-jp" value="2 JP (2 x 35 menit)" class="w-full border border-slate-200 rounded-lg p-2 text-xs outline-none focus:ring-2 focus:ring-emerald-500/20">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Kesiapan Murid</label>
+                        <input type="text" id="modul-kesiapan" value="Mayoritas murid telah mengenal dasar hukum tajwid" class="w-full border border-slate-200 rounded-lg p-2 text-xs outline-none focus:ring-2 focus:ring-emerald-500/20">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Elemen / Materi Pelajaran</label>
+                        <select id="select-elemen-inti" onchange="updateOtomatisCP()" class="w-full border border-slate-200 rounded-lg p-2 text-xs font-semibold bg-white outline-none focus:ring-2 focus:ring-emerald-500/20">
                             <option value="Al-Qur'an Hadis">Al-Qur'an Hadis</option>
                             <option value="Akidah">Akidah</option>
                             <option value="Akhlak">Akhlak</option>
@@ -226,29 +234,73 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Topik / Materi Pelajaran</label>
-                        <select id="select-materi-pokok" onchange="document.getElementById('input-topik-materi').value = this.options[this.selectedIndex].text" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-semibold bg-white outline-none focus:ring-2 focus:ring-emerald-500/20">
-                            <option value="">-- Pilih Materi Pokok --</option>
-                        </select>
-                        <input type="hidden" id="input-topik-materi" value="">
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Topik Pembelajaran</label>
+                        <input type="text" id="modul-topik" value="Belajar Hukum Tajwid Dasar" class="w-full border border-slate-200 rounded-lg p-2 text-xs outline-none focus:ring-2 focus:ring-emerald-500/20">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Capaian Pembelajaran (CP)</label>
-                        <textarea id="textarea-cp" rows="3" class="w-full border border-slate-200 rounded-lg p-2 text-xs font-medium bg-slate-100 text-slate-600 outline-none resize-none" readonly></textarea>
+                        <textarea id="textarea-cp" rows="2" class="w-full border border-slate-200 rounded-lg p-2 text-xs bg-slate-50 text-slate-600 outline-none resize-none"></textarea>
                     </div>
                     <div>
-                        <div class="flex items-center justify-between mb-1">
-                            <label class="block text-xs font-bold text-slate-600 uppercase">Tujuan Pembelajaran (TP)</label>
-                            <button type="button" onclick="tambahBarisTP('')" class="text-[10px] font-bold text-emerald-600 hover:text-emerald-700 cursor-pointer">+ Tambah</button>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Tujuan Pembelajaran (TP)</label>
+                        <textarea id="textarea-tp" rows="2" class="w-full border border-slate-200 rounded-lg p-2 text-xs outline-none resize-none">Murid dapat mengidentifikasi & mempraktikkan hukum tajwid dasar dalam Al-Qur'an.</textarea>
+                    </div>
+
+                    <!-- DIMENSI PROFIL LULUSAN -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Dimensi Profil Lulusan (Centang)</label>
+                        <div class="grid grid-cols-2 gap-2 text-xs border border-slate-200 p-2.5 rounded-lg bg-slate-50">
+                            <label class="flex items-center gap-1.5"><input type="checkbox" value="Keimanan dan Ketaqwaan Terhadap Tuhan YME" checked class="dimensi-chk"> Keimanan & Ketaqwaan</label>
+                            <label class="flex items-center gap-1.5"><input type="checkbox" value="Penalaran Kritis" checked class="dimensi-chk"> Penalaran Kritis</label>
+                            <label class="flex items-center gap-1.5"><input type="checkbox" value="Kreativitas" class="dimensi-chk"> Kreativitas</label>
+                            <label class="flex items-center gap-1.5"><input type="checkbox" value="Kolaborasi" checked class="dimensi-chk"> Kolaborasi</label>
+                            <label class="flex items-center gap-1.5"><input type="checkbox" value="Kewargaan" class="dimensi-chk"> Kewargaan</label>
+                            <label class="flex items-center gap-1.5"><input type="checkbox" value="Kemandirian" class="dimensi-chk"> Kemandirian</label>
+                            <label class="flex items-center gap-1.5"><input type="checkbox" value="Kesehatan" class="dimensi-chk"> Kesehatan</label>
+                            <label class="flex items-center gap-1.5"><input type="checkbox" value="Komunikasi" class="dimensi-chk"> Komunikasi</label>
                         </div>
-                        <div id="container-tp-dinamis" class="flex flex-col gap-2 max-h-32 overflow-y-auto custom-scrollbar p-0.5"></div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Praktik Pedagogik</label>
+                            <input type="text" id="modul-pedagogik" value="Problem Based Learning" class="w-full border border-slate-200 rounded-lg p-2 text-xs outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Lingkungan</label>
+                            <input type="text" id="modul-lingkungan" value="Ruang kelas / Perpustakaan" class="w-full border border-slate-200 rounded-lg p-2 text-xs outline-none">
+                        </div>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Alokasi Waktu</label>
-                        <input type="text" id="modul-jp" value="2 JP (2 x 35 Menit)" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Kemitraan Pembelajaran</label>
+                        <input type="text" id="modul-kemitraan" value="Murid kelas, orang tua, guru mapel" class="w-full border border-slate-200 rounded-lg p-2 text-xs outline-none">
                     </div>
-                    <button onclick="generateModulDeepLearning()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs uppercase tracking-wider py-2.5 rounded-lg transition shadow-md flex items-center justify-center gap-2 cursor-pointer">
-                        <i class="fa-solid fa-gears"></i> Susun Modul Ajar
+
+                    <!-- PEMANFAATAN DIGITAL -->
+                    <div class="border-t pt-2 flex flex-col gap-2">
+                        <label class="block text-xs font-bold text-emerald-800 uppercase">Pemanfaatan Digital (YouTube/Link)</label>
+                        <input type="text" id="digital-ice" placeholder="Link Youtube Ice Breaking" value="https://youtube.com/watch?v=icebreaking" class="w-full border border-slate-200 rounded-lg p-2 text-xs outline-none">
+                        <input type="text" id="digital-materi" placeholder="Link Youtube Materi/Bahan Ajar" value="https://youtube.com/watch?v=materi-utama" class="w-full border border-slate-200 rounded-lg p-2 text-xs outline-none">
+                        <input type="text" id="digital-lkm" placeholder="Link Lembar Kerja Murid (LKM)" value="https://drive.google.com/lkm-siswa" class="w-full border border-slate-200 rounded-lg p-2 text-xs outline-none">
+                    </div>
+
+                    <!-- LANGKAH PEMBELAJARAN & ASESMEN -->
+                    <div class="border-t pt-2 flex flex-col gap-2">
+                        <label class="block text-xs font-bold text-slate-700 uppercase">Kegiatan Awal & Waktu</label>
+                        <div class="flex gap-2"><textarea id="keg-awal" rows="2" class="flex-1 border border-slate-200 rounded-lg p-2 text-xs resize-none">Mengkondisikan suasana kelas yang berkesadaran dan menggembirakan, tadarus bersama, dilanjutkan penyampaian alur kegiatan.</textarea><input type="text" id="waktu-awal" value="10 Menit" class="w-20 border border-slate-200 rounded-lg p-1 text-center text-xs self-start"></div>
+                        
+                        <label class="block text-xs font-bold text-slate-700 uppercase">Kegiatan Inti & Waktu (Sesuai Sintak)</label>
+                        <div class="flex gap-2"><textarea id="keg-inti" rows="3" class="flex-1 border border-slate-200 rounded-lg p-2 text-xs resize-none">Sintak PBL: 1. Orientasi masalah kontekstual melalui video ajar. 2. Mengorganisasikan kelompok diskusi. 3. Membimbing penyelidikan individu/kelompok secara bermakna.</textarea><input type="text" id="waktu-inti" value="50 Menit" class="w-20 border border-slate-200 rounded-lg p-1 text-center text-xs self-start"></div>
+                        
+                        <label class="block text-xs font-bold text-slate-700 uppercase">Kegiatan Penutup & Waktu</label>
+                        <div class="flex gap-2"><textarea id="keg-penutup" rows="2" class="flex-1 border border-slate-200 rounded-lg p-2 text-xs resize-none">Refleksi berkesadaran terhadap value esensial, penarikan kesimpulan menggembirakan dibantu kuis kilat, doa penutup.</textarea><input type="text" id="waktu-penutup" value="10 Menit" class="w-20 border border-slate-200 rounded-lg p-1 text-center text-xs self-start"></div>
+                        
+                        <label class="block text-xs font-bold text-slate-700 uppercase">Sistem Asesmen</label>
+                        <textarea id="keg-asesmen" rows="2" class="w-full border border-slate-200 rounded-lg p-2 text-xs resize-none">Penilaian performa diskusi kelompok, tes tulis formatif via LKM digital, rubrik jurnal sikap berkesadaran.</textarea>
+                    </div>
+
+                    <button onclick="generateModulMendalam()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs uppercase tracking-wider py-2.5 rounded-lg transition shadow-md flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-gears"></i> Susun Modul Ajar Mendalam
                     </button>
                 </div>
             </div>
@@ -286,12 +338,12 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
                             <div class="p-3 bg-white border border-slate-100 rounded-lg">
                                 <span class="text-[10px] text-slate-400 block font-bold uppercase">Nama Sekolah:</span>
-                                <span id="lbl-sekolah" class="text-sm font-bold text-slate-900">SD Negeri Nusantara</span>
+                                <span id="lbl-sekolah" class="text-sm font-bold text-slate-900">SDN CIRACAS 11 PAGI</span>
                             </div>
                             <div class="p-3 bg-white border border-slate-100 rounded-lg flex items-center justify-between">
                                 <div>
-                                    <span class="text-[10px] text-slate-400 block font-bold uppercase">Rombel Terpilih:</span>
-                                    <span id="lbl-rombel-aktif" class="text-sm font-bold text-emerald-700">Kelas 1 A</span>
+                                    <span class="text-[10px] text-slate-400 block font-bold uppercase">Rombel & Semester:</span>
+                                    <span id="lbl-rombel-aktif" class="text-xs font-bold text-emerald-700">Kelas 1 A / Semester II</span>
                                 </div>
                                 <div class="text-right">
                                     <span class="text-[10px] text-slate-400 block font-bold uppercase">Tahun Ajaran:</span>
@@ -300,13 +352,13 @@
                             </div>
                             <div class="p-3 bg-white border border-slate-100 rounded-lg flex flex-col gap-0.5">
                                 <span class="text-[10px] text-slate-400 font-bold uppercase">Kepala Sekolah:</span>
-                                <span id="lbl-kepsek" class="font-bold text-slate-800">H. Ahmad Syarif, M.Pd.</span>
-                                <span id="lbl-nip-kepsek" class="text-slate-500 font-mono">NIP. 19750824 200003 1 002</span>
+                                <span id="lbl-kepsek" class="font-bold text-slate-800">Dian Rosdianingsih, M.Pd</span>
+                                <span id="lbl-nip-kepsek" class="text-slate-500 font-mono">NIP 197012032008012014</span>
                             </div>
                             <div class="p-3 bg-white border border-slate-100 rounded-lg flex flex-col gap-0.5">
-                                <span class="text-[10px] text-slate-400 font-bold uppercase">Guru PAI & BP:</span>
-                                <span id="lbl-guru" class="font-bold text-slate-800">Aminah S.Pd.I.</span>
-                                <span id="lbl-nip-guru" class="text-slate-500 font-mono">NIP. 19881210 201504 2 003</span>
+                                <span class="text-[10px] text-slate-400 font-bold uppercase">Mata Pelajaran & Penyusun:</span>
+                                <span id="lbl-guru" class="font-bold text-slate-800">Siti Aminah, S.Pd.</span>
+                                <span id="lbl-nip-guru" class="text-slate-500 font-mono">NIP 198812102015042003</span>
                             </div>
                         </div>
                     </div>
@@ -324,9 +376,7 @@
                                     <th class="p-3.5 text-center w-24">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody id="tabel-body-siswa" class="divide-y divide-slate-100 font-medium text-slate-700">
-                                <!-- Data siswa masuk lewat sini -->
-                            </tbody>
+                            <tbody id="tabel-body-siswa" class="divide-y divide-slate-100 font-medium text-slate-700"></tbody>
                         </table>
                     </div>
                 </div>
@@ -341,7 +391,6 @@
                                     <th class="p-3.5">Tanggal</th>
                                     <th class="p-3.5">Nama Siswa</th>
                                     <th class="p-3.5">Status</th>
-                                    <th class="p-3.5">Catatan Sikap</th>
                                     <th class="p-3.5 text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -359,9 +408,7 @@
                                     <th class="p-3.5">No</th>
                                     <th class="p-3.5">Nama Siswa</th>
                                     <th class="p-3.5">Jenis</th>
-                                    <th class="p-3.5">Materi / Bab</th>
                                     <th class="p-3.5 text-center w-20">Nilai</th>
-                                    <th class="p-3.5 text-center w-20">Predikat</th>
                                     <th class="p-3.5 text-center w-20">Aksi</th>
                                 </tr>
                             </thead>
@@ -373,8 +420,8 @@
                 <!-- SCREEN: MODUL AJAR PREVIEW -->
                 <div id="screen-modul" class="p-6 flex-1 flex flex-col gap-4 hidden bg-slate-50/50">
                     <div id="area-cetak-modul" class="flex flex-col gap-4">
-                        <div id="pratinjau-modul-dokumen" class="bg-white border border-slate-200 shadow-sm rounded-xl p-6 text-xs text-slate-700 flex flex-col gap-4 max-h-[520px] overflow-y-auto custom-scrollbar">
-                            <p class="text-center text-slate-400 py-8">Belum ada modul yang disusun.</p>
+                        <div id="pratinjau-modul-dokumen" class="bg-white border border-slate-200 shadow-sm rounded-xl p-2 text-xs text-slate-700 flex flex-col gap-4 max-h-[65vh] overflow-y-auto custom-scrollbar">
+                            <p class="text-center text-slate-400 py-8">Belum ada modul mendalam yang disusun.</p>
                         </div>
                     </div>
                 </div>
@@ -386,7 +433,7 @@
     <!-- FOOTER -->
     <footer class="bg-white border-t border-slate-200 py-4 mt-auto no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 font-medium">
-            <p>&copy; 2026 Si PAI Cloud.</p>
+            <p>&copy; 2026 Si PAI Cloud - Perencanaan Pembelajaran Mendalam.</p>
         </div>
     </footer>
 
@@ -394,7 +441,7 @@
     <div id="modal-auth" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden no-print">
         <div class="bg-white rounded-2xl max-w-sm w-full p-5 flex flex-col gap-4">
             <h4 class="font-bold text-sm uppercase text-slate-800">Aktivasi Cloud Server</h4>
-            <input type="email" id="auth-email" placeholder="nama@guru.pai.id" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs">
+            <input type="email" id="auth-email" placeholder="nama@guru.id" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs">
             <input type="password" id="auth-password" placeholder="••••••••" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs">
             <div class="grid grid-cols-2 gap-2">
                 <button id="btn-login-action" class="bg-emerald-600 text-white font-bold text-xs py-2 rounded-lg cursor-pointer">Masuk</button>
@@ -403,15 +450,15 @@
         </div>
     </div>
 
-    <!-- DATA BASE CODE -->
+    <!-- CODE SCRIPT DATABASE & LOGIC -->
     <script>
         const DATA_BPKDM_PAI = {
-            "1": { "Al-Qur'an Hadis": { "cp": "Mengenal huruf hijaiyah dan harakatnya secara baik.", "bab": ["Bab 1: Aku Cinta Al-Qur'an"] }, "Akidah": { "cp": "Mengenal rukun iman kepada Allah Swt.", "bab": ["Bab 2: Mengenal Rukun Iman"] }, "Akhlak": { "cp": "Membiasakan perilaku terpuji sehari-hari.", "bab": ["Bab 3: Perilaku Terpuji"] }, "Fikih": { "cp": "Mengenal tata cara bersuci/wudu.", "bab": ["Bab 4: Mengenal Tata Cara Wudu"] }, "Sejarah Peradaban Islam": { "cp": "Mengenal kisah keteladanan Nabi Muhammad Swt.", "bab": ["Bab 5: Kisah Nabi Muhammad Swt."] } },
-            "2": { "Al-Qur'an Hadis": { "cp": "Melafalkan Surah An-Nas dan Al-Falaq dengan fasih.", "bab": ["Bab 1: Surah An-Nas & Al-Falaq"] } },
-            "3": { "Al-Qur'an Hadis": { "cp": "Mampu membaca Al-Qur'an dengan tajwid dasar.", "bab": ["Bab 1: Belajar Hukum Tajwid Dasar"] } },
-            "4": { "Al-Qur'an Hadis": { "cp": "Memahami Surah Al-Hujurat ayat 13.", "bab": ["Bab 1: Mengaji Surah Al-Hujurat"] } },
-            "5": { "Al-Qur'an Hadis": { "cp": "Membaca Surah Al-Ma'un dan Al-Fil dengan benar.", "bab": ["Bab 1: Menghayati Kandungan Surah Al-Ma'un"] } },
-            "6": { "Al-Qur'an Hadis": { "cp": "Memahami hukum bacaan Tafkhim dan Tarqiq.", "bab": ["Bab 1: Hukum Bacaan Lam & Ra"] } }
+            "1": { "Al-Qur'an Hadis": { "cp": "Mengenal huruf hijaiyah dan harakatnya secara baik.", "topik": "Aku Cinta Al-Qur'an" }, "Akidah": { "cp": "Mengenal rukun iman kepada Allah Swt.", "topik": "Mengenal Rukun Iman" } },
+            "2": { "Al-Qur'an Hadis": { "cp": "Melafalkan Surah An-Nas dan Al-Falaq dengan fasih.", "topik": "Surah An-Nas & Al-Falaq" } },
+            "3": { "Al-Qur'an Hadis": { "cp": "Mampu membaca Al-Qur'an dengan tajwid dasar.", "topik": "Belajar Hukum Tajwid Dasar" } },
+            "4": { "Al-Qur'an Hadis": { "cp": "Memahami Surah Al-Hujurat ayat 13.", "topik": "Mengaji Surah Al-Hujurat" } },
+            "5": { "Al-Qur'an Hadis": { "cp": "Membaca Surah Al-Ma'un dan Al-Fil dengan benar.", "topik": "Menghayati Kandungan Surah Al-Ma'un" } },
+            "6": { "Al-Qur'an Hadis": { "cp": "Memahami hukum bacaan Tafkhim dan Tarqiq.", "topik": "Hukum Bacaan Lam & Ra" } }
         };
 
         let databaseSiswa = {
@@ -420,28 +467,31 @@
             absensi: [],
             nilai: [],
             configSekolah: {
-                namaSekolah: "SD Negeri Nusantara",
+                namaSekolah: "SDN CIRACAS 11 PAGI",
                 tahunAjaran: "2026/2027",
-                namaKepsek: "H. Ahmad Syarif, M.Pd.",
-                nipKepsek: "19750824 200003 1 002",
-                namaGuru: "Aminah S.Pd.I.",
-                nipGuru: "19881210 201504 2 003"
+                semester: "II",
+                mapel: "PAI & Budi Pekerti",
+                namaKepsek: "Dian Rosdianingsih, M.Pd",
+                nipKepsek: "197012032008012014",
+                namaGuru: "Siti Aminah, S.Pd.",
+                nipGuru: "198812102015042003"
             }
         };
 
         window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('absensi-tanggal').value = new Date().toISOString().substring(0, 10);
-            const localData = localStorage.getItem('si_pai_data_storage_v3');
+            const localData = localStorage.getItem('si_pai_mendalam_v1');
             if(localData) {
                 try {
                     databaseSiswa = JSON.parse(localData);
-                    if(!databaseSiswa.daftarSiswa) databaseSiswa.daftarSiswa = [];
-                    if(!databaseSiswa.configSekolah.tahunAjaran) databaseSiswa.configSekolah.tahunAjaran = "2026/2027";
                 } catch(e) {}
             }
             
+            // Set input views
             document.getElementById('cfg-nama-sekolah').value = databaseSiswa.configSekolah.namaSekolah;
             document.getElementById('cfg-tahun-ajaran').value = databaseSiswa.configSekolah.tahunAjaran;
+            document.getElementById('cfg-semester').value = databaseSiswa.configSekolah.semester;
+            document.getElementById('cfg-mapel').value = databaseSiswa.configSekolah.mapel;
             document.getElementById('cfg-nama-kepsek').value = databaseSiswa.configSekolah.namaKepsek;
             document.getElementById('cfg-nip-kepsek').value = databaseSiswa.configSekolah.nipKepsek;
             document.getElementById('cfg-nama-guru').value = databaseSiswa.configSekolah.namaGuru;
@@ -454,6 +504,8 @@
         function simpanConfigSekolah() {
             databaseSiswa.configSekolah.namaSekolah = document.getElementById('cfg-nama-sekolah').value;
             databaseSiswa.configSekolah.tahunAjaran = document.getElementById('cfg-tahun-ajaran').value;
+            databaseSiswa.configSekolah.semester = document.getElementById('cfg-semester').value;
+            databaseSiswa.configSekolah.mapel = document.getElementById('cfg-mapel').value;
             databaseSiswa.configSekolah.namaKepsek = document.getElementById('cfg-nama-kepsek').value;
             databaseSiswa.configSekolah.nipKepsek = document.getElementById('cfg-nip-kepsek').value;
             databaseSiswa.configSekolah.namaGuru = document.getElementById('cfg-nama-guru').value;
@@ -461,12 +513,16 @@
             
             document.getElementById('lbl-sekolah').innerText = databaseSiswa.configSekolah.namaSekolah;
             document.getElementById('lbl-tahun-ajaran').innerText = databaseSiswa.configSekolah.tahunAjaran;
-            document.getElementById('lbl-kepsek').innerText = databaseSiswa.configSekolah.namaKepsek;
-            document.getElementById('lbl-nip-kepsek').innerText = "NIP. " + databaseSiswa.configSekolah.nipKepsek;
-            document.getElementById('lbl-guru').innerText = databaseSiswa.configSekolah.namaGuru;
-            document.getElementById('lbl-nip-guru').innerText = "NIP. " + databaseSiswa.configSekolah.nipGuru;
             
-            localStorage.setItem('si_pai_data_storage_v3', JSON.stringify(databaseSiswa));
+            const bagian = databaseSiswa.kelas.split('-');
+            document.getElementById('lbl-rombel-aktif').innerText = "Kelas " + bagian[0] + " " + bagian[1] + " / Semester " + databaseSiswa.configSekolah.semester;
+            
+            document.getElementById('lbl-kepsek').innerText = databaseSiswa.configSekolah.namaKepsek;
+            document.getElementById('lbl-nip-kepsek').innerText = "NIP " + databaseSiswa.configSekolah.nipKepsek;
+            document.getElementById('lbl-guru').innerText = databaseSiswa.configSekolah.namaGuru;
+            document.getElementById('lbl-nip-guru').innerText = "NIP " + databaseSiswa.configSekolah.nipGuru;
+            
+            localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa));
         }
 
         function gantiTab(target) {
@@ -486,51 +542,23 @@
                     if(screen) screen.classList.add('hidden');
                 }
             });
-
+            
             const inputJudul = document.getElementById('judul-panel-input');
-            const inputDeskripsi = document.getElementById('deskripsi-panel-input');
             const monitorJudul = document.getElementById('judul-live-monitor');
-            const monitorSub = document.getElementById('subjudul-live-monitor');
             
             if(target === 'sekolah') { 
                 inputJudul.innerHTML = `<i class="fa-solid fa-school text-emerald-600"></i> Profil Lembaga & Guru`;
-                inputDeskripsi.innerText = "Atur identitas instansi dan penandatangan dokumen.";
                 monitorJudul.innerText = "Profil Satuan Pendidikan"; 
-                monitorSub.innerText = "Data utama identitas instansi."; 
-            }
-            else if(target === 'siswa') { 
-                inputJudul.innerHTML = `<i class="fa-solid fa-users text-emerald-600"></i> Manajemen Data Siswa`;
-                inputDeskripsi.innerText = "Tempel data siswa massal per kelas paralel.";
-                monitorJudul.innerText = "Manajemen Database Siswa Perkelas"; 
-                monitorSub.innerText = "Kelola data nama dan gender rombel aktif."; 
-            }
-            else if(target === 'absensi') { 
-                inputJudul.innerHTML = `<i class="fa-solid fa-clipboard-user text-emerald-600"></i> Input Absensi`;
-                inputDeskripsi.innerText = "Rekam presensi harian siswa.";
-                monitorJudul.innerText = "Bagian Jurnal Absensi Harian"; 
-                monitorSub.innerText = "Rekam riwayat kehadiran."; 
-            }
-            else if(target === 'nilai') { 
-                inputJudul.innerHTML = `<i class="fa-solid fa-star text-emerald-600"></i> Input Nilai PAI`;
-                inputDeskripsi.innerText = "Masukkan skor asesmen formatif & sumatif.";
-                monitorJudul.innerText = "Rekapitulasi Nilai Asesmen PAI"; 
-                monitorSub.innerText = "Nilai formatif & sumatif."; 
-            }
-            else { 
-                inputJudul.innerHTML = `<i class="fa-solid fa-file-invoice text-emerald-600"></i> Struktur Modul Ajar`;
-                inputDeskripsi.innerText = "Pilih CP, TP, dan Target Alokasi JP.";
-                monitorJudul.innerText = "Dokumen Lembar Modul Ajar"; 
-                monitorSub.innerText = "Pratinjau berkas fisik siap cetak."; 
+            } else if(target === 'modul') {
+                inputJudul.innerHTML = `<i class="fa-solid fa-file-invoice text-emerald-600"></i> Desain Pembelajaran Mendalam`;
+                monitorJudul.innerText = "Dokumen Lembar Perencanaan Pembelajaran Mendalam";
             }
         }
 
         function sinkronisasiKelasGlobal(rombelVal) {
             databaseSiswa.kelas = rombelVal;
-            localStorage.setItem('si_pai_data_storage_v3', JSON.stringify(databaseSiswa));
-            
-            const bagian = rombelVal.split('-');
-            document.getElementById('lbl-rombel-aktif').innerText = "Kelas " + bagian[0] + " " + bagian[1];
-            
+            localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa));
+            simpanConfigSekolah();
             updateOtomatisCP();
             renderTabelSiswa();
             updateDropdownSiswa();
@@ -538,297 +566,201 @@
             renderTabelNilai();
         }
 
+        function updateOtomatisCP() {
+            const tingkat = databaseSiswa.kelas.split('-')[0];
+            const elemen = document.getElementById('select-elemen-inti').value;
+            if (DATA_BPKDM_PAI[tingkat] && DATA_BPKDM_PAI[tingkat][elemen]) {
+                document.getElementById('textarea-cp').value = "Pada akhir fase, murid mampu: " + DATA_BPKDM_PAI[tingkat][elemen].cp;
+                document.getElementById('modul-topik').value = DATA_BPKDM_PAI[tingkat][elemen].topik;
+            } else {
+                document.getElementById('textarea-cp').value = "Pada akhir fase, murid kompeten secara holistik.";
+            }
+        }
+
+        // BULK DATA PROCESSORS
         function prosesBulkInputSiswa() {
             const areaTeks = document.getElementById('siswa-bulk-input').value;
-            if(!areaTeks.trim()) { alert("Kotak input masih kosong!"); return; }
-            
-            const barisData = areaTeks.split('\n');
-            let jumlahSukses = 0;
-            
-            barisData.forEach(baris => {
+            if(!areaTeks.trim()) return;
+            areaTeks.split('\n').forEach(baris => {
                 if(!baris.trim()) return;
-                
-                let nama = "";
-                let jk = "L";
-                
-                if(baris.includes('\t')) {
-                    const kolom = baris.split('\t');
-                    nama = kolom[0].trim();
-                    if(kolom[1]) {
-                        let valJk = kolom[1].trim().toUpperCase();
-                        if(valJk.startsWith('P') || valJk.includes('PEREMPUAN')) jk = "P";
-                    }
-                } else if(baris.includes(',')) {
-                    const kolom = baris.split(',');
-                    nama = kolom[0].trim();
-                    if(kolom[1]) {
-                        let valJk = kolom[1].trim().toUpperCase();
-                        if(valJk.startsWith('P')) jk = "P";
-                    }
-                } else {
-                    nama = baris.trim();
-                }
-                
-                if(nama) {
-                    databaseSiswa.daftarSiswa.push({
-                        id: Date.now() + Math.random(),
-                        rombel: databaseSiswa.kelas,
-                        nama: nama,
-                        jk: jk
-                    });
-                    jumlahSukses++;
-                }
+                let nama = baris.split('\t')[0] || baris;
+                let jk = baris.includes('P') ? 'P' : 'L';
+                databaseSiswa.daftarSiswa.push({ id: Date.now()+Math.random(), rombel: databaseSiswa.kelas, nama: nama.trim(), jk });
             });
-            
             document.getElementById('siswa-bulk-input').value = "";
-            localStorage.setItem('si_pai_data_storage_v3', JSON.stringify(databaseSiswa));
-            
-            alert(`Berhasil memasukkan ${jumlahSukses} siswa ke dalam Rombel ${databaseSiswa.kelas}`);
-            renderTabelSiswa();
-            updateDropdownSiswa();
+            localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa));
+            renderTabelSiswa(); updateDropdownSiswa();
         }
 
         function hapusSiswa(id) {
             databaseSiswa.daftarSiswa = databaseSiswa.daftarSiswa.filter(x => x.id !== id);
-            localStorage.setItem('si_pai_data_storage_v3', JSON.stringify(databaseSiswa));
-            renderTabelSiswa();
-            updateDropdownSiswa();
+            localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa));
+            renderTabelSiswa(); updateDropdownSiswa();
         }
 
         function renderTabelSiswa() {
-            const tbody = document.getElementById('tabel-body-siswa');
-            tbody.innerHTML = "";
-            
+            const tbody = document.getElementById('tabel-body-siswa'); tbody.innerHTML = "";
             const filterSiswa = databaseSiswa.daftarSiswa.filter(x => x.rombel === databaseSiswa.kelas);
-            
-            if(filterSiswa.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-slate-400">Belum ada data siswa. Silakan copy-paste dari Excel pada kolom menu di sebelah kiri.</td></tr>`;
-                return;
-            }
-            
-            filterSiswa.forEach((s, idx) => {
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-50 border-b border-slate-100";
-                tr.innerHTML = `
-                    <td class="p-3.5 font-bold text-slate-400">${idx + 1}</td>
-                    <td class="p-3.5 font-bold text-slate-900">${s.nama}</td>
-                    <td class="p-3.5 text-center"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${s.jk === 'L' ? 'bg-blue-100 text-blue-800' : 'bg-rose-100 text-rose-800'}">${s.jk === 'L' ? 'Laki-laki (L)' : 'Perempuan (P)'}</span></td>
-                    <td class="p-3.5 text-center">
-                        <button onclick="hapusSiswa(${s.id})" class="text-rose-500 hover:text-rose-700 cursor-pointer"><i class="fa-solid fa-trash-can"></i></button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
+            if(filterSiswa.length===0) { tbody.innerHTML="<tr><td colspan='4' class='p-4 text-center text-slate-400'>Belum ada siswa.</td></tr>"; return;}
+            filterSiswa.forEach((s, i) => {
+                tbody.innerHTML += `<tr class='border-b border-slate-100'><td class='p-3 font-bold text-slate-400'>${i+1}</td><td class='p-3 font-bold'>${s.nama}</td><td class='p-3 text-center'>${s.jk}</td><td class='p-3 text-center'><button onclick='hapusSiswa(${s.id})' class='text-rose-500'><i class='fa-solid fa-trash-can'></i></button></td></tr>`;
             });
         }
 
         function updateDropdownSiswa() {
-            const selAbs = document.getElementById('absensi-nama-select');
-            const selNil = document.getElementById('nilai-nama-select');
-            
-            selAbs.innerHTML = "";
-            selNil.innerHTML = "";
-            
-            const filterSiswa = databaseSiswa.daftarSiswa.filter(x => x.rombel === databaseSiswa.kelas);
-            
-            if(filterSiswa.length === 0) {
-                const opt = "<option value=''>-- Data Siswa Kosong --</option>";
-                selAbs.innerHTML = opt;
-                selNil.innerHTML = opt;
-                return;
-            }
-            
-            filterSiswa.forEach(s => {
-                const opt = `<option value="${s.nama}">${s.nama} (${s.jk})</option>`;
-                selAbs.innerHTML += opt;
-                selNil.innerHTML += opt;
+            const selAbs = document.getElementById('absensi-nama-select'); const selNil = document.getElementById('nilai-nama-select');
+            selAbs.innerHTML = ""; selNil.innerHTML = "";
+            databaseSiswa.daftarSiswa.filter(x => x.rombel === databaseSiswa.kelas).forEach(s => {
+                let opt = `<option value="${s.nama}">${s.nama}</option>`; selAbs.innerHTML+=opt; selNil.innerHTML+=opt;
             });
         }
 
         function tambahDataAbsensi() {
-            const nama = document.getElementById('absensi-nama-select').value;
-            const status = document.getElementById('absensi-status').value;
-            const tanggal = document.getElementById('absensi-tanggal').value;
-            const catatan = document.getElementById('absensi-catatan').value.trim();
-            
-            if(!nama || nama.includes('Kosong')) { alert("Tambahkan data siswa ke dalam rombel terlebih dahulu!"); return; }
-            
-            databaseSiswa.absensi.push({
-                id: Date.now(), rombel: databaseSiswa.kelas, tanggal, nama, status, catatan: catatan || "Hadir mengikuti KBM PAI."
-            });
-            document.getElementById('absensi-catatan').value = "";
-            localStorage.setItem('si_pai_data_storage_v3', JSON.stringify(databaseSiswa));
-            renderTabelAbsensi();
-        }
-
-        function hapusAbsensi(id) {
-            databaseSiswa.absensi = databaseSiswa.absensi.filter(x => x.id !== id);
-            localStorage.setItem('si_pai_data_storage_v3', JSON.stringify(databaseSiswa));
-            renderTabelAbsensi();
+            databaseSiswa.absensi.push({ id:Date.now(), rombel:databaseSiswa.kelas, tanggal:document.getElementById('absensi-tanggal').value, nama:document.getElementById('absensi-nama-select').value, status:document.getElementById('absensi-status').value });
+            localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa)); renderTabelAbsensi();
         }
 
         function renderTabelAbsensi() {
-            const tbody = document.getElementById('tabel-body-absensi');
-            tbody.innerHTML = "";
-            const filterData = databaseSiswa.absensi.filter(x => x.rombel === databaseSiswa.kelas);
-            
-            if(filterData.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">Tidak ada data absensi.</td></tr>`;
-                return;
-            }
-            filterData.forEach((x, idx) => {
-                const tr = document.createElement('tr');
-                tr.className = "border-b border-slate-100 text-slate-700";
-                tr.innerHTML = `
-                    <td class="p-3.5 font-bold text-slate-400">${idx+1}</td>
-                    <td class="p-3.5">${x.tanggal}</td>
-                    <td class="p-3.5 font-bold text-slate-900">${x.nama}</td>
-                    <td class="p-3.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100">${x.status}</span></td>
-                    <td class="p-3.5 max-w-xs truncate">${x.catatan}</td>
-                    <td class="p-3.5 text-center"><button onclick="hapusAbsensi(${x.id})" class="text-rose-500 cursor-pointer"><i class="fa-solid fa-trash-can"></i></button></td>
-                `;
-                tbody.appendChild(tr);
+            const tbody = document.getElementById('tabel-body-absensi'); tbody.innerHTML = "";
+            databaseSiswa.absensi.filter(x => x.rombel === databaseSiswa.kelas).forEach((x, i) => {
+                tbody.innerHTML += `<tr><td class='p-3'>${i+1}</td><td class='p-3'>${x.tanggal}</td><td class='p-3 font-bold'>${x.nama}</td><td class='p-3'>${x.status}</td><td class='p-3 text-center'><button onclick='databaseSiswa.absensi=databaseSiswa.absensi.filter(a=>a.id!=${x.id});localStorage.setItem("si_pai_mendalam_v1",JSON.stringify(databaseSiswa));renderTabelAbsensi();' class='text-rose-500'><i class='fa-solid fa-trash-can'></i></button></td></tr>`;
             });
         }
 
         function tambahDataNilai() {
-            const nama = document.getElementById('nilai-nama-select').value;
-            const jenis = document.getElementById('nilai-jenis').value;
-            const angka = parseInt(document.getElementById('nilai-angka').value);
-            const kom = document.getElementById('nilai-kompetensi').value.trim();
-            
-            if(!nama || nama.includes('Kosong') || isNaN(angka)) { alert("Data siswa belum siap atau nilai angka kosong!"); return; }
-            
-            let predikat = angka >= 86 ? "A" : (angka >= 76 ? "B" : "C");
-            databaseSiswa.nilai.push({ id: Date.now(), rombel: databaseSiswa.kelas, nama, jenis, angka, kompetensi: kom || "Bab Pokok", predikat });
-            document.getElementById('nilai-angka').value = "";
-            localStorage.setItem('si_pai_data_storage_v3', JSON.stringify(databaseSiswa));
-            renderTabelNilai();
-        }
-
-        function hapusNilai(id) {
-            databaseSiswa.nilai = databaseSiswa.nilai.filter(x => x.id !== id);
-            localStorage.setItem('si_pai_data_storage_v3', JSON.stringify(databaseSiswa));
-            renderTabelNilai();
+            databaseSiswa.nilai.push({ id:Date.now(), rombel:databaseSiswa.kelas, nama:document.getElementById('nilai-nama-select').value, jenis:document.getElementById('nilai-jenis').value, angka:document.getElementById('nilai-angka').value });
+            localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa)); renderTabelNilai();
         }
 
         function renderTabelNilai() {
-            const tbody = document.getElementById('tabel-body-nilai');
-            tbody.innerHTML = "";
-            const filterData = databaseSiswa.nilai.filter(x => x.rombel === databaseSiswa.kelas);
-            if(filterData.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-slate-400">Belum ada rekap nilai.</td></tr>`;
-                return;
-            }
-            filterData.forEach((x, idx) => {
-                const tr = document.createElement('tr');
-                tr.className = "border-b border-slate-100 text-slate-700";
-                tr.innerHTML = `
-                    <td class="p-3.5 font-bold text-slate-400">${idx+1}</td>
-                    <td class="p-3.5 font-bold text-slate-900">${x.nama}</td>
-                    <td class="p-3.5">${x.jenis}</td>
-                    <td class="p-3.5">${x.kompetensi}</td>
-                    <td class="p-3.5 text-center font-bold text-emerald-700">${x.angka}</td>
-                    <td class="p-3.5 text-center font-bold">${x.predikat}</td>
-                    <td class="p-3.5 text-center"><button onclick="hapusNilai(${x.id})" class="text-rose-500 cursor-pointer"><i class="fa-solid fa-trash-can"></i></button></td>
-                `;
-                tbody.appendChild(tr);
+            const tbody = document.getElementById('tabel-body-nilai'); tbody.innerHTML = "";
+            databaseSiswa.nilai.filter(x => x.rombel === databaseSiswa.kelas).forEach((x, i) => {
+                tbody.innerHTML += `<tr><td class='p-3'>${i+1}</td><td class='p-3 font-bold'>${x.nama}</td><td class='p-3'>${x.jenis}</td><td class='p-3 text-center font-bold text-emerald-600'>${x.angka}</td><td class='p-3 text-center'><button onclick='databaseSiswa.nilai=databaseSiswa.nilai.filter(n=>n.id!=${x.id});localStorage.setItem("si_pai_mendalam_v1",JSON.stringify(databaseSiswa));renderTabelNilai();' class='text-rose-500'><i class='fa-solid fa-trash-can'></i></button></td></tr>`;
             });
         }
 
-        function tambahBarisTP(isiTeks = "") {
-            const container = document.getElementById('container-tp-dinamis');
-            const div = document.createElement('div');
-            div.className = "flex items-center gap-2";
-            div.innerHTML = `
-                <input type="text" placeholder="Indikator TP..." value="${isiTeks}" class="input-tp-item flex-1 border border-slate-200 rounded p-1.5 text-xs outline-none focus:ring-1 focus:ring-emerald-500">
-                <button type="button" onclick="this.parentElement.remove()" class="text-rose-500 text-xs p-1 cursor-pointer"><i class="fa-solid fa-trash-can"></i></button>
-            `;
-            container.appendChild(div);
-        }
-
-        function updateOtomatisCP() {
-            const rombel = databaseSiswa.kelas;
-            const angkaKelas = rombel.split('-')[0];
-            const elemen = document.getElementById('select-elemen-inti').value;
-            const textareaCp = document.getElementById('textarea-cp');
-            const selectMateri = document.getElementById('select-materi-pokok');
-            const inputHiddenTopik = document.getElementById('input-topik-materi');
-            
-            document.getElementById('container-tp-dinamis').innerHTML = "";
-            
-            if (DATA_BPKDM_PAI[angkaKelas] && DATA_BPKDM_PAI[angkaKelas][elemen]) {
-                const data = DATA_BPKDM_PAI[angkaKelas][elemen];
-                textareaCp.value = data.cp;
-                selectMateri.innerHTML = '';
-                data.bab.forEach(b => {
-                    const opt = document.createElement('option'); opt.value = b; opt.textContent = b; selectMateri.appendChild(opt);
-                });
-                inputHiddenTopik.value = data.bab[0];
-            } else {
-                textareaCp.value = "Capaian Pembelajaran Mandiri.";
-                selectMateri.innerHTML = '<option value="Materi Mandiri">Materi Mandiri</option>';
-                inputHiddenTopik.value = "Materi Mandiri";
-            }
-            tambahBarisTP("");
-        }
-
-        function generateModulDeepLearning() {
-            const rombel = databaseSiswa.kelas;
-            const bagian = rombel.split('-');
-            const tingkat = bagian[0];
-            const paralelName = bagian[1];
-            const elemen = document.getElementById('select-elemen-inti').value;
-            const topik = document.getElementById('input-topik-materi').value;
-            const cp = document.getElementById('textarea-cp').value;
-            const jp = document.getElementById('modul-jp').value;
+        // GENERATE MODUL PERENCANAAN PEMBELAJARAN MENDALAM
+        function generateModulMendalam() {
             const conf = databaseSiswa.configSekolah;
+            const tingkat = databaseSiswa.kelas.split('-')[0];
+            const jp = document.getElementById('modul-jp').value;
+            const kesiapan = document.getElementById('modul-kesiapan').value;
+            const topik = document.getElementById('modul-topik').value;
+            const cp = document.getElementById('textarea-cp').value;
+            const tp = document.getElementById('textarea-tp').value;
+            const pedagogik = document.getElementById('modul-pedagogik').value;
+            const lingkungan = document.getElementById('modul-lingkungan').value;
+            const kemitraan = document.getElementById('modul-kemitraan').value;
             
-            let listTpHtml = "";
-            document.querySelectorAll('.input-tp-item').forEach(el => {
-                if(el.value.trim()) listTpHtml += `<li class="ml-4 list-decimal">${el.value.trim()}</li>`;
+            const ice = document.getElementById('digital-ice').value;
+            const materi = document.getElementById('digital-materi').value;
+            const lkm = document.getElementById('digital-lkm').value;
+
+            const kAwal = document.getElementById('keg-awal').value; const wAwal = document.getElementById('waktu-awal').value;
+            const kInti = document.getElementById('keg-inti').value; const wInti = document.getElementById('waktu-inti').value;
+            const kPenutup = document.getElementById('keg-penutup').value; const wPenutup = document.getElementById('waktu-penutup').value;
+            const kAsesmen = document.getElementById('keg-asesmen').value;
+
+            let dimensiHtml = "";
+            document.querySelectorAll('.dimensi-chk:checked').forEach(c => {
+                dimensiHtml += `<span class="inline-block bg-slate-100 text-slate-800 border px-2 py-0.5 rounded text-[9px] font-medium mr-1 mb-1">✓ ${c.value}</span>`;
             });
 
             document.getElementById('pratinjau-modul-dokumen').innerHTML = `
-                <div class="border-2 border-slate-800 p-6 flex flex-col gap-4 bg-white select-text">
-                    <div class="text-center border-b-2 border-slate-800 pb-3 flex flex-col gap-1">
-                        <h2 class="font-bold text-sm uppercase">MODUL AJAR KURIKULUM MERDEKA PAI & BP</h2>
-                        <h3 class="font-bold text-xs uppercase text-emerald-800">${conf.namaSekolah}</h3>
-                        <p class="text-[10px] font-bold">KELAS ${tingkat} ${paralelName} / TAHUN AJARAN ${conf.tahunAjaran || '-'}</p>
+                <div class="border-2 border-slate-800 p-8 flex flex-col gap-5 bg-white text-slate-900 select-text leading-relaxed font-mono">
+                    <div class="text-center border-b-2 border-slate-900 pb-2">
+                        <h2 class="font-black text-sm uppercase tracking-wider">PERENCANAAN PEMBELAJARAN MENDALAM</h2>
                     </div>
-                    <div class="grid grid-cols-2 gap-2 text-[10px] bg-slate-50 p-2 rounded border">
-                        <div>Materi: <strong>${topik}</strong></div>
-                        <div>Elemen: <strong>${elemen}</strong></div>
-                        <div>Waktu: <strong>${jp}</strong></div>
+                    
+                    <!-- KOTAK INFORMASI UMUM -->
+                    <div class="border border-slate-800 p-3 bg-slate-50/50">
+                        <h3 class="font-bold border-b border-slate-800 text-[11px] mb-2 uppercase text-slate-700">Informasi Umum</h3>
+                        <table class="w-full text-[10px] border-collapse">
+                            <tr><td class="w-1/3 py-0.5 font-bold">Satuan Pendidikan</td><td class="w-2 py-0.5">:</td><td class="py-0.5">${conf.namaSekolah}</td></tr>
+                            <tr><td class="py-0.5 font-bold">Kelas/Semester</td><td class="py-0.5">:</td><td class="py-0.5">${tingkat} / ${conf.semester}</td></tr>
+                            <tr><td class="py-0.5 font-bold">Mata Pelajaran</td><td class="py-0.5">:</td><td class="py-0.5">${conf.mapel}</td></tr>
+                            <tr><td class="py-0.5 font-bold">Alokasi Waktu</td><td class="py-0.5">:</td><td class="py-0.5">${jp}</td></tr>
+                            <tr><td class="py-0.5 font-bold">Nama Penyusun</td><td class="py-0.5">:</td><td class="py-0.5">${conf.namaGuru}</td></tr>
+                        </table>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-[11px] border-b pb-0.5">I. CAPAIAN PEMBELAJARAN (CP)</h4>
-                        <p class="text-slate-600 italic text-[10px] mt-1">${cp}</p>
+
+                    <!-- KOTAK IDENTITAS -->
+                    <div class="border border-slate-800 p-3 bg-slate-50/50">
+                        <h3 class="font-bold border-b border-slate-800 text-[11px] mb-2 uppercase text-slate-700">Identitas</h3>
+                        <table class="w-full text-[10px]">
+                            <tr><td class="w-1/3 py-0.5 font-bold">Kesiapan Murid</td><td class="w-2 py-0.5">:</td><td class="py-0.5">${kesiapan}</td></tr>
+                            <tr><td class="py-0.5 font-bold">Materi Pelajaran</td><td class="py-0.5">:</td><td class="py-0.5">${topik}</td></tr>
+                            <tr><td class="py-0.5 font-bold align-top">Dimensi Profil Lulusan</td><td class="py-0.5 align-top">:</td><td class="py-0.5">${dimensiHtml || '-'}</td></tr>
+                        </table>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-[11px] border-b pb-0.5">II. TUJUAN PEMBELAJARAN (TP)</h4>
-                        <ol class="text-[10px] mt-1 flex flex-col gap-0.5">${listTpHtml || '<p class="italic text-rose-600">Belum diisi.</p>'}</ol>
+
+                    <!-- KOTAK DESAIN PEMBELAJARAN -->
+                    <div class="border border-slate-800 p-3">
+                        <h3 class="font-bold border-b border-slate-800 text-[11px] mb-2 uppercase text-emerald-800">Desain Pembelajaran</h3>
+                        <table class="w-full text-[10px]">
+                            <tr><td class="w-1/3 py-1 font-bold align-top">Capaian Pembelajaran</td><td class="w-2 py-1 align-top">:</td><td class="py-1 text-slate-700">${cp}</td></tr>
+                            <tr><td class="py-1 font-bold align-top">Tujuan Pembelajaran</td><td class="w-2 py-1 align-top">:</td><td class="py-1 text-slate-700">${tp}</td></tr>
+                            <tr><td class="py-1 font-bold">Topik Pembelajaran</td><td class="w-2 py-1">:</td><td class="py-1 font-bold">${topik}</td></tr>
+                            <tr><td class="py-1 font-bold">Praktik Pedagogik</td><td class="w-2 py-1">:</td><td class="py-1">${pedagogik}</td></tr>
+                            <tr><td class="py-1 font-bold">Kemitraan Pembelajaran</td><td class="w-2 py-1">:</td><td class="py-1">${kemitraan}</td></tr>
+                            <tr><td class="py-1 font-bold">Lingkungan Pembelajaran</td><td class="w-2 py-1">:</td><td class="py-1">${lingkungan}</td></tr>
+                            <tr>
+                                <td class="py-2 font-bold align-top">Pemanfaatan Digital</td>
+                                <td class="py-2 align-top">:</td>
+                                <td class="py-2 text-[9px] text-slate-600 bg-slate-50 p-2 border font-mono">
+                                    <strong>Link Youtube (ice breaking):</strong><br>${ice || '-'}<br>
+                                    <strong>(materi/bahan ajar):</strong><br>${materi || '-'}<br>
+                                    <strong>(Lembar Kerja Murid):</strong><br>${lkm || '-'}
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-[11px] border-b pb-0.5">III. METODE DEEP LEARNING KEMENAG</h4>
-                        <p class="text-[10px] mt-1 text-slate-600 leading-relaxed"><strong>1. Mindful:</strong> Tadarus bersama & pengkondisian jiwa spiritual siswa.<br><strong>2. Meaningful:</strong> Diskusi kontekstual mengenai penerapan materi <strong>${topik}</strong> di rumah.<br><strong>3. Joyful:</strong> Penutupan kelas menggunakan kuis interaktif keagamaan.</p>
+
+                    <!-- LANGKAH PEMBELAJARAN -->
+                    <div class="border border-slate-800 overflow-hidden">
+                        <div class="bg-slate-800 text-white p-2 text-center text-[11px] font-bold">LANGKAH PEMBELAJARAN</div>
+                        <table class="w-full text-[10px] border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 border-b border-slate-800 font-bold"><th class="p-2 border-r border-slate-800 text-left">Kegiatan Pembelajaran</th><th class="p-2 text-center w-24">Alokasi Waktu</th></tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-400">
+                                <tr>
+                                    <td class="p-2 border-r border-slate-800"><strong>Kegiatan Awal (Berkesadaran dan Menggembirakan):</strong><br><span class="text-slate-700">${kAwal}</span></td>
+                                    <td class="p-2 text-center font-bold bg-slate-50/50">${wAwal}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-r border-slate-800"><strong>Kegiatan Inti (Berkesadaran, Bermakna, Menggembirakan):</strong><br><span class="text-slate-700 font-medium">${kInti}</span></td>
+                                    <td class="p-2 text-center font-bold bg-slate-50/50">${wInti}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border-r border-slate-800"><strong>Penutup (Berkesadaran, Bermakna, Menggembirakan):</strong><br><span class="text-slate-700">${kPenutup}</span></td>
+                                    <td class="p-2 text-center font-bold bg-slate-50/50">${wPenutup}</td>
+                                </tr>
+                                <tr class="bg-slate-50">
+                                    <td colspan="2" class="p-2"><strong>Asesmen:</strong><br><span class="text-slate-700 italic">${kAsesmen}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 mt-6 pt-4 border-t border-slate-300 text-[10px]">
-                        <div class="flex flex-col justify-between h-20">
+
+                    <!-- SIGNATURE AREA -->
+                    <div class="grid grid-cols-2 gap-4 mt-8 pt-4 text-[10px]">
+                        <div class="flex flex-col justify-between h-24">
                             <div><p>Mengetahui,</p><p class="font-bold">Kepala Sekolah</p></div>
-                            <div><p class="underline font-bold">${conf.namaKepsek}</p><p class="text-slate-500 text-[9px]">NIP. ${conf.nipKepsek}</p></div>
+                            <div><p class="underline font-bold">${conf.namaKepsek}</p><p>NIP ${conf.nipKepsek}</p></div>
                         </div>
-                        <div class="flex flex-col justify-between h-20 text-right">
-                            <div><p>Jakarta, _________ 2026</p><p class="font-bold">Guru PAI & BP</p></div>
-                            <div><p class="underline font-bold">${conf.namaGuru}</p><p class="text-slate-500 text-[9px]">NIP. ${conf.nipGuru || '-'}</p></div>
+                        <div class="flex flex-col justify-between h-24 text-right">
+                            <div><p>Jakarta, ________________ 2026</p><p class="font-bold">Guru Kelas / Mapel</p></div>
+                            <div><p class="underline font-bold">${conf.namaGuru}</p><p>NIP ${conf.nipGuru || '____________________'}</p></div>
                         </div>
                     </div>
                 </div>
-                <button onclick="window.print()" class="no-print mt-2 w-full bg-slate-900 text-white text-xs font-bold py-2 rounded cursor-pointer"><i class="fa-solid fa-print"></i> Cetak / Simpan Berkas Modul Ajar Murni</button>
+                <button onclick="window.print()" class="no-print mt-3 w-full bg-slate-900 text-white text-xs font-bold py-2.5 rounded-xl cursor-pointer shadow"><i class="fa-solid fa-print"></i> Cetak / Simpan Berkas Perencanaan Mendalam</button>
             `;
         }
 
-        function bersihkanLokal() { if(confirm("Reset seluruh data lokal?")) { localStorage.removeItem('si_pai_data_storage_v3'); location.reload(); } }
-        function simpanKeCloud() { localStorage.setItem('si_pai_data_storage_v3', JSON.stringify(databaseSiswa)); alert("Data tersinkronisasi!"); }
+        function bersihkanLokal() { if(confirm("Reset data?")) { localStorage.removeItem('si_pai_mendalam_v1'); location.reload(); } }
+        function simpanKeCloud() { localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa)); alert("Tersimpan secara lokal & siap sinkronisasi cloud!"); }
         function bukaModalAuth() { document.getElementById('modal-auth').classList.remove('hidden'); }
         function tutupModalAuth() { document.getElementById('modal-auth').classList.add('hidden'); }
     </script>
