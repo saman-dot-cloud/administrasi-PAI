@@ -132,7 +132,7 @@
                         <div class="font-bold flex items-center gap-1.5 mb-0.5 text-emerald-900">
                             <i class="fa-solid fa-paste"></i> Anda bisa langsung Copy 2 Kolom (Nama & JK) dari Excel
                         </div>
-                        lalu Paste di kotak bawah ini.
+                        lahu Paste di kotak bawah ini.
                     </div>
                     <div>
                         <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Area Paste Data Siswa</label>
@@ -219,7 +219,7 @@
                 </div>
             </div>
 
-            <!-- CLOUD SYNCHRONIZER CARD -->
+            <!-- CLOUD SYNCHRONIZER CARD (DIUBAH NAMA TOMBOLNYA) -->
             <div class="bg-slate-900 p-5 rounded-2xl text-white shadow-xl flex flex-col gap-4">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-3">
                     <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-500">Cloud Synchronizer</span>
@@ -229,7 +229,7 @@
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <button onclick="simpanKeCloud()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2.5 rounded-xl transition cursor-pointer shadow-md shadow-emerald-900/30 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-cloud-arrow-up"></i> Push Cloud
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Simpan Data Online
                     </button>
                     <button onclick="bersihkanLokal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold py-2.5 rounded-xl transition cursor-pointer">
                         Reset Data
@@ -454,7 +454,6 @@
             document.getElementById('cfg-nama-guru').value = databaseSiswa.configSekolah.namaGuru;
             document.getElementById('cfg-nip-guru').value = databaseSiswa.configSekolah.nipGuru;
 
-            // Render tombol berdasarkan status login terakhir
             updateHeaderAuthUI();
 
             sinkronisasiKelasGlobal(document.getElementById('global-kelas-select').value);
@@ -675,7 +674,6 @@
             });
         }
 
-        // --- SISTEM AKTIVASI CLOUD, LOGIN & LOGOUT (PERBAIKAN FITUR) ---
         function bukaModalAuth() { 
             document.getElementById('modal-auth').classList.remove('hidden'); 
         }
@@ -715,7 +713,6 @@
             const badge = document.getElementById('badge-cloud-status');
 
             if (databaseSiswa.isCloudActive) {
-                // Tampilan saat LOGIN / TERHUBUNG
                 if(profileZone) {
                     profileZone.innerHTML = `
                         <div class="flex items-center gap-3">
@@ -735,7 +732,6 @@
                     badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Online / Terhubung`;
                 }
             } else {
-                // Tampilan saat LOGOUT / OFFLINE
                 if(profileZone) {
                     profileZone.innerHTML = `
                         <button onclick="bukaModalAuth()" class="bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-slate-800 shadow-sm transition flex items-center gap-2 cursor-pointer">
@@ -749,6 +745,7 @@
             }
         }
 
+        // FUNGSI SIMPAN DATA ONLINE (ALERT TULISAN SUDAH DIBERSIHKAN)
         function simpanKeCloud() { 
             if(!databaseSiswa.isCloudActive) {
                 alert('Anda belum login. Mengalihkan ke halaman login/aktivasi...');
@@ -757,7 +754,7 @@
             }
             
             localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa)); 
-            alert("Sukses! Data Rombel " + databaseSiswa.kelas + " Berhasil di-Push ke Cloud Server Si PAI v2026."); 
+            alert("Sukses! Data Rombel " + databaseSiswa.kelas + " Berhasil disimpan ke Server Online Si PAI v2026."); 
         }
 
         function bersihkanLokal() { 
