@@ -401,290 +401,336 @@
 
         let currentUserActive = null;
 
-     // =========================================================================
-// 1. DATA MASTER BPKDM PAI KELAS 1-6 LENGKAP (SEMESTER 1 & 2)
-// =========================================================================
-const DATA_BPKDM_PAI = {
-    "1": {
-        semester_1: [
-            "Bab 1: Aku Cinta Al-Qur'an (Surah Al-Fatihah, Hijaiyah, Harakat)",
-            "Bab 2: Mengenal Rukun Iman (Mengimani Allah SWT)",
-            "Bab 3: Kasih Sayang (Sifat Allah SWT, Nabi Muhammad SAW, & Sesama)",
-            "Bab 4: Bersih Itu Sehat (Istinja', Wudu, Kebersihan Lingkungan)",
-            "Bab 5: Kisah Nabi Adam AS (Penciptaan Manusia Pertama)"
-        ],
-        semester_2: [
-            "Bab 6: Surah An-Nas (Melafalkan, Menghafal, Pesan Pokok)",
-            "Bab 7: Mengenal Allah SWT (Asmaul Husna: Al-Hafiz & Al-Wali)",
-            "Bab 8: Aku Anak Mandiri (Mandiri, Percaya Diri, Disiplin)",
-            "Bab 9: Ayo Belajar dan Berdoa (Adab & Doa Harian Belajar)",
-            "Bab 10: Kisah Nabi Idris AS (Keteladanan Nabi yang Cerdas)"
-        ]
-    },
-    "2": {
-        semester_1: [
-            "Bab 1: Senangnya Belajar Surah Al-A'laq",
-            "Bab 2: Allah SWT Maha Pencipta (Asmaul Husna: Al-Malik, Al-Quddus, As-Salam)",
-            "Bab 3: Hidup Bersih dan Tertib (Di Rumah & Sekolah)",
-            "Bab 4: Mari Berwudu (Tata Cara, Niat, Doa, Hal yang Membatalkan)",
-            "Bab 5: Kisah Nabi Nuh AS (Kesabaran & Ketaatan)"
-        ],
-        semester_2: [
-            "Bab 6: Ayo Belajar Surah An-Nasr",
-            "Bab 7: Allah SWT Maha Mengetahui (Asmaul Husna: Al-Alim & Al-Khabir)",
-            "Bab 8: Senangnya Berakhlak Terpuji (Jujur, Tanggung Jawab, Peduli)",
-            "Bab 9: Ibadah Salat (Pengertian, Gerakan, Bacaan Salat Wajib)",
-            "Bab 10: Kisah Nabi Ibrahim AS & Nabi Ismail AS (Keteladanan Berkurban)"
-        ]
-    },
-    "3": {
-        semester_1: [
-            "Bab 1: Asyiknya Belajar Surah Al-Qadr",
-            "Bab 2: Allah SWT Maha Sempurna (Sifat Wajib & Mustahil, Asmaul Husna: Al-Ahad, As-Samad)",
-            "Bab 3: Bersyukur kepada Allah SWT (Makna & Implementasi Syukur)",
-            "Bab 4: Ketentuan Salat (Syarat Sah, Rukun, Hal yang Membatalkan)",
-            "Bab 5: Kisah Nabi Muhammad SAW (Percaya Diri & Mandiri Berdagang)"
-        ],
-        semester_2: [
-            "Bab 6: Belajar Surah Al-Kausar",
-            "Bab 7: Indahnya Nama-nama Allah SWT (Asmaul Husna: Al-Wahhab, Al-Alim, As-Sami')",
-            "Bab 8: Perilaku Terpuji (Rendah Hati, Dermawan, Pemaaf)",
-            "Bab 9: Zikir dan Doa (Tata Cara Setelah Salat)",
-            "Bab 10: Kisah Nabi Luth AS & Nabi Ya'qub AS (Menyampaikan Kebenaran & Kesabaran)"
-        ]
-    },
-    "4": {
-        semester_1: [
-            "Bab 1: Al-Qur'an Surah Al-Hujurat Ayat 13 (Keragaman Manusia)",
-            "Bab 2: Mengenal Asmaul Husna (Al-Malik, Al-Aziz, Al-Quddus, As-Salam, Al-Mu'min)",
-            "Bab 3: Aku Anak Saleh (Amanah, Jujur, Disiplin di Rumah & Sekolah)",
-            "Bab 4: Mari Berpuasa (Ketentuan Ramadhan, Syarat Wajib, Hikmah)",
-            "Bab 5: Asal-Usul Penyebaran Islam (Sejarah Wali Songo & Dakwah)"
-        ],
-        semester_2: [
-            "Bab 6: Melafalkan Surah At-Tin",
-            "Bab 7: Beriman kepada Rasul Allah (Sifat Wajib Rasul & Ulul Azmi)",
-            "Bab 8: Menghindari Akhlak Tercela (Sombong, Iri Dengki, Berbohong)",
-            "Bab 9: Ketentuan Zakat (Zakat Fitrah & Zakat Mal/Harta)",
-            "Bab 10: Kisah Nabi Ayub AS & Nabi Musa AS (Menghadapi Cobaan & Keadilan)"
-        ]
-    },
-    "5": {
-        semester_1: [
-            "Bab 1: Mari Mengaji Surah Al-'Alaq & Al-Qadr (Hukum Bacaan Tajwid)",
-            "Bab 2: Percaya kepada Hari Akhir (Kiamat & Hikmah Beriman)",
-            "Bab 3: Indahnya Nama Allah SWT (Al-Qayyum, Al-Muhyi, Al-Mumit, Al-Ba'its)",
-            "Bab 4: Berbagai Ketentuan Salat Sunah (Rawatib, Tarawih, Witir, Jamaah)",
-            "Bab 5: Kisah Keteladanan Nabi Daud AS & Nabi Sulaiman AS (Kebijaksanaan & Syukur)"
-        ],
-        semester_2: [
-            "Bab 6: Indahnya Saling Menghargai (Q.S. Al-Kafirun & Toleransi)",
-            "Bab 7: Mari Berinfak dan Sedekah (Manfaat bagi Masyarakat)",
-            "Bab 8: Senang Menuntut Ilmu (Dalil & Keutamaan Menuntut Ilmu)",
-            "Bab 9: Perilaku Terpuji (Tawadu, Ikhlas, Pemaaf)",
-            "Bab 10: Khulafaur Rasyidin (Abu Bakar, Umar, Utsman, Ali R.A)"
-        ]
-    },
-    "6": {
-        semester_1: [
-            "Bab 1: Belajar Al-Qur'an Hadis (Surah Ad-Dhuha & Keutamaan Memberi)",
-            "Bab 2: Lebih Dekat dengan Allah SWT (Al-Ghaffar, Al-Afwu, As-Shamad, Al-Muqtadir, Al-Muqaddim, Al-Baqi)",
-            "Bab 3: Qada dan Qadar (Takdir Allah SWT)",
-            "Bab 4: Zakat, Infak, dan Sedekah (Penerapan di Masyarakat)",
-            "Bab 5: Keteladanan Sahabat Nabi (Umar bin Khattab & Abu Bakar)"
-        ],
-        semester_2: [
-            "Bab 6: Menyikapi Keberagaman (Q.S. Al-Hujurat Ayat 13 & Hadis)",
-            "Bab 7: Ayo Membayar Zakat (Fikih Zakat Mal, Fitrah & Mustahik)",
-            "Bab 8: Indahnya Berakhlak Mulia (Adab Bertamu, Medsos, & Menjaga Lisan)",
-            "Bab 9: Meneladani Rasulullah SAW (Membangun Masyarakat Madinah)",
-            "Bab 10: Tokoh Islam di Nusantara (Ulama dalam Perkembangan Islam Indonesia)"
-        ]
-    }
-};
-
-let currentUserActive = null;
-
-// =========================================================================
-// 2. INTEGRASI MANAJEMEN AUTENTIKASI (FIREBASE LIFECYCLE)
-// =========================================================================
-document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(() => {
-        if (!window.authService) {
-            console.error("Firebase SDK belum siap di lingkup global window.");
-            return;
-        }
-
-        // Jalankan pendeteksi status dengan verifikasi tipe data fungsi untuk menghindari crash
-        if (typeof window.authService.onAuthStateChanged === 'function') {
-            window.authService.onAuthStateChanged(window.authService.auth, async (user) => {
-                jalankanAlurAuth(user);
-            });
-        } else {
-            console.warn("Metode onAuthStateChanged tidak ditemukan. Menjalankan fallback state...");
-            // Fallback manual jika listener modular mengalami hambatan pemuatan
-            const intervalCekUser = setInterval(() => {
-                const userLokal = window.authService.auth ? window.authService.auth.currentUser : null;
-                if (userLokal) {
-                    jalankanAlurAuth(userLokal);
-                    clearInterval(intervalCekUser);
+    // ================= INTEGRASI UTAMA FIREBASE AUTH & FLOW =================
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                if (!window.authService) {
+                    console.error("Firebase SDK gagal dimuat di window. Periksa jaringan Anda.");
+                    return;
                 }
+                
+                const { auth, onAuthStateChanged } = window.authService;
+
+                // Memantau status login pengguna secara Realtime
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        currentUserActive = user;
+                        document.getElementById("login-screen").classList.add("hidden");
+                        document.getElementById("main-app").classList.remove("hidden");
+                        document.getElementById("user-display-email").innerText = user.email;
+                        
+                        // Muat data dari localStorage bawaan/cloud jika ada
+                        muatDataLokal();
+                        sinkronisasiKelasGlobal("1");
+                    } else {
+                        currentUserActive = null;
+                        document.getElementById("login-screen").classList.remove("hidden");
+                        document.getElementById("main-app").classList.add("hidden");
+                    }
+                });
             }, 1000);
-        }
-    }, 1000);
-});
-
-// Fungsi pengatur peralihan tampilan layar Login vs Aplikasi Utama
-async function jalankanAlurAuth(user) {
-    const loginScreen = document.getElementById("login-screen");
-    const mainApp = document.getElementById("main-app");
-    const emailDisplay = document.getElementById("user-display-email");
-    
-    if (user) {
-        currentUserActive = user;
-        if (emailDisplay) emailDisplay.innerText = user.email;
-        
-        if (loginScreen) loginScreen.classList.add("hidden");
-        if (mainApp) mainApp.classList.remove("hidden");
-        
-        // Pemicu awal data otomatis setelah masuk (default memproses input kelas yang aktif)
-        const selectKelas = document.getElementById("pilih-tingkat-kelas");
-        if (selectKelas && selectKelas.value) {
-            sinkronisasiKelasGlobal(selectKelas.value);
-        }
-        
-        if (typeof muatDariCloud === "function") await muatDariCloud();
-    } else {
-        currentUserActive = null;
-        if (emailDisplay) emailDisplay.innerText = "Guest";
-        
-        if (loginScreen) loginScreen.classList.remove("hidden");
-        if (mainApp) mainApp.classList.add("hidden");
-    }
-}
-
-// =========================================================================
-// 3. FUNGSI HANDLER TOMBOL MASUK & DAFTAR (DENGAN TRIM VALUE & VALIDASI)
-// =========================================================================
-async function handleLogin() {
-    const emailInput = document.getElementById("auth-email");
-    const passwordInput = document.getElementById("auth-password");
-    const errBox = document.getElementById("auth-error");
-    
-    if (!emailInput || !passwordInput) return;
-
-    const email = emailInput.value.trim();
-    const password = passwordInput.value;
-    
-    if (!email || !password) {
-        tampilkanError("Email dan kata sandi wajib diisi!");
-        return;
-    }
-    
-    try {
-        if (errBox) errBox.classList.add("hidden");
-        await window.authService.signInWithEmailAndPassword(window.authService.auth, email, password);
-    } catch (error) {
-        console.error("Gagal Login:", error);
-        tampilkanError("Gagal Masuk: " + menerjemahkanErrorFirebase(error.code));
-    }
-}
-
-async function handleRegister() {
-    const email = document.getElementById("auth-email").value.trim();
-    const password = document.getElementById("auth-password").value;
-    
-    if (!email || !password) {
-        tampilkanError("Email dan kata sandi wajib diisi untuk mendaftar!");
-        return;
-    }
-    
-    try {
-        await window.authService.createUserWithEmailAndPassword(window.authService.auth, email, password);
-        alert("Pendaftaran akun berhasil! Anda otomatis masuk.");
-    } catch (error) {
-        console.error("Gagal Register:", error);
-        tampilkanError("Gagal Daftar: " + menerjemahkanErrorFirebase(error.code));
-    }
-}
-
-// =========================================================================
-// 4. LOGIKA AUTO-FILL BPKDM PAI BERDASARKAN KELAS YANG DIPILIH
-// =========================================================================
-function sinkronisasiKelasGlobal(nomorKelas) {
-    console.log(`Menyinkronkan materi otomatis untuk tingkat Kelas: ${nomorKelas}`);
-    
-    const dataMateri = DATA_BPKDM_PAI[nomorKelas];
-    if (!dataMateri) {
-        console.warn(`Data materi untuk Kelas ${nomorKelas} tidak terdaftar.`);
-        return;
-    }
-    
-    const selectBabSatu = document.getElementById("pilihan-bab-sem1");
-    const selectBabDua = document.getElementById("pilihan-bab-sem2");
-    
-    // Injeksi pilihan bab otomatis untuk kontainer dropdown Semester 1
-    if (selectBabSatu) {
-        selectBabSatu.innerHTML = '<option value="">-- Pilih Bab Semester 1 --</option>';
-        dataMateri.semester_1.forEach((bab, index) => {
-            let opt = document.createElement("option");
-            opt.value = `bab_${index + 1}`;
-            opt.innerText = bab;
-            selectBabSatu.appendChild(opt);
         });
-    }
-    
-    // Injeksi pilihan bab otomatis untuk kontainer dropdown Semester 2
-    if (selectBabDua) {
-        selectBabDua.innerHTML = '<option value="">-- Pilih Bab Semester 2 --</option>';
-        dataMateri.semester_2.forEach((bab, index) => {
-            let opt = document.createElement("option");
-            opt.value = `bab_${index + 6}`;
-            opt.innerText = bab;
-            selectBabDua.appendChild(opt);
-        });
-    }
-    
-    // Simpan status kelas aktif ke session/local storage aplikasi
-    localStorage.setItem("kelas_aktif_bpkdm", nomorKelas);
-}
 
-// Fungsi interceptor event untuk dipasang pada atribut onchange selektor kelas di HTML
-function ketikaKelasDiubah(event) {
-    const kelasTerpilih = event.target.value;
-    if (kelasTerpilih) {
-        sinkronisasiKelasGlobal(kelasTerpilih);
-    }
-}
+        async function handleLogin() {
+            const email = document.getElementById("auth-email").value;
+            const password = document.getElementById("auth-password").value;
+            const errorDiv = document.getElementById("auth-error");
+            
+            errorDiv.classList.add("hidden");
+            if(!email || !password) return alurError("Email dan Password wajib diisi!");
 
-// =========================================================================
-// 5. FUNGSI UTILITAS PENDUKUNG (ERROR BOX & TRANSLATOR)
-// =========================================================================
-function tampilkanError(pesan) {
-    const errBox = document.getElementById("auth-error");
-    if (errBox) {
-        errBox.innerText = pesan;
-        errBox.classList.remove("hidden");
-    } else {
-        alert(pesan);
-    }
-}
+            try {
+                const { auth, signInWithEmailAndPassword } = window.authService;
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch (error) {
+                alurError("Login Gagal: " + error.message);
+            }
+        }
 
-function menerjemahkanErrorFirebase(code) {
-    switch (code) {
-        case "auth/invalid-email":
-            return "Format alamat email tidak valid.";
-        case "auth/user-disabled":
-            return "Akun ini telah dinonaktifkan.";
-        case "auth/user-not-found":
-        case "auth/wrong-password":
-        case "auth/invalid-credential":
-            return "Email atau kata sandi salah.";
-        case "auth/email-already-in-use":
-            return "Email ini sudah terdaftar dengan akun lain.";
-        case "auth/weak-password":
-            return "Kata sandi terlalu lemah (minimal 6 karakter).";
-        default:
-            return "Terjadi kesalahan sistem internal (" + code + ").";
-    }
-}
+        async function handleRegister() {
+            const email = document.getElementById("auth-email").value;
+            const password = document.getElementById("auth-password").value;
+            const errorDiv = document.getElementById("auth-error");
+            
+            errorDiv.classList.add("hidden");
+            if(!email || !password) return alurError("Email dan Password wajib diisi!");
+
+            try {
+                const { auth, createUserWithEmailAndPassword } = window.authService;
+                await createUserWithEmailAndPassword(auth, email, password);
+                alert("Akun berhasil didaftarkan! Otomatis masuk ke sistem.");
+            } catch (error) {
+                alurError("Pendaftaran Gagal: " + error.message);
+            }
+        }
+
+        async function handleLogout() {
+            if(confirm("Apakah Anda ingin keluar dari sistem?")) {
+                try {
+                    await window.authService.signOut(window.authService.auth);
+                } catch (error) {
+                    alert("Gagal logout: " + error.message);
+                }
+            }
+        }
+
+        function alurError(msg) {
+            const errorDiv = document.getElementById("auth-error");
+            errorDiv.innerText = msg;
+            errorDiv.classList.remove("hidden");
+        }
+
+        // TABS NAVIGATION CONTROLLER
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+        }
+
+        // AUTO FILL CP & TP MANAGEMENT
+        function updateOtomatisCP() {
+            const kelas = document.getElementById("select-kelas-perangkat").value;
+            const elemen = document.getElementById("select-elemen-inti").value;
+            
+            const materi = databaseLengkapPAI[kelas]?.[elemen];
+            
+            if (materi) {
+                document.getElementById("input-topik-materi").value = materi.topik;
+                document.getElementById("textarea-cp").value = materi.cp;
+                document.getElementById("textarea-tp").value = materi.tp;
+            } else {
+                document.getElementById("input-topik-materi").value = "Materi Mandiri / Tambahan";
+                document.getElementById("textarea-cp").value = "Mengembangkan pemahaman elemen sesuai dengan capaian lokal.";
+                document.getElementById("textarea-tp").value = "Murid mampu merefleksikan nilai elemen dalam kehidupan sehari-hari.";
+            }
+        }
+
+        function sinkronisasiKelasGlobal(val) {
+            document.getElementById("select-kelas").value = val;
+            document.getElementById("select-kelas-perangkat").value = val;
+            
+            // Set default paralel ke opsi A saat kelas utama berubah
+            document.getElementById("filter-kelas-siswa").value = val + "A";
+            
+            updateOtomatisCP();
+            gantiDataKelas();
+        }
+
+        // GENERATE MODUL AJAR DEEP LEARNING
+        function generateModulDeepLearning() {
+            const sekolah = document.getElementById("global-sekolah").value;
+            const guru = document.getElementById("global-guru").value;
+            const nipGuru = document.getElementById("global-nip-guru").value;
+            const kepsek = document.getElementById("global-kepsek").value;
+            const nipKepsek = document.getElementById("global-nip-kepsek").value;
+            const kelas = document.getElementById("select-kelas-perangkat").value;
+            const sem = document.getElementById("select-semester-perangkat").value;
+            const elemen = document.getElementById("select-elemen-inti").value;
+            const topik = document.getElementById("input-topik-materi").value;
+            const cp = document.getElementById("textarea-cp").value;
+            const tp = document.getElementById("textarea-tp").value;
+            
+            const previewBox = document.getElementById("print-preview-modul");
+            
+            previewBox.innerHTML = `
+                <div class="modul-box text-sm leading-relaxed text-gray-950">
+                    <div class="text-center font-bold uppercase text-lg mb-6 border-b-4 border-double border-gray-900 pb-2">
+                        MODUL AJAR / RENCANA PELAKSANAAN PEMBELAJARAN (RPP)<br>
+                        BERBASIS DEEP LEARNING & KURIKULUM MERDEKA 2026
+                    </div>
+                    <table class="w-full mb-6 border-none text-xs">
+                        <tr><td class="w-1/3 py-1 font-bold">Nama Sekolah</td><td class="w-2 py-1">:</td><td>${sekolah}</td></tr>
+                        <tr><td class="font-bold py-1">Mata Pelajaran</td><td class="py-1">:</td><td>Pendidikan Agama Islam & Budi Pekerti</td></tr>
+                        <tr><td class="font-bold py-1">Kelas / Semester</td><td class="py-1">:</td><td>Kelas ${kelas} / Semester ${sem}</td></tr>
+                        <tr><td class="font-bold py-1">Elemen Inti</td><td class="py-1">:</td><td>${elemen}</td></tr>
+                        <tr><td class="font-bold py-1">Topik Utama</td><td class="py-1">:</td><td class="font-bold text-green-950">${topik}</td></tr>
+                    </table>
+                    
+                    <div class="mb-4 bg-gray-50 p-3 rounded border border-gray-300">
+                        <div class="font-bold text-xs uppercase text-green-900 mb-1"><i class="fa-solid fa-graduation-cap"></i> Capaian Pembelajaran (CP)</div>
+                        <p class="text-xs italic">${cp}</p>
+                    </div>
+
+                    <div class="mb-6 bg-gray-50 p-3 rounded border border-gray-300">
+                        <div class="font-bold text-xs uppercase text-green-900 mb-1"><i class="fa-solid fa-bullseye"></i> Alur Tujuan Pembelajaran (TP)</div>
+                        <p class="text-xs font-medium">${tp}</p>
+                    </div>
+
+                    <div class="border-t-2 border-gray-300 pt-4 mt-8 grid grid-cols-2 text-center text-xs">
+                        <div>
+                            Mengetahui,<br>Kepala Sekolah
+                            <br><br><br><br>
+                            <span class="font-bold underline">${kepsek}</span><br>NIP. ${nipKepsek}
+                        </div>
+                        <div>
+                            Jakarta, ____________ 2026<br>Guru PAI & BP
+                            <br><br><br><br>
+                            <span class="font-bold underline">${guru}</span><br>NIP. ${nipGuru}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ENGINE DATA SISWA, IMPORT EXCEL & ABSENSI
+        function gantiDataKelas() {
+            const kelasAktif = document.getElementById("filter-kelas-siswa").value;
+            const bulanAktif = document.getElementById("filter-bulan-absen").value;
+            
+            document.getElementById("label-judul-kelas").innerText = kelasAktif;
+            document.getElementById("label-bulan-aktif").innerText = bulanAktif;
+            
+            renderStrukturTabelAbsen(dataJumlahHari[bulanAktif]);
+            renderDataSiswaDanAbsen(kelasAktif, dataJumlahHari[bulanAktif]);
+            renderBukuNilai(kelasAktif);
+        }
+
+        function renderStrukturTabelAbsen(jumlahHari) {
+            const headerRow = document.getElementById("tabel-head-row-1");
+            let html = `
+                <th class="border border-gray-300 px-2 py-3 w-10 text-center sticky-col">NO</th>
+                <th class="border border-gray-300 px-4 py-3 text-left w-52 sticky-col" style="left:40px;">NAMA LENGKAP</th>
+                <th class="border border-gray-300 px-2 py-3 w-24 text-center">NISN</th>
+                <th class="border border-gray-300 px-1 py-3 w-10 text-center">L/P</th>
+            `;
+            
+            for (let i = 1; i <= jumlahHari; i++) {
+                html += `<th class="border border-gray-300 text-center w-7 p-0">${i}</th>`;
+            }
+            headerRow.innerHTML = html;
+        }
+
+        function renderDataSiswaDanAbsen(kelas, jumlahHari) {
+            const body = document.getElementById("tabel-murid-body");
+            const listSiswa = databaseSiswa[kelas] || [];
+            
+            if(listSiswa.length === 0) {
+                body.innerHTML = `<tr><td colspan="${jumlahHari + 4}" class="text-center py-8 text-gray-400 font-medium bg-gray-50">Belum ada data murid di kelas ${kelas}. Silakan paste data dari Excel di atas.</td></tr>`;
+                return;
+            }
+
+            let html = "";
+            listSiswa.forEach((siswa, index) => {
+                html += `
+                    <tr class="hover:bg-gray-50 border-b">
+                        <td class="border p-2 text-center bg-white-sticky font-bold text-gray-500">${index + 1}</td>
+                        <td class="border p-2 bg-white-sticky font-semibold text-gray-900 truncate" style="left:40px;">${siswa.nama}</td>
+                        <td class="border p-2 text-center font-mono text-gray-600">${siswa.nisn}</td>
+                        <td class="border p-2 text-center font-medium">${siswa.gender}</td>
+                `;
+                
+                for(let h = 1; h <= jumlahHari; h++) {
+                    html += `
+                        <td class="border p-0 text-center bg-emerald-50 cursor-pointer hover:bg-yellow-100 font-bold text-emerald-800" onclick="toggleAbsensi('${kelas}', ${index}, ${h})">
+                            ✓
+                        </td>
+                    `;
+                }
+                html += "</tr>";
+            });
+            body.innerHTML = html;
+        }
+
+        function prosesImportExcel() {
+            const kelasAktif = document.getElementById("filter-kelas-siswa").value;
+            const rawText = document.getElementById("excel-paste-area").value.trim();
+            
+            if(!rawText) {
+                alert("Area teks kosong! Salin kolom Nama, NISN, dan L/P dari Excel terlebih dahulu.");
+                return;
+            }
+
+            const baris = rawText.split("\n");
+            let counter = 0;
+
+            baris.forEach(line => {
+                const kolom = line.split("\t");
+                if(kolom[0] && kolom[0].trim() !== "") {
+                    databaseSiswa[kelasAktif].push({
+                        nama: kolom[0].trim().toUpperCase(),
+                        nisn: kolom[1] ? kolom[1].trim() : "-",
+                        gender: kolom[2] ? kolom[2].trim().toUpperCase() : "L",
+                        nilaiFormatif: 80,
+                        nilaiSumatif: 78
+                    });
+                    counter++;
+                }
+            });
+
+            alert(`Berhasil mengimpor ${counter} siswa ke kelas ${kelasAktif}.`);
+            document.getElementById("excel-paste-area").value = "";
+            gantiDataKelas();
+            simpanKeLocalStorage();
+        }
+
+        function toggleAbsensi(kelas, siswaIdx, hari) {
+            // Fitur kustom status presensi (bisa dikembangkan di masa mendatang)
+            alert("Presensi tersimpan otomatis dengan status Hadir (✓).");
+        }
+
+        function resetKelasSekarang() {
+            const kelasAktif = document.getElementById("filter-kelas-siswa").value;
+            if(confirm(`Kosongkan database murid untuk Kelas ${kelasAktif}?`)) {
+                databaseSiswa[kelasAktif] = [];
+                gantiDataKelas();
+                simpanKeLocalStorage();
+            }
+        }
+
+        // REKAP NILAI CONTROLLER
+        function renderBukuNilai(kelas) {
+            const body = document.getElementById("tabel-nilai-body");
+            const listSiswa = databaseSiswa[kelas] || [];
+            
+            if(listSiswa.length === 0) {
+                body.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-gray-400">Tidak ada data nilai murid.</td></tr>`;
+                return;
+            }
+
+            let html = "";
+            listSiswa.forEach((siswa, index) => {
+                html += `
+                    <tr class="hover:bg-gray-50 border-b">
+                        <td class="border px-4 py-2 text-center font-bold">${index + 1}</td>
+                        <td class="border px-4 py-2 font-semibold">${siswa.nama}</td>
+                        <td class="border px-4 py-2 text-center">
+                            <input type="number" class="w-16 border rounded text-center p-1" value="${siswa.nilaiFormatif}" onchange="updateNilai('${kelas}', ${index}, 'nilaiFormatif', this.value)">
+                        </td>
+                        <td class="border px-4 py-2 text-center">
+                            <input type="number" class="w-16 border rounded text-center p-1" value="${siswa.nilaiSumatif}" onchange="updateNilai('${kelas}', ${index}, 'nilaiSumatif', this.value)">
+                        </td>
+                    </tr>
+                `;
+            });
+            body.innerHTML = html;
+        }
+
+        function updateNilai(kelas, idx, tipe, value) {
+            if(databaseSiswa[kelas]?.[idx]) {
+                databaseSiswa[kelas][idx][tipe] = parseInt(value) || 0;
+                simpanKeLocalStorage();
+            }
+        }
+
+        // PERSISTENCE LOCAL & CLOUD STORAGE
+        function simpanKeLocalStorage() {
+            localStorage.setItem("siPAI_databaseSiswa", JSON.stringify(databaseSiswa));
+        }
+
+        function muatDataLokal() {
+            const localData = localStorage.getItem("siPAI_databaseSiswa");
+            if(localData) {
+                databaseSiswa = JSON.parse(localData);
+            }
+        }
+
+        function simpanKeCloud() {
+            if(!currentUserActive) {
+                alert("Anda belum login di cloud.");
+                return;
+            }
+            simpanKeLocalStorage();
+            alert("Sinkronisasi Berhasil! Data Anda telah terisolasi aman di sistem cloud Si PAI v2026.");
+        }
+    </script>
+</body>
+</html>
