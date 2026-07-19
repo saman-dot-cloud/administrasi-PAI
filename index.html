@@ -8,43 +8,47 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-slate-100 font-sans text-slate-800 antialiased">
+<body class="bg-slate-100 font-sans text-slate-800 antialiased overflow-hidden">
 
-    <div class="flex h-screen overflow-hidden">
+    <!-- LAYOUT UTAMA CONTAINER -->
+    <div class="flex h-screen w-full">
         
         <!-- SIDEBAR / PANEL INPUT (KIRI) -->
-        <div class="w-80 bg-white border-r border-slate-200 flex flex-col justify-between shadow-sm z-10">
-            <!-- Header Panel -->
-            <div class="p-4 border-b border-slate-100">
-                <h2 id="judul-panel-input" class="text-sm font-bold text-slate-800 flex items-center gap-2 transition-all duration-200">
+        <div class="w-80 bg-white border-r border-slate-200 flex flex-col justify-between shadow-sm h-full">
+            
+            <!-- Header Panel Kiri (Tempat Judul Menu yang Akan Berubah Dinamis) -->
+            <div class="p-4 border-b border-slate-100 bg-slate-50/50">
+                <h2 id="judul-panel-input" class="text-sm font-bold text-slate-800 flex items-center gap-2">
                     <i class="fa-solid fa-school text-emerald-600"></i> Profil Lembaga & Guru
                 </h2>
-                <p id="deskripsi-panel-input" class="text-[11px] text-slate-400 mt-0.5 transition-all duration-200">
+                <p id="deskripsi-panel-input" class="text-[11px] text-slate-500 mt-1 leading-relaxed">
                     Atur identitas instansi, tahun ajaran, dan penandatangan dokumen.
                 </p>
             </div>
 
-            <!-- Konten Form / Sub-Menu Dinamis -->
-            <div class="flex-1 overflow-y-auto p-4">
+            <!-- Konten Form / Sub-Menu Isi -->
+            <div class="flex-1 overflow-y-auto p-4 space-y-4">
                 
                 <!-- 1. FORM PROFIL LEMBAGA -->
                 <div id="form-sub-sekolah" class="space-y-3">
                     <div class="flex flex-col gap-1">
                         <label class="text-[11px] font-semibold text-slate-700">Nama Sekolah</label>
-                        <input type="text" id="input-nama-sekolah" placeholder="SDN Contoh 01" class="w-full px-3 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-emerald-600">
+                        <input type="text" id="input-nama-sekolah" placeholder="SDN Contoh 01" class="w-full px-3 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-emerald-600 transition-all">
                     </div>
-                    <!-- Input Tahun Ajaran Baru -->
+                    
+                    <!-- INPUT TAHUN AJARAN BARU -->
                     <div class="flex flex-col gap-1">
                         <label class="text-[11px] font-semibold text-slate-700">Tahun Ajaran</label>
-                        <input type="text" id="input-tahun-ajaran" placeholder="Contoh: 2025/2026" class="w-full px-3 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-emerald-600">
+                        <input type="text" id="input-tahun-ajaran" placeholder="Contoh: 2025/2026" class="w-full px-3 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-emerald-600 transition-all">
                     </div>
+                    
                     <div class="flex flex-col gap-1">
                         <label class="text-[11px] font-semibold text-slate-700">Nama Kepala Sekolah</label>
-                        <input type="text" placeholder="Nama Lengkap & Gelar" class="w-full px-3 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-emerald-600">
+                        <input type="text" placeholder="Nama Lengkap & Gelar" class="w-full px-3 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-emerald-600 transition-all">
                     </div>
                     <div class="flex flex-col gap-1">
                         <label class="text-[11px] font-semibold text-slate-700">NIP Kepala Sekolah</label>
-                        <input type="text" placeholder="1987xxxxxxxxxxxxxx" class="w-full px-3 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-emerald-600">
+                        <input type="text" placeholder="1987xxxxxxxxxxxxxx" class="w-full px-3 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:border-emerald-600 transition-all">
                     </div>
                 </div>
 
@@ -98,57 +102,58 @@
 
             </div>
 
-            <!-- BARS MENU UTAMA (BOTTOM NAV BAR) -->
-            <div class="p-2 border-t border-slate-100 bg-slate-50 flex gap-1 justify-between">
-                <!-- Tab Sekolah (Active by Default) -->
-                <div id="tab-sekolah" onclick="gantiTab('sekolah')" class="flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer bg-emerald-600 text-white shadow-sm">
+            <!-- MENU TOMBOL UTAMA (BOTTOM MENU) -->
+            <div class="p-2 border-t border-slate-200 bg-slate-50 flex gap-1 justify-between">
+                <!-- Tab Sekolah -->
+                <div id="tab-sekolah" onclick="gantiTab('sekolah')" class="flex-1 min-w-[55px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer bg-emerald-600 text-white shadow-sm">
                     <i class="fa-solid fa-school text-sm"></i>
                     <span>Lembaga</span>
                 </div>
                 <!-- Tab Siswa -->
-                <div id="tab-siswa" onclick="gantiTab('siswa')" class="flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-50">
+                <div id="tab-siswa" onclick="gantiTab('siswa')" class="flex-1 min-w-[55px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-100">
                     <i class="fa-solid fa-users text-sm"></i>
                     <span>Siswa</span>
                 </div>
                 <!-- Tab Absensi -->
-                <div id="tab-absensi" onclick="gantiTab('absensi')" class="flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-50">
+                <div id="tab-absensi" onclick="gantiTab('absensi')" class="flex-1 min-w-[55px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-100">
                     <i class="fa-solid fa-clipboard-user text-sm"></i>
                     <span>Absensi</span>
                 </div>
                 <!-- Tab Nilai -->
-                <div id="tab-nilai" onclick="gantiTab('nilai')" class="flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-50">
+                <div id="tab-nilai" onclick="gantiTab('nilai')" class="flex-1 min-w-[55px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-100">
                     <i class="fa-solid fa-star text-sm"></i>
                     <span>Nilai</span>
                 </div>
                 <!-- Tab Modul -->
-                <div id="tab-modul" onclick="gantiTab('modul')" class="flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-50">
+                <div id="tab-modul" onclick="gantiTab('modul')" class="flex-1 min-w-[55px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-100">
                     <i class="fa-solid fa-file-invoice text-sm"></i>
                     <span>Modul</span>
                 </div>
             </div>
         </div>
 
-        <!-- MAIN MONITOR / PREVIEW SCREEN (KANAN) -->
-        <div class="flex-1 bg-slate-100 p-6 flex flex-col overflow-hidden">
-            <!-- Header Monitor -->
+        <!-- MAIN MONITOR / LAYAR KANAN -->
+        <div class="flex-1 bg-slate-50 p-6 flex flex-col h-full overflow-hidden">
+            
+            <!-- Header Tampilan Monitor -->
             <div class="mb-4">
-                <h1 id="judul-live-monitor" class="text-lg font-bold text-slate-800 transition-all duration-200">Profil Satuan Pendidikan</h1>
-                <p id="subjudul-live-monitor" class="text-xs text-slate-500 transition-all duration-200">Data utama identitas instansi.</p>
+                <h1 id="judul-live-monitor" class="text-lg font-bold text-slate-800">Profil Satuan Pendidikan</h1>
+                <p id="subjudul-live-monitor" class="text-xs text-slate-500">Data utama identitas instansi.</p>
             </div>
 
-            <!-- Layar Tampilan Data Dinamis -->
+            <!-- Tempat Output Data Preview Lembar Kerja -->
             <div class="flex-1 bg-white rounded-xl border border-slate-200 shadow-sm p-6 overflow-y-auto">
                 
                 <!-- Screen 1: Lembaga -->
                 <div id="screen-sekolah" class="space-y-4">
                     <div class="border-b border-dashed border-slate-200 pb-3">
-                        <h3 class="text-sm font-bold text-emerald-700 mb-2">Pratinjau Kop & Identitas Berkas</h3>
-                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg text-center space-y-1">
-                            <h2 class="font-serif font-bold text-sm tracking-wide uppercase">Pemerintah Kabupaten / Kota Contoh</h2>
-                            <h1 id="view-nama-sekolah" class="font-serif font-bold text-base tracking-wider uppercase">SDN CONTOH 01</h1>
-                            <p class="text-[10px] text-slate-500 font-sans italic">Alamat Lengkap Instansi Satuan Pendidikan Jalan Pahlawan No. 45</p>
-                            <div class="text-[11px] font-semibold text-slate-700 mt-2 border-t border-slate-200 pt-1">
-                                TAHUN AJARAN: <span id="view-tahun-ajaran" class="text-emerald-600">-</span>
+                        <h3 class="text-xs font-bold text-emerald-700 mb-2 uppercase tracking-wider">Pratinjau Kop Surat</h3>
+                        <div class="p-6 bg-slate-50 border border-slate-200 rounded-xl text-center space-y-1">
+                            <h2 class="font-serif font-bold text-sm tracking-wide uppercase">PEMERINTAH KABUPATEN / KOTA</h2>
+                            <h1 id="view-nama-sekolah" class="font-serif font-bold text-base tracking-wider text-slate-900 uppercase">SDN CONTOH 01</h1>
+                            <p class="text-[10px] text-slate-500 font-sans italic">Alamat Instansi Satuan Pendidikan Jalan Pahlawan No. 45</p>
+                            <div class="text-[11px] font-semibold text-slate-700 mt-3 border-t border-slate-200 pt-2">
+                                TAHUN AJARAN: <span id="view-tahun-ajaran" class="text-emerald-600 font-bold">-</span>
                             </div>
                         </div>
                     </div>
@@ -172,19 +177,12 @@
                                 <td class="p-2 font-semibold">Budi Santoso</td>
                                 <td class="p-2 text-center">L</td>
                             </tr>
-                            <tr class="border-b border-slate-100">
-                                <td class="p-2">2</td>
-                                <td class="p-2 font-mono">87654321</td>
-                                <td class="p-2 font-semibold">Siti Aminah</td>
-                                <td class="p-2 text-center">P</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <!-- Screen 3: Absensi -->
                 <div id="screen-absensi" class="hidden">
-                    <p class="text-xs text-slate-500 mb-2">Klik radio button untuk mengubah absensi siswa hari ini:</p>
                     <table class="w-full text-left text-xs border-collapse">
                         <thead>
                             <tr class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
@@ -198,10 +196,10 @@
                         <tbody>
                             <tr class="border-b border-slate-100">
                                 <td class="p-2 font-semibold">Budi Santoso</td>
-                                <td class="p-2 text-center"><input type="radio" name="abs-1" checked></td>
-                                <td class="p-2 text-center"><input type="radio" name="abs-1"></td>
-                                <td class="p-2 text-center"><input type="radio" name="abs-1"></td>
-                                <td class="p-2 text-center"><input type="radio" name="abs-1"></td>
+                                <td class="p-2 text-center"><input type="radio" name="abs-demo" checked></td>
+                                <td class="p-2 text-center"><input type="radio" name="abs-demo"></td>
+                                <td class="p-2 text-center"><input type="radio" name="abs-demo"></td>
+                                <td class="p-2 text-center"><input type="radio" name="abs-demo"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -210,18 +208,16 @@
                 <!-- Screen 4: Nilai -->
                 <div id="screen-nilai" class="hidden">
                     <div class="bg-amber-50 border border-amber-200 text-amber-800 p-3 rounded-lg text-xs">
-                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> Nilai formatif dan sumatif akan direkap otomatis ke dalam e-Rapor.
+                        <i class="fa-solid fa-circle-info mr-1"></i> Nilai formatif dan sumatif akan direkap otomatis ke rapot utama.
                     </div>
                 </div>
 
                 <!-- Screen 5: Modul -->
                 <div id="screen-modul" class="hidden">
-                    <div class="border border-slate-300 p-6 rounded shadow-sm max-w-2xl mx-auto bg-white font-serif text-xs space-y-4">
-                        <h2 class="text-center font-bold text-sm uppercase underline">MODUL AJAR / RPP</h2>
-                        <table class="w-full text-left">
-                            <tr><td class="w-24 font-bold">Mata Pelajaran</td><td>: Pendidikan Agama Islam & Budi Pekerti</td></tr>
-                            <tr><td class="font-bold">Fase / Kelas</td><td>: A / 1</td></tr>
-                        </table>
+                    <div class="border border-slate-300 p-6 rounded bg-white font-serif text-xs space-y-2 max-w-xl mx-auto shadow-sm">
+                        <h2 class="text-center font-bold text-sm uppercase underline mb-4">MODUL AJAR KURIKULUM MERDEKA</h2>
+                        <p><strong>Mata Pelajaran:</strong> Pendidikan Agama Islam & Budi Pekerti</p>
+                        <p><strong>Fase / Kelas:</strong> A / 1</p>
                     </div>
                 </div>
 
@@ -230,29 +226,29 @@
 
     </div>
 
-    <!-- JAVASCRIPT SYSTEM -->
+    <!-- JAVASCRIPT SYSTEM ENGINE -->
     <script>
-        // Fungsi utama perpindahan Tab Menu secara Dinamis & Real-time
         function gantiTab(target) {
             const tabs = ['sekolah', 'siswa', 'absensi', 'nilai', 'modul'];
             
+            // Perulangan untuk tombol navigasi menu bawah dan layar preview
             tabs.forEach(t => {
                 const btn = document.getElementById(`tab-${t}`);
                 const formSub = document.getElementById(`form-sub-${t}`);
                 const screen = document.getElementById(`screen-${t}`);
                 
                 if(t === target) {
-                    if(btn) btn.className = "flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer bg-emerald-600 text-white shadow-sm";
+                    if(btn) btn.className = "flex-1 min-w-[55px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer bg-emerald-600 text-white shadow-sm";
                     if(formSub) formSub.classList.remove('hidden');
                     if(screen) screen.classList.remove('hidden');
                 } else {
-                    if(btn) btn.className = "flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-50";
+                    if(btn) btn.className = "flex-1 min-w-[55px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-100";
                     if(formSub) formSub.classList.add('hidden');
                     if(screen) screen.classList.add('hidden');
                 }
             });
 
-            // Sinkronisasi Judul Panel Input Kiri
+            // LOGIKA DINAMIS: Mengubah teks judul di panel kiri atas sesuai tab aktif
             const panelJudul = document.getElementById('judul-panel-input');
             const panelDeskripsi = document.getElementById('deskripsi-panel-input');
             
@@ -279,7 +275,7 @@
                 }
             }
 
-            // Sinkronisasi Judul Main Monitor Kanan
+            // LOGIKA DINAMIS: Mengubah judul besar di monitor kanan atas
             const monitorJudul = document.getElementById('judul-live-monitor');
             const monitorSub = document.getElementById('subjudul-live-monitor');
             
@@ -292,7 +288,7 @@
             }
         }
 
-        // Live Binding Real-time Input dari Form Ke Monitor Kanan (Untuk Nama & Tahun Ajaran)
+        // Real-time Text-Binding untuk Monitor Kanan
         document.getElementById('input-nama-sekolah').addEventListener('input', function(e) {
             const val = e.target.value;
             document.getElementById('view-nama-sekolah').innerText = val ? val.toUpperCase() : "SDN CONTOH 01";
