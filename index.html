@@ -71,7 +71,7 @@
         </div>
     </header>
     
-    <!-- MAIN INTERACTIVE CONTAINER (Fixed responsive grids) -->
+    <!-- MAIN INTERACTIVE CONTAINER -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 md:grid-cols-12 gap-6">
         
         <!-- LEFT CONTROL: NAVIGATION & INPUT -->
@@ -452,7 +452,6 @@
             document.getElementById('lbl-guru').innerText = databaseSiswa.configSekolah.namaGuru;
             document.getElementById('lbl-nip-guru').innerText = "NIP. " + databaseSiswa.configSekolah.nipGuru;
             
-            // Perbaikan: Sinkronisasi tampilan label rombel agar tidak menghasilkan error undefined
             const bagian = databaseSiswa.kelas.split('-');
             document.getElementById('lbl-rombel-aktif').innerText = "Kelas " + bagian[0] + " " + bagian[1];
             
@@ -476,14 +475,31 @@
                     if(screen) screen.classList.add('hidden');
                 }
             });
+
+            // PERBAIKAN DINAMIS: Judul & deskripsi monitor berubah secara akurat 100% mengikuti tab aktif
             const monitorJudul = document.getElementById('judul-live-monitor');
             const monitorSub = document.getElementById('subjudul-live-monitor');
             
-            if(target === 'sekolah') { monitorJudul.innerText = "Profil Satuan Pendidikan"; monitorSub.innerText = "Data utama identitas instansi."; }
-            else if(target === 'siswa') { monitorJudul.innerText = "Manajemen Database Siswa Perkelas"; monitorSub.innerText = "Kelola data nama dan gender rombel aktif."; }
-            else if(target === 'absensi') { monitorJudul.innerText = "Jurnal Absensi Harian"; monitorSub.innerText = "Rekam riwayat kehadiran."; }
-            else if(target === 'nilai') { monitorJudul.innerText = "Rekapitulasi Nilai Asesmen PAI"; monitorSub.innerText = "Nilai formatif & sumatif."; }
-            else { monitorJudul.innerText = "Dokumen Lembar Modul Ajar"; monitorSub.innerText = "Pratinjau berkas fisik siap cetak."; }
+            if(target === 'sekolah') { 
+                monitorJudul.innerText = "Profil Satuan Pendidikan"; 
+                monitorSub.innerText = "Data utama identitas instansi dan penandatangan."; 
+            }
+            else if(target === 'siswa') { 
+                monitorJudul.innerText = "Manajemen Database Siswa Perkelas"; 
+                monitorSub.innerText = "Kelola data nama dan gender rombel aktif."; 
+            }
+            else if(target === 'absensi') { 
+                monitorJudul.innerText = "Jurnal Absensi Harian"; 
+                monitorSub.innerText = "Rekam riwayat kehadiran dan catatan jurnal sikap siswa."; 
+            }
+            else if(target === 'nilai') { 
+                monitorJudul.innerText = "Rekapitulasi Nilai Asesmen PAI"; 
+                monitorSub.innerText = "Manajemen nilai formatif, sumatif bab, dan sumatif akhir."; 
+            }
+            else if(target === 'modul') { 
+                monitorJudul.innerText = "Dokumen Lembar Modul Ajar"; 
+                monitorSub.innerText = "Pratinjau berkas cetak fisik modul berbasis Deep Learning."; 
+            }
         }
         
         function sinkronisasiKelasGlobal(rombelVal) {
@@ -796,9 +812,6 @@
             } 
         }
 
-        // ==========================================
-        // BACKEND CONTROLLER: CLOUD CORE SYSTEM 
-        // ==========================================
         function bukaModalAuth() { 
             document.getElementById('modal-auth').classList.remove('hidden'); 
         }
