@@ -5,7 +5,7 @@
     <title>Modul Perangkat Inti</title>
     <style>
         /* ==========================================================================
-           1. GAYA UNTUK TAMPILAN LAYAR (FORM INPUT - KEMBALI KE VERSI ASLI YANG BAGUS)
+           1. GAYA UNTUK TAMPILAN LAYAR (FORM INPUT ASLI YANG SUDAH BAGUS)
            ========================================================================== */
         body {
             font-family: Arial, sans-serif;
@@ -48,21 +48,21 @@
         .btn-submit { background-color: #007bff; color: white; }
         .btn-print { background-color: #28a745; color: white; margin-left: 10px; }
 
-        /* Area pratonton cetak tersembunyi di layar monitor */
+        /* Menyembunyikan template cetak dokumen dari layar monitor */
         #area-cetak-lampiran {
             display: none;
         }
 
         /* ==========================================================================
-           2. GAYA KHUSUS CETAK (SESUAI DOKUMEN LAMPIRAN ANDA)
+           2. GAYA KHUSUS CETAK (SESUAI DOKUMEN LAMPIRAN)
            ========================================================================== */
         @media print {
-            /* Sembunyikan semua elemen input dan tombol bawaan layar */
+            /* Sembunyikan elemen input dan tombol saat dicetak */
             body *, .container, .btn-area {
                 display: none !important;
             }
 
-            /* Tampilkan hanya area cetak template dokumen */
+            /* Tampilkan template formal lampiran */
             #area-cetak-lampiran {
                 display: block !important;
                 font-family: "Times New Roman", Times, serif;
@@ -70,7 +70,6 @@
                 line-height: 1.5;
             }
 
-            /* Header Dokumen Lampiran */
             .header-lampiran {
                 text-align: center;
                 border-bottom: 3px double #000;
@@ -80,7 +79,6 @@
             .header-lampiran h2 { margin: 0; font-size: 18px; text-transform: uppercase; }
             .header-lampiran p { margin: 5px 0 0 0; font-size: 12px; }
 
-            /* Tabel Data Perangkat */
             .tabel-lampiran {
                 width: 100%;
                 border-collapse: collapse;
@@ -100,7 +98,6 @@
             }
             .text-center { text-align: center; }
 
-            /* Tanda Tangan / Footer Dokumen */
             .footer-lampiran {
                 margin-top: 50px;
                 float: right;
@@ -116,7 +113,7 @@
 </head>
 <body>
 
-    <!-- CONTAINER FORM INPUT: DIKEMBALIKAN KE ASLINYA YANG SUDAH BAGUS -->
+    <!-- KELOMPOK INPUT (TIDAK BERUBAH SAMA SEKALI) -->
     <div class="container">
         <h2>Input Data Perangkat Inti / Modul</h2>
         <hr>
@@ -148,9 +145,7 @@
         </form>
     </div>
 
-    <!-- ==========================================================================
-       3. TEMPLATE STRUKTUR CETAK (SAMA PERSIS DENGAN FORMAT DOKUMEN LAMPIRAN)
-       ========================================================================== -->
+    <!-- TEMPLATE DOKUMEN CETAK (OTOMATIS MUNCUL SAAT KLIK CETAK) -->
     <div id="area-cetak-lampiran">
         <div class="header-lampiran">
             <h2>Laporan Inventaris Perangkat Inti & Modul</h2>
@@ -188,23 +183,21 @@
         </div>
     </div>
 
-    <!-- ==========================================================================
-       4. LOGIKA JAVASCRIPT UNTUK MEMINDAHKAN DATA INPUT KE STRUKTUR CETAK
-       ========================================================================== -->
+    <!-- SCRIPT LOGIKA CETAK TANPA MENYENTUH INPUT DATA -->
     <script>
         function prosesCetakFormatLampiran() {
-            // 1. Ambil nilai asli dari form input yang sudah bagus
+            // Mengambil nilai asli dari form input
             const nama = document.getElementById('nama_perangkat').value;
             const spesifikasi = document.getElementById('spesifikasi').value;
             const jumlah = document.getElementById('jumlah').value;
             const keterangan = document.getElementById('keterangan').value;
             
-            // Tanggal otomatis untuk format cetakan
-            const hari Ini = new Date();
+            // Format tanggal Indonesia otomatis
+            const hariIni = new Date();
             const opsiTanggal = { year: 'numeric', month: 'long', day: 'numeric' };
-            const tanggalStr = hari Ini.toLocaleDateString('id-ID', opsiTanggal);
+            const tanggalStr = hariIni.toLocaleDateString('id-ID', opsiTanggal);
 
-            // 2. Petakan nilainya ke elemen template cetak lampiran (tanpa mengubah inputan)
+            // Memasukkan data ke dalam template cetak lampiran
             document.getElementById('cetak-nama').innerText = nama;
             document.getElementById('cetak-spesifikasi').innerText = spesifikasi;
             document.getElementById('cetak-jumlah').innerText = jumlah;
@@ -212,14 +205,14 @@
             document.getElementById('cetak-tanggal').innerText = tanggalStr;
             document.getElementById('cetak-tgl-ttd').innerText = tanggalStr;
 
-            // 3. Panggil perintah cetak browser
+            // Trigger perintah print cetak browser
             window.print();
         }
 
-        // Contoh simulasi handle submit biasa agar input tidak terganggu
+        // Jalur simpan data (tidak mengganggu cetak)
         document.getElementById('formPerangkat').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Data input berhasil disimpan dengan aman (Struktur input awal tetap terjaga!)');
+            alert('Data berhasil disimpan secara sistem (Format input tetap terjaga aman!)');
         });
     </script>
 </body>
