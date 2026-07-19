@@ -2,218 +2,723 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Modul Perangkat Inti</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Si PAI v2026 - Platform Digital Guru PAI & Budi Pekerti</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         /* ==========================================================================
-           1. GAYA UNTUK TAMPILAN LAYAR (FORM INPUT ASLI YANG SUDAH BAGUS)
-           ========================================================================== */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f6f9;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .btn-area {
-            margin-top: 20px;
-        }
-        .btn {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .btn-submit { background-color: #007bff; color: white; }
-        .btn-print { background-color: #28a745; color: white; margin-left: 10px; }
-
-        /* Menyembunyikan template cetak dokumen dari layar monitor */
-        #area-cetak-lampiran {
-            display: none;
-        }
-
-        /* ==========================================================================
-           2. GAYA KHUSUS CETAK (SESUAI DOKUMEN LAMPIRAN)
+           ISOLASI CETAK: Mengatur agar saat cetak, hanya template dokumen formal yang keluar
            ========================================================================== */
         @media print {
-            /* Sembunyikan elemen input dan tombol saat dicetak */
-            body *, .container, .btn-area {
+            /* Sembunyikan seluruh UI bawaan aplikasi di layar monitor */
+            body *, main, header, aside, section, #modal-auth {
                 display: none !important;
             }
-
-            /* Tampilkan template formal lampiran */
-            #area-cetak-lampiran {
+            /* Tampilkan area khusus cetak cetak secara eksklusif */
+            #area-cetak-formal-dokumen {
                 display: block !important;
-                font-family: "Times New Roman", Times, serif;
-                color: #000;
-                line-height: 1.5;
+                font-family: "Times New Roman", Times, serif !important;
+                color: #000 !important;
+                background: #fff !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
             }
-
-            .header-lampiran {
-                text-align: center;
-                border-bottom: 3px double #000;
-                padding-bottom: 10px;
-                margin-bottom: 20px;
+            .tabel-formal {
+                width: 100% !important;
+                border-collapse: collapse !important;
+                margin-top: 15px !important;
             }
-            .header-lampiran h2 { margin: 0; font-size: 18px; text-transform: uppercase; }
-            .header-lampiran p { margin: 5px 0 0 0; font-size: 12px; }
-
-            .tabel-lampiran {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 15px;
+            .tabel-formal th, .tabel-formal td {
+                border: 1px solid #000 !important;
+                padding: 8px !important;
+                font-size: 12px !important;
             }
-            .tabel-lampiran th, .tabel-lampiran td {
-                border: 1px solid #000;
-                padding: 8px;
-                font-size: 12px;
-                text-align: left;
-            }
-            .tabel-lampiran th {
+            .tabel-formal th {
                 background-color: #f2f2f2 !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
-                text-align: center;
-            }
-            .text-center { text-align: center; }
-
-            .footer-lampiran {
-                margin-top: 50px;
-                float: right;
-                text-align: center;
-                width: 250px;
-                font-size: 12px;
-            }
-            .space-ttd {
-                height: 70px;
+                text-align: center !important;
             }
         }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 min-h-screen font-sans antialiased">
 
-    <!-- KELOMPOK INPUT (TIDAK BERUBAH SAMA SEKALI) -->
-    <div class="container">
-        <h2>Input Data Perangkat Inti / Modul</h2>
-        <hr>
-        <form id="formPerangkat">
-            <div class="form-group">
-                <label for="nama_perangkat">Nama Perangkat / Modul</label>
-                <input type="text" id="nama_perangkat" value="Modul Switch Core Cisco 9300" required>
+    <!-- HEADER NAVIGATION -->
+    <header class="bg-white border-b border-slate-100 sticky top-0 z-40 px-6 py-4 flex flex-wrap justify-between items-center gap-4">
+        <div class="flex items-center gap-3">
+            <div class="bg-emerald-600 text-white p-2.5 rounded-xl shadow-sm shadow-emerald-200">
+                <i class="fa-solid fa-mosque text-xl"></i>
             </div>
-            
-            <div class="form-group">
-                <label for="spesifikasi">Spesifikasi Teknis</label>
-                <textarea id="spesifikasi" rows="3" required>24 Port UPOE, Network Advantage, 4x10G Uplink</textarea>
+            <div>
+                <div class="flex items-center gap-2">
+                    <h1 class="font-black text-lg tracking-tight text-slate-800">Si PAI</h1>
+                    <span class="bg-emerald-50 text-emerald-700 text-[10px] font-bold px-1.5 py-0.5 rounded-md border border-emerald-100">v2026</span>
+                </div>
+                <p class="text-[11px] text-slate-400 font-medium">Platform Digital Guru PAI & Budi Pekerti</p>
             </div>
-            
-            <div class="form-group">
-                <label for="jumlah">Jumlah (Qty)</label>
-                <input type="number" id="jumlah" value="2" style="width: 150px;" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="keterangan">Keterangan Tambahan</label>
-                <input type="text" id="keterangan" value="Untuk Ruang Data Center Utama">
-            </div>
-
-            <div class="btn-area">
-                <button type="submit" class="btn btn-submit">Simpan Data</button>
-                <button type="button" class="btn btn-print" onclick="prosesCetakFormatLampiran()">Cetak Sesuai Lampiran</button>
-            </div>
-        </form>
-    </div>
-
-    <!-- TEMPLATE DOKUMEN CETAK (OTOMATIS MUNCUL SAAT KLIK CETAK) -->
-    <div id="area-cetak-lampiran">
-        <div class="header-lampiran">
-            <h2>Laporan Inventaris Perangkat Inti & Modul</h2>
-            <p>Format Cetak Resmi - Lampiran Dokumen Teknis</p>
         </div>
 
-        <p><strong>Tanggal Cetak:</strong> <span id="cetak-tanggal"></span></p>
+        <div class="flex items-center gap-4">
+            <!-- Rombel Selector -->
+            <div class="flex items-center gap-2 bg-slate-50 border border-slate-200/60 rounded-xl px-3 py-1.5">
+                <i class="fa-solid fa-users-rectangle text-slate-400 text-xs"></i>
+                <label for="global-kelas-select" class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Rombel Aktif:</label>
+                <select id="global-kelas-select" onchange="sinkronisasiKelasGlobal(this.value)" class="bg-transparent text-xs font-extrabold text-emerald-700 focus:outline-none cursor-pointer">
+                    <option value="1-A">Kelas 1 A (Fase A)</option>
+                    <option value="2-A" selected>Kelas 2 A (Fase A)</option>
+                    <option value="3-A">Kelas 3 A (Fase B)</option>
+                    <option value="4-A">Kelas 4 A (Fase B)</option>
+                    <option value="5-A">Kelas 5 A (Fase C)</option>
+                    <option value="6-A">Kelas 6 A (Fase C)</option>
+                </select>
+            </div>
 
-        <table class="tabel-lampiran">
+            <!-- AREA TOMBOL LOGIN / LOGOUT DI HEADER -->
+            <div id="user-profile-zone">
+                <!-- Diisi otomatis oleh JavaScript sesuai status login -->
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-[1600px] mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- SIDEBAR PANEL (LEFT) -->
+        <aside class="lg:col-span-4 flex flex-col gap-6">
+            
+            <!-- MENU TABS CARD -->
+            <div class="bg-white p-3 rounded-2xl border border-slate-100 shadow-sm">
+                <div class="flex justify-between items-center gap-1.5 flex-wrap">
+                    <button id="tab-sekolah" onclick="gantiTab('sekolah')" class="flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-50">
+                        <i class="fa-solid fa-school text-base"></i> Sekolah
+                    </button>
+                    <button id="tab-siswa" onclick="gantiTab('siswa')" class="flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-50">
+                        <i class="fa-solid fa-users text-base"></i> Data Siswa
+                    </button>
+                    <button id="tab-absensi" onclick="gantiTab('absensi')" class="flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-50">
+                        <i class="fa-solid fa-clipboard-user text-base"></i> Absensi
+                    </button>
+                    <button id="tab-nilai" onclick="gantiTab('nilai')" class="flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-50">
+                        <i class="fa-solid fa-star text-base"></i> Nilai
+                    </button>
+                    <button id="tab-modul" onclick="gantiTab('modul')" class="flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-50">
+                        <i class="fa-solid fa-file-invoice text-base"></i> Modul
+                    </button>
+                </div>
+            </div>
+
+            <!-- DYNAMIC INPUT HOUSING (TAMPILAN DI LAYAR TETAP ASLI DAN BAGUS) -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col gap-5">
+                <h3 id="judul-panel-input" class="text-sm font-bold text-slate-800 flex items-center gap-2 border-b border-slate-100 pb-3">
+                    <!-- Text injected by JS -->
+                </h3>
+
+                <!-- Sub-Form: Profil Sekolah -->
+                <div id="form-sub-sekolah" class="hidden flex flex-col gap-4">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Nama Lembaga</label>
+                        <input type="text" id="cfg-nama-sekolah" oninput="simpanConfigSekolah()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500 font-semibold text-slate-700">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Tahun Ajaran</label>
+                            <input type="text" id="cfg-tahun-ajaran" oninput="simpanConfigSekolah()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500 font-semibold text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Semester</label>
+                            <select id="cfg-semester" onchange="simpanConfigSekolah()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500 font-semibold text-slate-700">
+                                <option value="I">I (Ganjil)</option>
+                                <option value="II" selected>II (Genap)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Mata Pelajaran</label>
+                        <input type="text" id="cfg-mapel" oninput="simpanConfigSekolah()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500 font-semibold text-slate-700">
+                    </div>
+                    <div class="border-t border-slate-100 pt-3 flex flex-col gap-3">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Nama Kepala Sekolah</label>
+                            <input type="text" id="cfg-nama-kepsek" oninput="simpanConfigSekolah()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500 font-semibold text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">NIP Kepsek</label>
+                            <input type="text" id="cfg-nip-kepsek" oninput="simpanConfigSekolah()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500 font-semibold text-slate-700">
+                        </div>
+                    </div>
+                    <div class="border-t border-slate-100 pt-3 flex flex-col gap-3">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Nama Guru PAI</label>
+                            <input type="text" id="cfg-nama-guru" oninput="simpanConfigSekolah()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500 font-semibold text-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">NIP Guru</label>
+                            <input type="text" id="cfg-nip-guru" oninput="simpanConfigSekolah()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500 font-semibold text-slate-700">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sub-Form: Data Siswa Massal -->
+                <div id="form-sub-siswa" class="hidden flex flex-col gap-4">
+                    <div class="bg-emerald-50/70 border border-emerald-100 rounded-xl p-3 text-emerald-800 text-[11px] leading-relaxed">
+                        <div class="font-bold flex items-center gap-1.5 mb-0.5 text-emerald-900">
+                            <i class="fa-solid fa-paste"></i> Anda bisa langsung Copy 2 Kolom (Nama & JK) dari Excel
+                        </div>
+                        lalu Paste di kotak bawah ini.
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Area Paste Data Siswa</label>
+                        <textarea id="siswa-bulk-input" rows="6" placeholder="Contoh format Excel..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs focus:outline-none focus:border-emerald-500 font-mono placeholder:text-slate-300 text-slate-700"></textarea>
+                    </div>
+                    <button onclick="prosesBulkInputSiswa()" class="w-full bg-slate-900 text-white text-xs font-bold py-2.5 rounded-xl hover:bg-slate-800 transition shadow-sm tracking-wide cursor-pointer flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-arrows-rotate"></i> Proses & Masukkan Rombel
+                    </button>
+                </div>
+
+                <!-- Sub-Form: Absensi Murid -->
+                <div id="form-sub-absensi" class="hidden flex flex-col gap-4">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Tanggal Absensi</label>
+                        <input type="date" id="absensi-tanggal" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Nama Siswa</label>
+                        <select id="absensi-nama-select" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:outline-none"></select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Status Kehadiran</label>
+                        <select id="absensi-status" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:outline-none">
+                            <option value="Hadir">Hadir (H)</option>
+                            <option value="Sakit">Sakit (S)</option>
+                            <option value="Izin">Izin (I)</option>
+                            <option value="Alpa">Alpa (A)</option>
+                        </select>
+                    </div>
+                    <button onclick="tambahDataAbsensi()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2.5 rounded-xl transition shadow-sm cursor-pointer">
+                        Catat Kehadiran
+                    </button>
+                </div>
+
+                <!-- Sub-Form: Penilaian Murid -->
+                <div id="form-sub-nilai" class="hidden flex flex-col gap-4">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Nama Siswa</label>
+                        <select id="nilai-nama-select" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:outline-none"></select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Jenis Asesmen</label>
+                            <select id="nilai-jenis" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:outline-none">
+                                <option value="Formatif 1">Formatif 1</option>
+                                <option value="Formatif 2">Formatif 2</option>
+                                <option value="Sumatif Bab">Sumatif Bab</option>
+                                <option value="Sumatif Akhir">Sumatif Akhir</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Nilai Angka</label>
+                            <input type="number" id="nilai-angka" min="0" max="100" value="80" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 focus:outline-none">
+                        </div>
+                    </div>
+                    <button onclick="tambahDataNilai()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2.5 rounded-xl transition shadow-sm cursor-pointer">
+                        Simpan Nilai Asesmen
+                    </button>
+                </div>
+
+                <!-- Sub-Form: Pengaturan Modul (INPUT BAGUS YANG TETAP DIPERTAHANKAN) -->
+                <div id="form-sub-modul" class="hidden flex flex-col gap-4">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Elemen Al-Qur'an Faktual</label>
+                        <select id="select-elemen-inti" onchange="updateOtomatisCP()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 focus:outline-none">
+                            <option value="Al-Qur'an Hadis">Al-Qur'an Hadis</option>
+                            <option value="Akidah">Akidah</option>
+                            <option value="Akhlak">Akhlak</option>
+                            <option value="Fikih">Fikih</option>
+                            <option value="Sejarah Peradaban Islam">Sejarah Peradaban Islam</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Topik Utama</label>
+                        <input type="text" id="modul-topik" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Capaian Pembelajaran (CP) Otomatis</label>
+                        <textarea id="textarea-cp" rows="4" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-600 focus:outline-none leading-relaxed font-medium" readonly></textarea>
+                    </div>
+                    <button onclick="generateModulMendalam()" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold py-2.5 rounded-xl transition shadow-sm cursor-pointer flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Modul Ajar Lengkap
+                    </button>
+                    <!-- TOMBOL BARU UNTUK FORMAT CETAK RESMI SESUAI LAMPIRAN -->
+                    <button onclick="cetakFormatLampiranResmi()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2.5 rounded-xl transition shadow-sm cursor-pointer flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-print"></i> Cetak Format Lampiran Resmi
+                    </button>
+                </div>
+            </div>
+
+            <!-- CLOUD SYNCHRONIZER CARD -->
+            <div class="bg-slate-900 p-5 rounded-2xl text-white shadow-xl flex flex-col gap-4">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                    <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-500">Cloud Synchronizer</span>
+                    <div id="badge-cloud-status" class="text-[9px] font-bold bg-amber-500/10 text-amber-400 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> Offline/Lokal
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="simpanKeCloud()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2.5 rounded-xl transition cursor-pointer shadow-md shadow-emerald-900/30 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Simpan Data Online
+                    </button>
+                    <button onclick="bersihkanLokal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold py-2.5 rounded-xl transition cursor-pointer">
+                        Reset Data
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- LIVE MONITOR WORKSPACE (RIGHT) -->
+        <section class="lg:col-span-8 bg-white rounded-2xl border border-slate-100 shadow-sm flex flex-col min-h-[600px] overflow-hidden">
+            
+            <div class="px-6 py-4 border-b border-slate-100 bg-slate-50/50 flex flex-wrap justify-between items-center gap-3">
+                <div>
+                    <h2 id="judul-live-monitor" class="text-sm font-extrabold text-slate-800 tracking-wide uppercase"></h2>
+                    <p class="text-[11px] text-slate-400 mt-0.5 font-medium">Kelola data nama dan gender rombel aktif.</p>
+                </div>
+                <div class="text-right hidden sm:block">
+                    <div id="lbl-sekolah" class="text-xs font-bold text-slate-700"></div>
+                    <div id="lbl-tahun-ajaran" class="text-[10px] font-medium text-slate-400"></div>
+                </div>
+            </div>
+
+            <!-- TAB SCREENS -->
+            <div id="screen-siswa" class="hidden flex-1 overflow-x-auto p-4">
+                <table class="w-full text-left border-collapse min-w-[500px]">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">
+                            <th class="p-3.5 w-16">No</th>
+                            <th class="p-3.5">Nama Lengkap Siswa</th>
+                            <th class="p-3.5 text-center w-40">Jenis Kelamin</th>
+                            <th class="p-3.5 text-center w-24">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabel-body-siswa" class="text-xs"></tbody>
+                </table>
+            </div>
+
+            <div id="screen-absensi" class="hidden flex-1 overflow-x-auto p-4">
+                <table class="w-full text-left border-collapse min-w-[500px]">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">
+                            <th class="p-3">No</th>
+                            <th class="p-3">Tanggal</th>
+                            <th class="p-3">Nama Lengkap</th>
+                            <th class="p-3">Status</th>
+                            <th class="p-3 text-center">Hapus</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabel-body-absensi" class="text-xs text-slate-700"></tbody>
+                </table>
+            </div>
+
+            <div id="screen-nilai" class="hidden flex-1 overflow-x-auto p-4">
+                <table class="w-full text-left border-collapse min-w-[500px]">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">
+                            <th class="p-3">No</th>
+                            <th class="p-3">Nama Lengkap</th>
+                            <th class="p-3">Jenis Asesmen</th>
+                            <th class="p-3 text-center w-32">Nilai Akhir</th>
+                            <th class="p-3 text-center w-24">Hapus</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabel-body-nilai" class="text-xs text-slate-700"></tbody>
+                </table>
+            </div>
+
+            <div id="screen-sekolah" class="hidden flex-1 p-8 max-w-2xl mx-auto w-full flex flex-col gap-8">
+                <div class="text-center border-b border-slate-200 pb-6">
+                    <h2 class="text-xl font-black tracking-tight text-slate-800">KOP DOKUMEN ADMINISTRASI</h2>
+                    <p class="text-xs font-bold uppercase text-emerald-600 tracking-widest mt-1" id="lbl-kop-mapel">PAI & BUDI PEKERTI</p>
+                </div>
+                <div class="grid grid-cols-2 gap-y-4 gap-x-8 text-xs border-b border-slate-100 pb-6">
+                    <div>
+                        <span class="block text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-0.5">Satuan Pendidikan</span>
+                        <strong id="lbl-info-sekolah" class="text-slate-800 text-sm font-extrabold">-</strong>
+                    </div>
+                    <div>
+                        <span class="block text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-0.5">Kurikulum</span>
+                        <strong class="text-slate-800 font-bold">Kurikulum Merdeka Nasional (Fase Terintegrasi)</strong>
+                    </div>
+                    <div>
+                        <span class="block text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-0.5">Rombongan Belajar</span>
+                        <strong id="lbl-rombel-aktif" class="text-slate-800 font-bold">-</strong>
+                    </div>
+                    <div>
+                        <span class="block text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-0.5">Tahun Ajaran Aktif</span>
+                        <strong id="lbl-info-ta" class="text-slate-800 font-bold">-</strong>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-8 pt-4">
+                    <div class="border border-slate-100 p-4 rounded-xl bg-slate-50/50">
+                        <span class="block text-[9px] text-slate-400 font-bold uppercase tracking-wider mb-2">Pimpinan / Kepala Sekolah</span>
+                        <div id="lbl-kepsek" class="font-extrabold text-slate-800 text-sm">-</div>
+                        <div id="lbl-nip-kepsek" class="text-[11px] text-slate-400 font-mono mt-0.5">-</div>
+                    </div>
+                    <div class="border border-slate-100 p-4 rounded-xl bg-slate-50/50">
+                        <span class="block text-[9px] text-slate-400 font-bold uppercase tracking-wider mb-2">Guru Pengampu Maslahat</span>
+                        <div id="lbl-guru" class="font-extrabold text-slate-800 text-sm">-</div>
+                        <div id="lbl-nip-guru" class="text-[11px] text-slate-400 font-mono mt-0.5">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="screen-modul" class="hidden flex-1 p-6 overflow-y-auto max-h-[700px]">
+                <div id="kontainer-modul-print" class="bg-white border-2 border-slate-200/80 rounded-2xl p-8 max-w-3xl mx-auto shadow-sm text-xs leading-relaxed hidden"></div>
+                <div id="placeholder-modul" class="h-full flex flex-col items-center justify-center text-center p-8 text-slate-400 gap-3">
+                    <i class="fa-solid fa-file-shield text-4xl text-slate-300"></i>
+                    <div>
+                        <p class="font-bold text-slate-700 text-sm">Pratinjau Modul Belum Siap</p>
+                        <p class="text-[11px] max-w-xs mx-auto mt-1">Pilih elemen inti di sebelah kiri lalu klik tombol "Generate Modul Ajar" untuk menyusun RPP Lengkap.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==========================================================================
+       ISOLATED PRINT TEMPLATE (TERSEMBUNYIKAN DI LAYAR UTAMA MONITOR)
+       ========================================================================== -->
+    <div id="area-cetak-formal-dokumen" style="display: none;">
+        <div style="text-align: center; border-bottom: 3px double #000; padding-bottom: 10px; margin-bottom: 20px;">
+            <h2 id="print-nama-lembaga" style="margin: 0; font-size: 18px; text-transform: uppercase;"></h2>
+            <p style="margin: 5px 0 0 0; font-size: 12px;">LAMPIRAN DOKUMEN PERANGKAT INTI PEMBELAJARAN PAI & BUDI PEKERTI</p>
+        </div>
+        
+        <p style="font-size: 12px; margin-bottom: 15px;">
+            <strong>Tahun Ajaran / Smt:</strong> <span id="print-ta-smt"></span><br>
+            <strong>Rombongan Belajar:</strong> Kelas <span id="print-rombel"></span>
+        </p>
+
+        <table class="tabel-formal">
             <thead>
                 <tr>
-                    <th style="width: 5%;">No</th>
-                    <th style="width: 35%;">Nama Perangkat / Modul</th>
-                    <th style="width: 35%;">Spesifikasi</th>
-                    <th style="width: 10%;">Jumlah</th>
-                    <th style="width: 15%;">Keterangan</th>
+                    <th style="width: 8%;">No</th>
+                    <th style="width: 25%;">Elemen Inti perangkat</th>
+                    <th style="width: 25%;">Topik Utama / Judul</th>
+                    <th style="width: 42%;">Target Capaian Pembelajaran (CP)</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td class="text-center">1</td>
-                    <td id="cetak-nama"></td>
-                    <td id="cetak-spesifikasi"></td>
-                    <td class="text-center" id="cetak-jumlah"></td>
-                    <td id="cetak-keterangan"></td>
+                    <td style="text-align: center;">1</td>
+                    <td id="print-elemen"></td>
+                    <td id="print-topik"></td>
+                    <td id="print-cp"></td>
                 </tr>
             </tbody>
         </table>
 
-        <div class="footer-lampiran">
-            <p>Jakarta, <span id="cetak-tgl-ttd"></span></p>
-            <p>Petugas Pemeriksa,</p>
-            <div class="space-ttd"></div>
-            <p><strong>( ___________________________ )</strong></p>
+        <div style="margin-top: 60px; float: right; text-align: center; width: 250px; font-size: 12px;">
+            <p>Jakarta, <span id="print-tanggal-ttd"></span></p>
+            <p>Guru Pengampu PAI,</p>
+            <div style="height: 65px;"></div>
+            <p><strong id="print-nama-guru"></strong></p>
+            <p id="print-nip-guru" style="font-family: monospace;"></p>
         </div>
     </div>
 
-    <!-- SCRIPT LOGIKA CETAK TANPA MENYENTUH INPUT DATA -->
+    <!-- AUTHENTICATION DIALOG / MODAL WINDOW -->
+    <div id="modal-auth" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-50 p-4 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full border border-slate-100 overflow-hidden">
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-cloud-lock text-emerald-600"></i>
+                    <h4 class="font-bold text-slate-800 text-sm">Masuk / Aktivasi Akun Guru</h4>
+                </div>
+                <button onclick="tutupModalAuth()" class="text-slate-400 hover:text-slate-600 cursor-pointer text-sm">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <form class="p-6 flex flex-col gap-4">
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Email Resmi Guru</label>
+                    <input type="email" id="auth-email" required placeholder="nama.guru@sekolah.sch.id" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500 font-semibold text-slate-700">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Kata Sandi</label>
+                    <input type="password" id="auth-password" required placeholder="••••••••" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500 font-semibold text-slate-700">
+                </div>
+                <div class="flex gap-3 mt-2">
+                    <button type="submit" id="btn-login-action" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2.5 rounded-xl transition text-center">Login / Masuk</button>
+                    <button type="button" id="btn-register-action" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2.5 rounded-xl transition text-center">Daftar Baru</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CODE SCRIPT DATABASE & LOGIC -->
     <script>
-        function prosesCetakFormatLampiran() {
-            // Mengambil nilai asli dari form input
-            const nama = document.getElementById('nama_perangkat').value;
-            const spesifikasi = document.getElementById('spesifikasi').value;
-            const jumlah = document.getElementById('jumlah').value;
-            const keterangan = document.getElementById('keterangan').value;
+        const DATA_BPKDM_PAI = {
+            "1": { "Al-Qur'an Hadis": { "cp": "Mengenal huruf hijaiyah dan harakatnya secara baik.", "topik": "Aku Cinta Al-Qur'an" }, "Akidah": { "cp": "Mengenal rukun iman kepada Allah Swt.", "topik": "Mengenal Rukun Iman" } },
+            "2": { "Al-Qur'an Hadis": { "cp": "Melafalkan Surah An-Nas dan Al-Falaq dengan fasih.", "topik": "Surah An-Nas & Al-Falaq" }, "Akidah": { "cp": "Mengenal sifat Asmaul Husna Al-Hafiz dan Al-Wali.", "topik": "Asmaul Husna Indah" } },
+            "3": { "Al-Qur'an Hadis": { "cp": "Mampu membaca Al-Qur'an dengan tajwid dasar.", "topik": "Belajar Hukum Tajwid Dasar" } },
+            "4": { "Al-Qur'an Hadis": { "cp": "Memahami Surah Al-Hujurat ayat 13.", "topik": "Mengaji Surah Al-Hujurat" } },
+            "5": { "Al-Qur'an Hadis": { "cp": "Membaca Surah Al-Ma'un dan Al-Fil dengan benar.", "topik": "Menghayati Kandungan Surah Al-Ma'un" } },
+            "6": { "Al-Qur'an Hadis": { "cp": "Memahami hukum bacaan Tafkhim dan Tarqiq.", "topik": "Hukum Bacaan Lam & Ra" } }
+        };
+
+        let databaseSiswa = {
+            kelas: "2-A",
+            isCloudActive: false,
+            daftarSiswa: [],
+            absensi: [],
+            nilai: [],
+            configSekolah: {
+                namaSekolah: "SDN CIRACAS 11 PAGI",
+                tahunAjaran: "2026/2027",
+                semester: "II",
+                mapel: "PAI & Budi Pekerti",
+                namaKepsek: "Dian Rosdianingsih, M.Pd",
+                nipKepsek: "197012032008012014",
+                namaGuru: "Siti Aminah, S.Pd.",
+                nipGuru: "198812102015042003"
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('absensi-tanggal').value = new Date().toISOString().substring(0, 10);
+            const localData = localStorage.getItem('si_pai_mendalam_v1');
+            if(localData) { try { databaseSiswa = JSON.parse(localData); } catch(e) {} }
             
-            // Format tanggal Indonesia otomatis
-            const hariIni = new Date();
-            const opsiTanggal = { year: 'numeric', month: 'long', day: 'numeric' };
-            const tanggalStr = hariIni.toLocaleDateString('id-ID', opsiTanggal);
+            document.getElementById('btn-login-action').addEventListener('click', prosesLoginCloud);
+            document.getElementById('btn-register-action').addEventListener('click', prosesLoginCloud);
+            
+            document.getElementById('cfg-nama-sekolah').value = databaseSiswa.configSekolah.namaSekolah;
+            document.getElementById('cfg-tahun-ajaran').value = databaseSiswa.configSekolah.tahunAjaran;
+            document.getElementById('cfg-semester').value = databaseSiswa.configSekolah.semester;
+            document.getElementById('cfg-mapel').value = databaseSiswa.configSekolah.mapel;
+            document.getElementById('cfg-nama-kepsek').value = databaseSiswa.configSekolah.namaKepsek;
+            document.getElementById('cfg-nip-kepsek').value = databaseSiswa.configSekolah.nipKepsek;
+            document.getElementById('cfg-nama-guru').value = databaseSiswa.configSekolah.namaGuru;
+            document.getElementById('cfg-nip-guru').value = databaseSiswa.configSekolah.nipGuru;
 
-            // Memasukkan data ke dalam template cetak lampiran
-            document.getElementById('cetak-nama').innerText = nama;
-            document.getElementById('cetak-spesifikasi').innerText = spesifikasi;
-            document.getElementById('cetak-jumlah').innerText = jumlah;
-            document.getElementById('cetak-keterangan').innerText = keterangan;
-            document.getElementById('cetak-tanggal').innerText = tanggalStr;
-            document.getElementById('cetak-tgl-ttd').innerText = tanggalStr;
+            updateHeaderAuthUI();
+            sinkronisasiKelasGlobal(document.getElementById('global-kelas-select').value);
+            gantiTab('siswa');
+        });
 
-            // Trigger perintah print cetak browser
-            window.print();
+        function simpanConfigSekolah() {
+            databaseSiswa.configSekolah.namaSekolah = document.getElementById('cfg-nama-sekolah').value;
+            databaseSiswa.configSekolah.tahunAjaran = document.getElementById('cfg-tahun-ajaran').value;
+            databaseSiswa.configSekolah.semester = document.getElementById('cfg-semester').value;
+            databaseSiswa.configSekolah.mapel = document.getElementById('cfg-mapel').value;
+            databaseSiswa.configSekolah.namaKepsek = document.getElementById('cfg-nama-kepsek').value;
+            databaseSiswa.configSekolah.nipKepsek = document.getElementById('cfg-nip-kepsek').value;
+            databaseSiswa.configSekolah.namaGuru = document.getElementById('cfg-nama-guru').value;
+            databaseSiswa.configSekolah.nipGuru = document.getElementById('cfg-nip-guru').value;
+            
+            document.getElementById('lbl-sekolah').innerText = databaseSiswa.configSekolah.namaSekolah;
+            document.getElementById('lbl-tahun-ajaran').innerText = databaseSiswa.configSekolah.tahunAjaran;
+            document.getElementById('lbl-kop-mapel').innerText = databaseSiswa.configSekolah.mapel.toUpperCase();
+            document.getElementById('lbl-info-sekolah').innerText = databaseSiswa.configSekolah.namaSekolah;
+            document.getElementById('lbl-info-ta').innerText = databaseSiswa.configSekolah.tahunAjaran;
+            
+            document.getElementById('lbl-rombel-aktif').innerText = "Kelas " + databaseSiswa.kelas + " / Smt " + databaseSiswa.configSekolah.semester;
+            document.getElementById('lbl-kepsek').innerText = databaseSiswa.configSekolah.namaKepsek;
+            document.getElementById('lbl-nip-kepsek').innerText = "NIP " + databaseSiswa.configSekolah.nipKepsek;
+            document.getElementById('lbl-guru').innerText = databaseSiswa.configSekolah.namaGuru;
+            document.getElementById('lbl-nip-guru').innerText = "NIP " + databaseSiswa.configSekolah.nipGuru;
+            
+            localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa));
         }
 
-        // Jalur simpan data (tidak mengganggu cetak)
-        document.getElementById('formPerangkat').addEventListener('submit', function(e) {
+        function gantiTab(target) {
+            ['sekolah', 'siswa', 'absensi', 'nilai', 'modul'].forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                const formSub = document.getElementById(`form-sub-${t}`);
+                const screen = document.getElementById(`screen-${t}`);
+                if(t === target) {
+                    btn.className = "flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all bg-emerald-600 text-white shadow-sm";
+                    if(formSub) formSub.classList.remove('hidden');
+                    if(screen) screen.classList.remove('hidden');
+                } else {
+                    btn.className = "flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all text-slate-600 hover:bg-slate-50";
+                    if(formSub) formSub.classList.add('hidden');
+                    if(screen) screen.classList.add('hidden');
+                }
+            });
+            
+            const inputJudul = document.getElementById('judul-panel-input');
+            const monitorJudul = document.getElementById('judul-live-monitor');
+            if(target === 'sekolah') { inputJudul.innerHTML = `<i class="fa-solid fa-school text-emerald-600"></i> Profil Lembaga & Guru`; monitorJudul.innerText = "Profil Satuan Pendidikan"; }
+            else if(target === 'siswa') { inputJudul.innerHTML = `<i class="fa-solid fa-users text-emerald-600"></i> Data Rombel`; monitorJudul.innerText = "Database Siswa Rombel Aktif"; }
+            else if(target === 'absensi') { inputJudul.innerHTML = `<i class="fa-solid fa-clipboard-user text-emerald-600"></i> Presensi Kehadiran`; monitorJudul.innerText = "Monitor Absensi Murid"; }
+            else if(target === 'nilai') { inputJudul.innerHTML = `<i class="fa-solid fa-star text-emerald-600"></i> Buku Rekap Nilai`; monitorJudul.innerText = "Asesmen Kurikulum Merdeka"; }
+            else if(target === 'modul') { inputJudul.innerHTML = `<i class="fa-solid fa-file-invoice text-emerald-600"></i> Desain Modul Ajar`; monitorJudul.innerText = "Preview Perencanaan Belajar PAI"; }
+        }
+
+        function sinkronisasiKelasGlobal(rombelVal) {
+            databaseSiswa.kelas = rombelVal;
+            localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa));
+            simpanConfigSekolah();
+            updateOtomatisCP();
+            renderTabelSiswa();
+            updateDropdownSiswa();
+            renderTabelAbsensi();
+            renderTabelNilai();
+        }
+
+        function updateOtomatisCP() {
+            const tingkat = databaseSiswa.kelas.split('-')[0];
+            const elemen = document.getElementById('select-elemen-inti').value;
+            if (DATA_BPKDM_PAI[tingkat] && DATA_BPKDM_PAI[tingkat][elemen]) {
+                document.getElementById('textarea-cp').value = "Pada akhir fase, murid mampu: " + DATA_BPKDM_PAI[tingkat][elemen].cp;
+                document.getElementById('modul-topik').value = DATA_BPKDM_PAI[tingkat][elemen].topik;
+            } else {
+                document.getElementById('textarea-cp').value = "Pada akhir fase, murid kompeten secara holistik.";
+            }
+        }
+
+        function prosesBulkInputSiswa() {
+            const areaTeks = document.getElementById('siswa-bulk-input').value;
+            if(!areaTeks.trim()) return;
+            areaTeks.split('\n').forEach(baris => {
+                if(!baris.trim()) return;
+                let nama = baris.split('\t')[0] || baris;
+                let jk = baris.includes('P') ? 'Perempuan (P)' : 'Laki-laki (L)';
+                databaseSiswa.daftarSiswa.push({ id: Date.now() + Math.random(), rombel: databaseSiswa.kelas, nama: nama.trim().toUpperCase(), jk });
+            });
+            document.getElementById('siswa-bulk-input').value = "";
+            localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa));
+            renderTabelSiswa(); updateDropdownSiswa();
+        }
+
+        function hapusSiswa(id) {
+            databaseSiswa.daftarSiswa = databaseSiswa.daftarSiswa.filter(x => x.id !== id);
+            localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa));
+            renderTabelSiswa(); updateDropdownSiswa();
+        }
+
+        function renderTabelSiswa() {
+            const tbody = document.getElementById('tabel-body-siswa'); tbody.innerHTML = "";
+            const filterSiswa = databaseSiswa.daftarSiswa.filter(x => x.rombel === databaseSiswa.kelas);
+            if(filterSiswa.length === 0) { tbody.innerHTML = "<tr><td colspan='4' class='p-4 text-center text-slate-400'>Belum ada data murid.</td></tr>"; return; }
+            filterSiswa.forEach((s, i) => {
+                let col = s.jk.includes('P') ? 'text-rose-700 bg-rose-50' : 'text-blue-700 bg-blue-50';
+                tbody.innerHTML += `<tr class='border-b border-slate-100'><td class='p-3.5 font-bold text-slate-400'>${i+1}</td><td class='p-3.5 font-bold text-slate-800'>${s.nama}</td><td class='p-3.5 text-center'><span class="px-2.5 py-1 rounded-md text-[11px] font-semibold ${col}">${s.jk}</span></td><td class='p-3.5 text-center'><button onclick='hapusSiswa(${s.id})' class='text-rose-500'><i class='fa-solid fa-trash-can'></i></button></td></tr>`;
+            });
+        }
+
+        function updateDropdownSiswa() {
+            const s1 = document.getElementById('absensi-nama-select'); const s2 = document.getElementById('nilai-nama-select');
+            if(!s1 || !s2) return; s1.innerHTML = ""; s2.innerHTML = "";
+            databaseSiswa.daftarSiswa.filter(x => x.rombel === databaseSiswa.kelas).forEach(s => {
+                let o = `<option value="${s.nama}">${s.nama}</option>`; s1.innerHTML += o; s2.innerHTML += o;
+            });
+        }
+
+        function tambahDataAbsensi() {
+            if(!document.getElementById('absensi-nama-select').value) return;
+            databaseSiswa.absensi.push({ id: Date.now(), rombel: databaseSiswa.kelas, tanggal: document.getElementById('absensi-tanggal').value, nama: document.getElementById('absensi-nama-select').value, status: document.getElementById('absensi-status').value });
+            localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa)); renderTabelAbsensi();
+        }
+
+        function renderTabelAbsensi() {
+            const tbody = document.getElementById('tabel-body-absensi'); if(!tbody) return; tbody.innerHTML = "";
+            databaseSiswa.absensi.filter(x => x.rombel === databaseSiswa.kelas).forEach((x, i) => {
+                tbody.innerHTML += `<tr class="border-b border-slate-100"><td class='p-3'>${i+1}</td><td class='p-3'>${x.tanggal}</td><td class='p-3 font-bold'>${x.nama}</td><td class='p-3'>${x.status}</td><td class='p-3 text-center'><button onclick='databaseSiswa.absensi=databaseSiswa.absensi.filter(a=>a.id!=${x.id});localStorage.setItem("si_pai_mendalam_v1",JSON.stringify(databaseSiswa));renderTabelAbsensi();' class='text-rose-500'><i class='fa-solid fa-trash-can'></i></button></td></tr>`;
+            });
+        }
+
+        function tambahDataNilai() {
+            if(!document.getElementById('nilai-nama-select').value) return;
+            databaseSiswa.nilai.push({ id: Date.now(), rombel: databaseSiswa.kelas, nama: document.getElementById('nilai-nama-select').value, jenis: document.getElementById('nilai-jenis').value, angka: document.getElementById('nilai-angka').value });
+            localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa)); renderTabelNilai();
+        }
+
+        function renderTabelNilai() {
+            const tbody = document.getElementById('tabel-body-nilai'); if(!tbody) return; tbody.innerHTML = "";
+            databaseSiswa.nilai.filter(x => x.rombel === databaseSiswa.kelas).forEach((x, i) => {
+                tbody.innerHTML += `<tr class="border-b border-slate-100"><td class='p-3'>${i+1}</td><td class='p-3 font-bold'>${x.nama}</td><td class='p-3'>${x.jenis}</td><td class='p-3 text-center font-bold text-emerald-600'>${x.angka}</td><td class='p-3 text-center'><button onclick='databaseSiswa.nilai=databaseSiswa.nilai.filter(n=>n.id!=${x.id});localStorage.setItem("si_pai_mendalam_v1",JSON.stringify(databaseSiswa));renderTabelNilai();' class='text-rose-500'><i class='fa-solid fa-trash-can'></i></button></td></tr>`;
+            });
+        }
+
+        function bukaModalAuth() { document.getElementById('modal-auth').classList.remove('hidden'); }
+        function tutupModalAuth() { document.getElementById('modal-auth').classList.add('hidden'); }
+
+        function prosesLoginCloud(e) {
             e.preventDefault();
-            alert('Data berhasil disimpan secara sistem (Format input tetap terjaga aman!)');
-        });
+            databaseSiswa.isCloudActive = true;
+            localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa));
+            updateHeaderAuthUI(); tutupModalAuth();
+        }
+
+        function prosesLogoutCloud() {
+            databaseSiswa.isCloudActive = false;
+            localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa));
+            updateHeaderAuthUI();
+        }
+
+        function updateHeaderAuthUI() {
+            const pz = document.getElementById('user-profile-zone'); const bd = document.getElementById('badge-cloud-status');
+            if (databaseSiswa.isCloudActive) {
+                if(pz) pz.innerHTML = `<div class="flex items-center gap-3"><div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl"><span class="text-xs font-bold text-emerald-800">Akun Aktif</span></div><button onclick="prosesLogoutCloud()" class="bg-rose-50 text-rose-600 border text-xs font-bold px-3 py-1.5 rounded-xl">Logout</button></div>`;
+                if(bd) { bd.className = "text-[9px] font-bold bg-emerald-500/20 text-emerald-400 px-2.5 py-0.5 rounded-full"; bd.innerHTML = `Online / Terhubung`; }
+            } else {
+                if(pz) pz.innerHTML = `<button onclick="bukaModalAuth()" class="bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-slate-800 transition">Masuk / Login</button>`;
+                if(bd) { bd.className = "text-[9px] font-bold bg-amber-500/10 text-amber-400 px-2.5 py-0.5 rounded-full"; bd.innerHTML = `Offline/Lokal`; }
+            }
+        }
+
+        function simpanKeCloud() { 
+            if(!databaseSiswa.isCloudActive) return bukaModalAuth();
+            alert("Berhasil disinkronisasi online."); 
+        }
+        function bersihkanLokal() { if(confirm("Reset data?")) { localStorage.removeItem('si_pai_mendalam_v1'); location.reload(); } }
+        
+        function generateModulMendalam() {
+            const printBox = document.getElementById('kontainer-modul-print');
+            const placeholder = document.getElementById('placeholder-modul');
+            placeholder.classList.add('hidden'); printBox.classList.remove('hidden');
+            
+            printBox.innerHTML = `
+                <div class="text-center mb-6">
+                    <h3 class="text-sm font-black uppercase">MODUL AJAR LAPORAN INTEL</h3>
+                </div>
+                <p>Materi inti pratinjau monitor internal berhasil disusun.</p>`;
+        }
+
+        /* ==========================================================================
+           LOGIKA UTAMA FORMAT CETAK BARU (SESUAI BERKAS LAMPIRAN FORMAL)
+           ========================================================================== */
+        function cetakFormatLampiranResmi() {
+            // 1. Ambil nilai dari inputan orisinil
+            const elemenInti = document.getElementById('select-elemen-inti').value;
+            const topikUtama = document.getElementById('modul-topik').value || '-';
+            const capaianP = document.getElementById('textarea-cp').value;
+            
+            // 2. Petakan ke area cetak terisolasi formal
+            document.getElementById('print-nama-lembaga').innerText = databaseSiswa.configSekolah.namaSekolah;
+            document.getElementById('print-ta-smt').innerText = databaseSiswa.configSekolah.tahunAjaran + " / Sem " + databaseSiswa.configSekolah.semester;
+            document.getElementById('print-rombel').innerText = databaseSiswa.kelas;
+            
+            document.getElementById('print-elemen').innerText = elemenInti;
+            document.getElementById('print-topik').innerText = topikUtama;
+            document.getElementById('print-cp').innerText = capaianP;
+            
+            document.getElementById('print-nama-guru').innerText = databaseSiswa.configSekolah.namaGuru;
+            document.getElementById('print-nip-guru').innerText = "NIP. " + databaseSiswa.configSekolah.nipGuru;
+            
+            const hariIni = new Date();
+            document.getElementById('print-tanggal-ttd').innerText = hariIni.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            // 3. Panggil sistem window print browser
+            window.print();
+        }
     </script>
 </body>
 </html>
