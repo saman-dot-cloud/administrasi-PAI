@@ -41,11 +41,9 @@
                 </select>
             </div>
 
-            <!-- Cloud Activation Button / User Zone -->
+            <!-- AREA TOMBOL LOGIN / LOGOUT DI HEADER -->
             <div id="user-profile-zone">
-                <button onclick="bukaModalAuth()" class="bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-slate-800 shadow-sm transition flex items-center gap-2 cursor-pointer">
-                    <i class="fa-solid fa-cloud-arrow-up text-[11px]"></i> Aktivasi Akun Cloud
-                </button>
+                <!-- Diisi otomatis oleh JavaScript sesuai status login -->
             </div>
         </div>
     </header>
@@ -372,7 +370,7 @@
             <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-cloud-lock text-emerald-600"></i>
-                    <h4 class="font-bold text-slate-800 text-sm">Aktivasi Akun Cloud Guru</h4>
+                    <h4 class="font-bold text-slate-800 text-sm">Masuk / Aktivasi Cloud Guru</h4>
                 </div>
                 <button onclick="tutupModalAuth()" class="text-slate-400 hover:text-slate-600 cursor-pointer text-sm">
                     <i class="fa-solid fa-xmark"></i>
@@ -395,7 +393,7 @@
                 </div>
                 <div class="flex gap-3 mt-2">
                     <button type="submit" id="btn-login-action" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2.5 rounded-xl transition shadow-sm cursor-pointer text-center">
-                        Masuk Akun
+                        Login / Masuk
                     </button>
                     <button type="button" id="btn-register-action" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold py-2.5 rounded-xl transition cursor-pointer text-center">
                         Daftar Baru
@@ -407,7 +405,6 @@
 
     <!-- CODE SCRIPT DATABASE & LOGIC -->
     <script>
-        // Database Bank Konten CP PAI Kemenag / Kemdikbudristek
         const DATA_BPKDM_PAI = {
             "1": { "Al-Qur'an Hadis": { "cp": "Mengenal huruf hijaiyah dan harakatnya secara baik.", "topik": "Aku Cinta Al-Qur'an" }, "Akidah": { "cp": "Mengenal rukun iman kepada Allah Swt.", "topik": "Mengenal Rukun Iman" } },
             "2": { "Al-Qur'an Hadis": { "cp": "Melafalkan Surah An-Nas dan Al-Falaq dengan fasih.", "topik": "Surah An-Nas & Al-Falaq" }, "Akidah": { "cp": "Mengenal sifat Asmaul Husna Al-Hafiz dan Al-Wali.", "topik": "Asmaul Husna Indah" } },
@@ -417,7 +414,6 @@
             "6": { "Al-Qur'an Hadis": { "cp": "Memahami hukum bacaan Tafkhim dan Tarqiq.", "topik": "Hukum Bacaan Lam & Ra" } }
         };
 
-        // Objek State Data Aplikasi Utama
         let databaseSiswa = {
             kelas: "2-A",
             isCloudActive: false,
@@ -436,11 +432,9 @@
             }
         };
 
-        // Trigger Pertama Saat DOM Siap
         window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('absensi-tanggal').value = new Date().toISOString().substring(0, 10);
             
-            // Ambil data dari LocalStorage jika ada
             const localData = localStorage.getItem('si_pai_mendalam_v1');
             if(localData) {
                 try {
@@ -448,11 +442,9 @@
                 } catch(e) {}
             }
             
-            // Pasang Listener Aksi Login di Modal Dialog
             document.getElementById('btn-login-action').addEventListener('click', prosesLoginCloud);
             document.getElementById('btn-register-action').addEventListener('click', prosesLoginCloud);
             
-            // Muat Nilai Isian Form Konfigurasi
             document.getElementById('cfg-nama-sekolah').value = databaseSiswa.configSekolah.namaSekolah;
             document.getElementById('cfg-tahun-ajaran').value = databaseSiswa.configSekolah.tahunAjaran;
             document.getElementById('cfg-semester').value = databaseSiswa.configSekolah.semester;
@@ -462,14 +454,11 @@
             document.getElementById('cfg-nama-guru').value = databaseSiswa.configSekolah.namaGuru;
             document.getElementById('cfg-nip-guru').value = databaseSiswa.configSekolah.nipGuru;
 
-            // Jika status cloud sebelumnya sudah aktif
-            if(databaseSiswa.isCloudActive) {
-                setCloudUIConnected();
-            }
+            // Render tombol berdasarkan status login terakhir
+            updateHeaderAuthUI();
 
-            // Jalankan sinkronisasi awal
             sinkronisasiKelasGlobal(document.getElementById('global-kelas-select').value);
-            gantiTab('siswa'); // Mengaktifkan tab 'Data Siswa' sesuai UI screenshot Anda
+            gantiTab('siswa');
         });
 
         function simpanConfigSekolah() {
@@ -482,11 +471,9 @@
             databaseSiswa.configSekolah.namaGuru = document.getElementById('cfg-nama-guru').value;
             databaseSiswa.configSekolah.nipGuru = document.getElementById('cfg-nip-guru').value;
             
-            // Update Label Monitor
             document.getElementById('lbl-sekolah').innerText = databaseSiswa.configSekolah.namaSekolah;
             document.getElementById('lbl-tahun-ajaran').innerText = databaseSiswa.configSekolah.tahunAjaran;
             document.getElementById('lbl-kop-mapel').innerText = databaseSiswa.configSekolah.mapel.toUpperCase();
-            
             document.getElementById('lbl-info-sekolah').innerText = databaseSiswa.configSekolah.namaSekolah;
             document.getElementById('lbl-info-ta').innerText = databaseSiswa.configSekolah.tahunAjaran;
             
@@ -688,7 +675,7 @@
             });
         }
 
-        // --- SISTEM AKTIVASI CLOUD & PUSH CLOUD (INTEGRASI PENUH) ---
+        // --- SISTEM AKTIVASI CLOUD, LOGIN & LOGOUT (PERBAIKAN FITUR) ---
         function bukaModalAuth() { 
             document.getElementById('modal-auth').classList.remove('hidden'); 
         }
@@ -705,58 +692,81 @@
                 return;
             }
             
-            // Set state cloud menjadi aktif
             databaseSiswa.isCloudActive = true;
             localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa));
             
-            // Perbarui tampilan interface
-            setCloudUIConnected();
+            updateHeaderAuthUI();
             tutupModalAuth();
-            
-            alert('Akun Cloud berhasil diaktivasi! Server Si PAI v2026 kini terhubung & tersinkronisasi.');
+            alert('Login Sukses! Akun Cloud berhasil diaktivasi dan siap digunakan.');
         }
 
-        function setCloudUIConnected() {
-            // Ubah badge status sinkronisasi di kiri bawah menjadi Hijau (Online)
-            const badge = document.getElementById('badge-cloud-status');
-            if(badge) {
-                badge.className = "text-[9px] font-bold bg-emerald-500/20 text-emerald-400 px-2.5 py-0.5 rounded-full flex items-center gap-1";
-                badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Online / Terhubung`;
+        function prosesLogoutCloud() {
+            if(confirm("Apakah Anda ingin keluar (Logout) dari akun cloud? Status sinkronisasi akan kembali offline.")) {
+                databaseSiswa.isCloudActive = false;
+                localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa));
+                
+                updateHeaderAuthUI();
+                alert('Anda telah berhasil keluar (Logout) dari sistem Cloud.');
             }
-            
-            // Ubah tombol aktivasi di atas menjadi status Profil Cloud Aktif
+        }
+
+        function updateHeaderAuthUI() {
             const profileZone = document.getElementById('user-profile-zone');
-            if(profileZone) {
-                profileZone.innerHTML = `
-                    <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl animate-in fade-in duration-300">
-                        <div class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-bold">
-                            <i class="fa-solid fa-cloud"></i>
-                        </div>
-                        <span class="text-xs font-bold text-emerald-800">Cloud Active</span>
-                    </div>`;
+            const badge = document.getElementById('badge-cloud-status');
+
+            if (databaseSiswa.isCloudActive) {
+                // Tampilan saat LOGIN / TERHUBUNG
+                if(profileZone) {
+                    profileZone.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl">
+                                <div class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-bold">
+                                    <i class="fa-solid fa-cloud"></i>
+                                </div>
+                                <span class="text-xs font-bold text-emerald-800">Cloud Active</span>
+                            </div>
+                            <button onclick="prosesLogoutCloud()" class="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 text-xs font-bold px-3 py-1.5 rounded-xl transition cursor-pointer flex items-center gap-1.5">
+                                <i class="fa-solid fa-right-from-bracket"></i> Logout
+                            </button>
+                        </div>`;
+                }
+                if(badge) {
+                    badge.className = "text-[9px] font-bold bg-emerald-500/20 text-emerald-400 px-2.5 py-0.5 rounded-full flex items-center gap-1";
+                    badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Online / Terhubung`;
+                }
+            } else {
+                // Tampilan saat LOGOUT / OFFLINE
+                if(profileZone) {
+                    profileZone.innerHTML = `
+                        <button onclick="bukaModalAuth()" class="bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-slate-800 shadow-sm transition flex items-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-right-to-bracket text-[11px]"></i> Masuk Cloud (Login)
+                        </button>`;
+                }
+                if(badge) {
+                    badge.className = "text-[9px] font-bold bg-amber-500/10 text-amber-400 px-2.5 py-0.5 rounded-full flex items-center gap-1";
+                    badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> Offline/Lokal`;
+                }
             }
         }
 
         function simpanKeCloud() { 
-            // Interseptor pintar: Jika belum diaktivasi, arahkan user ke form aktivasi otomatis
             if(!databaseSiswa.isCloudActive) {
-                alert('Akun Cloud belum aktif. Mengalihkan ke jendela aktivasi akun cloud...');
+                alert('Anda belum login. Mengalihkan ke halaman login/aktivasi...');
                 bukaModalAuth();
                 return;
             }
             
             localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa)); 
-            alert("Sukses! Seluruh data Rombel " + databaseSiswa.kelas + " Berhasil di-Push ke Cloud Server Si PAI."); 
+            alert("Sukses! Data Rombel " + databaseSiswa.kelas + " Berhasil di-Push ke Cloud Server Si PAI v2026."); 
         }
 
         function bersihkanLokal() { 
-            if(confirm("Apakah Anda yakin ingin mereset seluruh database lokal? Tindakan ini tidak dapat dikembalikan.")) { 
+            if(confirm("Apakah Anda yakin ingin mereset seluruh database lokal? Tindakan ini tidak dapat dibatalkan.")) { 
                 localStorage.removeItem('si_pai_mendalam_v1'); 
                 location.reload(); 
             } 
         }
         
-        // Fungsi pembantu menyusun struktur modul ajar cetak
         function generateModulMendalam() {
             const printBox = document.getElementById('kontainer-modul-print');
             const placeholder = document.getElementById('placeholder-modul');
@@ -783,14 +793,6 @@
                     <div>
                         <strong class="block text-emerald-700 mb-1">Capaian Pembelajaran:</strong>
                         <p class="bg-slate-50 p-2.5 rounded-lg border border-slate-200/60">${cp}</p>
-                    </div>
-                    <div>
-                        <strong class="block text-slate-800 mb-1">Langkah Pembelajaran Mendalam (Deep Learning):</strong>
-                        <ol class="list-decimal list-inside space-y-1 pl-1 text-slate-600">
-                            <li><strong>Asesmen Awal:</strong> Mengukur pemahaman pemantik murid mengenai tema ${topik}.</li>
-                            <li><strong>Inti Pemahaman:</strong> Diskusi interaktif reflektif bermakna berbasis kasus kontekstual.</li>
-                            <li><strong>Konsolidasi:</strong> Merumuskan kesimpulan aplikatif nilai moral keagamaan di kehidupan sehari-hari.</li>
-                        </ol>
                     </div>
                 </div>`;
         }
