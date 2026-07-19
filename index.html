@@ -132,7 +132,7 @@
                         <div class="font-bold flex items-center gap-1.5 mb-0.5 text-emerald-900">
                             <i class="fa-solid fa-paste"></i> Anda bisa langsung Copy 2 Kolom (Nama & JK) dari Excel
                         </div>
-                        lahu Paste di kotak bawah ini.
+                        lalu Paste di kotak bawah ini.
                     </div>
                     <div>
                         <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Area Paste Data Siswa</label>
@@ -219,7 +219,7 @@
                 </div>
             </div>
 
-            <!-- CLOUD SYNCHRONIZER CARD (DIUBAH NAMA TOMBOLNYA) -->
+            <!-- CLOUD SYNCHRONIZER CARD -->
             <div class="bg-slate-900 p-5 rounded-2xl text-white shadow-xl flex flex-col gap-4">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-3">
                     <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-500">Cloud Synchronizer</span>
@@ -370,7 +370,8 @@
             <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-cloud-lock text-emerald-600"></i>
-                    <h4 class="font-bold text-slate-800 text-sm">Masuk / Aktivasi Cloud Guru</h4>
+                    <!-- ISTILAH DIUBAH: Aktivasi Cloud Guru -> Aktivasi Akun Guru -->
+                    <h4 class="font-bold text-slate-800 text-sm">Masuk / Aktivasi Akun Guru</h4>
                 </div>
                 <button onclick="tutupModalAuth()" class="text-slate-400 hover:text-slate-600 cursor-pointer text-sm">
                     <i class="fa-solid fa-xmark"></i>
@@ -695,16 +696,16 @@
             
             updateHeaderAuthUI();
             tutupModalAuth();
-            alert('Login Sukses! Akun Cloud berhasil diaktivasi dan siap digunakan.');
+            alert('Login Sukses! Akun Anda berhasil diaktifkan dan siap digunakan.');
         }
 
         function prosesLogoutCloud() {
-            if(confirm("Apakah Anda ingin keluar (Logout) dari akun cloud? Status sinkronisasi akan kembali offline.")) {
+            if(confirm("Apakah Anda ingin keluar (Logout) dari akun Anda? Status penyimpanan akan kembali offline/lokal.")) {
                 databaseSiswa.isCloudActive = false;
                 localStorage.setItem('si_pai_mendalam_v1', JSON.stringify(databaseSiswa));
                 
                 updateHeaderAuthUI();
-                alert('Anda telah berhasil keluar (Logout) dari sistem Cloud.');
+                alert('Anda telah berhasil keluar dari akun.');
             }
         }
 
@@ -714,13 +715,14 @@
 
             if (databaseSiswa.isCloudActive) {
                 if(profileZone) {
+                    // ISTILAH DIUBAH: Cloud Active -> Akun Aktif
                     profileZone.innerHTML = `
                         <div class="flex items-center gap-3">
                             <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl">
                                 <div class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-bold">
-                                    <i class="fa-solid fa-cloud"></i>
+                                    <i class="fa-solid fa-user-check"></i>
                                 </div>
-                                <span class="text-xs font-bold text-emerald-800">Cloud Active</span>
+                                <span class="text-xs font-bold text-emerald-800">Akun Aktif</span>
                             </div>
                             <button onclick="prosesLogoutCloud()" class="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 text-xs font-bold px-3 py-1.5 rounded-xl transition cursor-pointer flex items-center gap-1.5">
                                 <i class="fa-solid fa-right-from-bracket"></i> Logout
@@ -733,9 +735,10 @@
                 }
             } else {
                 if(profileZone) {
+                    // ISTILAH DIUBAH: Masuk Cloud (Login) -> Masuk / Login
                     profileZone.innerHTML = `
                         <button onclick="bukaModalAuth()" class="bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-slate-800 shadow-sm transition flex items-center gap-2 cursor-pointer">
-                            <i class="fa-solid fa-right-to-bracket text-[11px]"></i> Masuk Cloud (Login)
+                            <i class="fa-solid fa-right-to-bracket text-[11px]"></i> Masuk / Login
                         </button>`;
                 }
                 if(badge) {
@@ -745,10 +748,9 @@
             }
         }
 
-        // FUNGSI SIMPAN DATA ONLINE (ALERT TULISAN SUDAH DIBERSIHKAN)
         function simpanKeCloud() { 
             if(!databaseSiswa.isCloudActive) {
-                alert('Anda belum login. Mengalihkan ke halaman login/aktivasi...');
+                alert('Anda belum masuk/login. Mengalihkan ke halaman login/aktivasi...');
                 bukaModalAuth();
                 return;
             }
