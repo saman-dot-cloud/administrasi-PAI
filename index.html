@@ -46,15 +46,15 @@
 
     <main class="max-w-4xl mx-auto p-6 mt-10">
         
-        <!-- CARD FORM INPUT UTAMA (Kembali ke Desain Asli Penuh) -->
+        <!-- CARD FORM INPUT UTAMA -->
         <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm flex flex-col gap-6">
             
             <div class="flex justify-between items-center flex-wrap gap-3">
                 <div>
                     <h2 class="text-xl font-bold text-slate-800 tracking-tight">Input Data Perangkat Inti / Modul</h2>
-                    <p class="text-[11px] text-slate-400 font-medium mt-0.5">Kelola Elemen, Topik, dan Mapping TP Rombel Aktif.</p>
+                    <p class="text-[11px] text-slate-400 font-medium mt-0.5">Kelola Elemen, Pilihan Topik, dan Mapping TP Rombel Aktif.</p>
                 </div>
-                <!-- Pilihan Rombel Aktif untuk acuan Mapping Database -->
+                <!-- Pilihan Rombel Aktif -->
                 <div class="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5">
                     <label for="kelas-select" class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Kelas:</label>
                     <select id="kelas-select" onchange="updateOtomatisMapping()" class="bg-transparent text-xs font-extrabold text-emerald-700 focus:outline-none cursor-pointer">
@@ -71,10 +71,10 @@
 
             <form id="formPerangkat" onsubmit="event.preventDefault();" class="flex flex-col gap-5">
                 
-                <!-- GRID ELEMEN & TOPIK UTAMA -->
+                <!-- GRID DROPDOWN ELEMEN & DROPDOWN TOPIK (Sudah Diperbaiki) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label for="select-elemen-inti" class="block text-xs font-bold text-slate-800 mb-2">Elemen Al-Qur'an Faktual / Inti</label>
+                        <label for="select-elemen-inti" class="block text-xs font-bold text-slate-800 mb-2">Elemen Perangkat / Inti</label>
                         <select id="select-elemen-inti" onchange="updateOtomatisMapping()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-bold text-slate-700 focus:outline-none focus:border-emerald-500 cursor-pointer">
                             <option value="Al-Qur'an Hadis">Al-Qur'an Hadis</option>
                             <option value="Akidah">Akidah</option>
@@ -84,8 +84,10 @@
                         </select>
                     </div>
                     <div>
-                        <label for="modul-topik" class="block text-xs font-bold text-slate-800 mb-2">Topik Utama (Mapping Otomatis)</label>
-                        <input type="text" id="modul-topik" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500 font-semibold text-slate-700" placeholder="Pilih elemen untuk memuat topik...">
+                        <label for="select-topik-inti" class="block text-xs font-bold text-slate-800 mb-2">Topik Pembelajaran (Dropdown Pilihan)</label>
+                        <select id="select-topik-inti" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 focus:outline-none focus:border-emerald-500 cursor-pointer">
+                            <!-- Pilihan isi topik dimuat otomatis via Javascript berdasarkan data awal Anda -->
+                        </select>
                     </div>
                 </div>
 
@@ -99,15 +101,15 @@
                 <div class="border border-slate-200 rounded-2xl p-5 bg-slate-50/50 flex flex-col gap-4">
                     <div class="flex justify-between items-center">
                         <div>
-                            <label class="block text-xs font-bold text-slate-800">Tujuan Pembelajaran (TP) / Kompetensi Spesifik</label>
-                            <span class="text-[10px] text-slate-400 font-medium">Pengguna dapat menambah, mengedit, atau menghapus TP sesuai kebutuhan kelas.</span>
+                            <label class="block text-xs font-bold text-slate-800">Tujuan Pembelajaran (TP) / Pemetaan Rombel</label>
+                            <span class="text-[10px] text-slate-400 font-medium">Bisa ditambah/diedit secara dinamis sesuai kebutuhan kelas.</span>
                         </div>
                         <button type="button" onclick="tambahBarisTP()" class="bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 transition">
                             <i class="fa-solid fa-plus text-[9px]"></i> Tambah TP
                         </button>
                     </div>
                     
-                    <!-- Wadah baris TP dinamis -->
+                    <!-- Tempat baris TP -->
                     <div id="wrapper-list-tp" class="flex flex-col gap-3">
                         <div class="flex items-center gap-2 item-tp-row">
                             <span class="text-xs font-bold text-slate-400 min-w-[20px] text-center nomor-urut">1</span>
@@ -168,55 +170,70 @@
         </div>
     </div>
 
-    <!-- CODE SCRIPT DATABASE & LOGIC MAPPING -->
+    <!-- CODE SCRIPT DATABASE & LOGIC MAPPING MURNI -->
     <script>
-        // Database Mapping Asli Aplikasi Anda
+        // Database Data Mapping Lengkap Aplikasi Anda
         const DATA_BPKDM_PAI = {
             "1": { 
-                "Al-Qur'an Hadis": { "cp": "Mengenal huruf hijaiyah dan harakatnya secara baik.", "topik": "Aku Cinta Al-Qur'an" }, 
-                "Akidah": { "cp": "Mengenal rukun iman kepada Allah Swt.", "topik": "Mengenal Rukun Iman" } 
+                "Al-Qur'an Hadis": { "cp": "Mengenal huruf hijaiyah dan harakatnya secara baik.", "topik": ["Aku Cinta Al-Qur'an", "Mengenal Huruf Hijaiyah"] }, 
+                "Akidah": { "cp": "Mengenal rukun iman kepada Allah Swt.", "topik": ["Mengenal Rukun Iman", "Sifat-Sifat Allah"] } 
             },
             "2": { 
-                "Al-Qur'an Hadis": { "cp": "Melafalkan Surah An-Nas dan Al-Falaq dengan fasih.", "topik": "Surah An-Nas & Al-Falaq" }, 
-                "Akidah": { "cp": "Mengenal sifat Asmaul Husna Al-Hafiz dan Al-Wali.", "topik": "Asmaul Husna Indah" } 
+                "Al-Qur'an Hadis": { "cp": "Melafalkan Surah An-Nas dan Al-Falaq dengan fasih.", "topik": ["Surah An-Nas & Al-Falaq", "Hukum Huruf Mad"] }, 
+                "Akidah": { "cp": "Mengenal sifat Asmaul Husna Al-Hafiz dan Al-Wali.", "topik": ["Asmaul Husna Indah", "Mengenal Malaikat Allah"] } 
             },
             "3": { 
-                "Al-Qur'an Hadis": { "cp": "Mampu membaca Al-Qur'an dengan tajwid dasar.", "topik": "Belajar Hukum Tajwid Dasar" } 
+                "Al-Qur'an Hadis": { "cp": "Mampu membaca Al-Qur'an dengan tajwid dasar.", "topik": ["Belajar Hukum Tajwid Dasar", "Surah Al-Kautsar"] } 
             },
             "4": { 
-                "Al-Qur'an Hadis": { "cp": "Memahami Surah Al-Hujurat ayat 13.", "topik": "Mengaji Surah Al-Hujurat" } 
+                "Al-Qur'an Hadis": { "cp": "Memahami Surah Al-Hujurat ayat 13.", "topik": ["Mengaji Surah Al-Hujurat", "Kisah Nabi Muhammad SAW"] } 
             },
             "5": { 
-                "Al-Qur'an Hadis": { "cp": "Membaca Surah Al-Ma'un dan Al-Fil dengan benar.", "topik": "Menghayati Kandungan Surah Al-Ma'un" } 
+                "Al-Qur'an Hadis": { "cp": "Membaca Surah Al-Ma'un dan Al-Fil dengan benar.", "topik": ["Menghayati Kandungan Surah Al-Ma'un", "Arti Surah Al-Fil"] } 
             },
             "6": { 
-                "Al-Qur'an Hadis": { "cp": "Memahami hukum bacaan Tafkhim dan Tarqiq.", "topik": "Hukum Bacaan Lam & Ra" } 
+                "Al-Qur'an Hadis": { "cp": "Memahami hukum bacaan Tafkhim dan Tarqiq.", "topik": ["Hukum Bacaan Lam & Ra", "Surah Al-Alaq"] } 
             }
         };
 
-        // Fungsi Sinkronisasi Otomatis Dropdown & Input saat Kelas atau Elemen Berubah
+        // Fungsi Memperbarui Dropdown Pilihan Topik & CP Secara Otomatis
         function updateOtomatisMapping() {
             const tingkat = document.getElementById('kelas-select').value;
             const elemen = document.getElementById('select-elemen-inti').value;
             
-            const topikInput = document.getElementById('modul-topik');
+            const topikSelect = document.getElementById('select-topik-inti');
             const cpTextarea = document.getElementById('textarea-cp');
 
+            // Reset dropdown topik terlebih dahulu
+            topikSelect.innerHTML = "";
+
             if (DATA_BPKDM_PAI[tingkat] && DATA_BPKDM_PAI[tingkat][elemen]) {
+                // Tampilkan CP Resmi
                 cpTextarea.value = "Pada akhir fase, murid mampu: " + DATA_BPKDM_PAI[tingkat][elemen].cp;
-                topikInput.value = DATA_BPKDM_PAI[tingkat][elemen].topik;
+                
+                // Isi Dropdown Pilihan Topik sesuai database Anda
+                const opsiTopik = DATA_BPKDM_PAI[tingkat][elemen].topik;
+                opsiTopik.forEach(function(topik) {
+                    let opt = document.createElement('option');
+                    opt.value = topik;
+                    opt.innerHTML = topik;
+                    topikSelect.appendChild(opt);
+                });
             } else {
-                cpTextarea.value = "Kompetensi Fase Lanjutan/Terintegrasi untuk elemen ini.";
-                topikInput.value = "Topik Mandiri Elemen " + elemen;
+                cpTextarea.value = "Kompetensi mandiri terintegrasi untuk elemen ini.";
+                let opt = document.createElement('option');
+                opt.value = "Topik Mandiri Pilihan";
+                opt.innerHTML = "Topik Mandiri Elemen " + elemen;
+                topikSelect.appendChild(opt);
             }
         }
 
-        // Jalankan pemetaan otomatis pertama kali saat aplikasi dibuka
+        // Jalankan pemetaan saat halaman dimuat pertama kali
         window.addEventListener('DOMContentLoaded', () => {
             updateOtomatisMapping();
         });
 
-        // Manajemen Input TP Dinamis (Tambah Baris)
+        // Fitur Tambah Baris Input TP Baru
         function tambahBarisTP() {
             const wrapper = document.getElementById('wrapper-list-tp');
             const totalBaris = wrapper.getElementsByClassName('item-tp-row').length;
@@ -225,7 +242,7 @@
             divBaru.className = "flex items-center gap-2 item-tp-row";
             divBaru.innerHTML = `
                 <span class="text-xs font-bold text-slate-400 min-w-[20px] text-center nomor-urut">${totalBaris + 1}</span>
-                <input type="text" placeholder="Masukkan Tujuan Pembelajaran (TP) hasil penyesuaian kelas..." class="flex-1 bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-700 focus:outline-none focus:border-emerald-500 value-input-tp">
+                <input type="text" placeholder="Masukkan Tujuan Pembelajaran (TP) khusus kelas..." class="flex-1 bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-700 focus:outline-none focus:border-emerald-500 value-input-tp">
                 <button type="button" onclick="hapusBarisTP(this)" class="text-slate-400 hover:text-rose-600 px-2 py-1 transition">
                     <i class="fa-solid fa-trash-can text-sm"></i>
                 </button>
@@ -233,10 +250,7 @@
             wrapper.appendChild(divBaru);
         }
 
-        // Manajemen Input TP Dinamis (Hapus Baris)
-        function removeRow(btn) {
-            btn.closest('.item-tp-row').remove();
-        }
+        // Fitur Hapus Baris Input TP
         function hapusBarisTP(btn) {
             const wrapper = document.getElementById('wrapper-list-tp');
             if (wrapper.getElementsByClassName('item-tp-row').length <= 1) {
@@ -255,10 +269,9 @@
         function eksekusiCetakLampiran() {
             document.getElementById('print-rombel').innerText = document.getElementById('kelas-select').value;
             document.getElementById('print-elemen').innerText = document.getElementById('select-elemen-inti').value;
-            document.getElementById('print-topik').innerText = document.getElementById('modul-topik').value;
+            document.getElementById('print-topik').innerText = document.getElementById('select-topik-inti').value;
             document.getElementById('print-cp').innerText = document.getElementById('textarea-cp').value;
 
-            // Suntik kumpulan TP dinamis yang dibuat user ke tabel cetak
             const tbodyPrint = document.getElementById('print-tbody-tp');
             tbodyPrint.innerHTML = "";
             
@@ -279,7 +292,7 @@
             }
 
             if (counter === 1) {
-                tbodyPrint.innerHTML = `<tr><td colspan="2" style="text-align: center; color: #888;">Belum ada target TP spesifik yang dimasukkan pengguna.</td></tr>`;
+                tbodyPrint.innerHTML = `<tr><td colspan="2" style="text-align: center; color: #888;">Belum ada target TP spesifik yang dimasukkan.</td></tr>`;
             }
 
             const hariIni = new Date();
@@ -289,7 +302,7 @@
         }
 
         function simpanLokal() {
-            alert("Perubahan mapping perangkat berhasil disimpan.");
+            alert("Perubahan mapping perangkat berhasil disimpan dengan aman.");
         }
     </script>
 </body>
