@@ -74,7 +74,7 @@
     <!-- MAIN INTERACTIVE CONTAINER (Fixed responsive grids) -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 md:grid-cols-12 gap-6">
         
-        <!-- LEFT CONTROL: NAVIGATION & INPUT (Set column spans cleanly) -->
+        <!-- LEFT CONTROL: NAVIGATION & INPUT -->
         <section class="md:col-span-5 lg:col-span-4 flex flex-col gap-6 no-print">
             
             <!-- NAVIGATION TABS -->
@@ -95,6 +95,7 @@
                     <i class="fa-solid fa-file-invoice text-xs"></i> Modul
                 </button>
             </div>
+            
             <!-- PANEL INPUT DYNAMIC -->
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 flex flex-col gap-5">
                 <div class="border-b border-slate-100 pb-3">
@@ -103,6 +104,7 @@
                     </h2>
                     <p id="deskripsi-panel-input" class="text-xs text-slate-500 mt-0.5">Atur identitas instansi dan penandatangan dokumen.</p>
                 </div>
+                
                 <!-- SUB-PANEL: DATA SEKOLAH -->
                 <div id="form-sub-sekolah" class="flex flex-col gap-4">
                     <div>
@@ -124,7 +126,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- SUB-PANEL: INPUT SISWA BATCH / COPY-PASTE -->
+                
+                <!-- SUB-PANEL: INPUT SISWA BATCH -->
                 <div id="form-sub-siswa" class="hidden flex flex-col gap-4">
                     <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 p-3 rounded-lg flex items-start gap-2">
                         <i class="fa-solid fa-paste text-xs mt-0.5"></i>
@@ -138,6 +141,7 @@
                         <i class="fa-solid fa-arrows-spin"></i> Proses & Masukkan Rombel
                     </button>
                 </div>
+                
                 <!-- SUB-PANEL: ABSENSI -->
                 <div id="form-sub-absensi" class="hidden flex flex-col gap-4">
                     <div>
@@ -168,6 +172,7 @@
                         <i class="fa-solid fa-floppy-disk"></i> Rekam Absensi
                     </button>
                 </div>
+                
                 <!-- SUB-PANEL: JURNAL NILAI -->
                 <div id="form-sub-nilai" class="hidden flex flex-col gap-4">
                     <div>
@@ -197,6 +202,7 @@
                         <i class="fa-solid fa-circle-check"></i> Rekam Nilai
                     </button>
                 </div>
+                
                 <!-- SUB-PANEL: MODUL AJAR -->
                 <div id="form-sub-modul" class="hidden flex flex-col gap-4">
                     <div>
@@ -236,6 +242,7 @@
                     </button>
                 </div>
             </div>
+            
             <!-- SYNC STATUS LOG -->
             <div class="bg-slate-900 text-white rounded-2xl p-5 shadow-inner flex flex-col gap-3">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-2">
@@ -251,7 +258,7 @@
             </div>
         </section>
         
-        <!-- RIGHT OUTPUT: DATAGRAPH & DOCUMENTS (Set md:col-span-7 to balance) -->
+        <!-- RIGHT OUTPUT: DATAGRAPH & DOCUMENTS -->
         <section class="md:col-span-7 lg:col-span-8 flex flex-col gap-6">
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col flex-1 min-h-[500px]">
                 
@@ -261,6 +268,7 @@
                         <p id="subjudul-live-monitor" class="text-xs text-slate-500">Sesuaikan data kop lembaga sekolah.</p>
                     </div>
                 </div>
+                
                 <!-- SCREEN: PREVIEW SEKOLAH -->
                 <div id="screen-sekolah" class="p-6 flex-1 flex flex-col gap-4">
                     <div class="border border-slate-200 rounded-xl p-5 bg-slate-50/50 flex flex-col gap-3 text-xs">
@@ -287,6 +295,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <!-- SCREEN: TABEL DATA SISWA -->
                 <div id="screen-siswa" class="p-6 flex-1 flex flex-col gap-4 hidden">
                     <div class="overflow-x-auto custom-scrollbar border border-slate-100 rounded-xl">
@@ -304,6 +313,7 @@
                         </table>
                     </div>
                 </div>
+                
                 <!-- SCREEN: TABEL ABSENSI -->
                 <div id="screen-absensi" class="p-6 flex-1 flex flex-col gap-4 hidden">
                     <div class="overflow-x-auto custom-scrollbar border border-slate-100 rounded-xl">
@@ -322,6 +332,7 @@
                         </table>
                     </div>
                 </div>
+                
                 <!-- SCREEN: TABEL NILAI -->
                 <div id="screen-nilai" class="p-6 flex-1 flex flex-col gap-4 hidden">
                     <div class="overflow-x-auto custom-scrollbar border border-slate-100 rounded-xl">
@@ -341,6 +352,7 @@
                         </table>
                     </div>
                 </div>
+                
                 <!-- SCREEN: MODUL AJAR PREVIEW -->
                 <div id="screen-modul" class="p-6 flex-1 flex flex-col gap-4 hidden bg-slate-50/50">
                     <div id="area-cetak-modul" class="flex flex-col gap-4">
@@ -423,7 +435,7 @@
             // Render cloud status status
             updateCloudUIState();
             
-            sinkronisasiKelasGlobal(document.getElementById('global-kelas-select').value);
+            sinkronisasiKelasGlobal(databaseSiswa.kelas || document.getElementById('global-kelas-select').value);
             gantiTab('sekolah');
         });
         
@@ -439,6 +451,10 @@
             document.getElementById('lbl-nip-kepsek').innerText = "NIP. " + databaseSiswa.configSekolah.nipKepsek;
             document.getElementById('lbl-guru').innerText = databaseSiswa.configSekolah.namaGuru;
             document.getElementById('lbl-nip-guru').innerText = "NIP. " + databaseSiswa.configSekolah.nipGuru;
+            
+            // Perbaikan: Sinkronisasi tampilan label rombel agar tidak menghasilkan error undefined
+            const bagian = databaseSiswa.kelas.split('-');
+            document.getElementById('lbl-rombel-aktif').innerText = "Kelas " + bagian[0] + " " + bagian[1];
             
             localStorage.setItem('si_pai_data_storage_v3', JSON.stringify(databaseSiswa));
         }
@@ -472,6 +488,7 @@
         
         function sinkronisasiKelasGlobal(rombelVal) {
             databaseSiswa.kelas = rombelVal;
+            document.getElementById('global-kelas-select').value = rombelVal;
             localStorage.setItem('si_pai_data_storage_v3', JSON.stringify(databaseSiswa));
             
             const bagian = rombelVal.split('-');
@@ -796,9 +813,7 @@
             const text = document.getElementById('cloud-indicator-text');
             const topBtn = document.getElementById('btn-login-trigger');
             const topBtnTxt = document.getElementById('txt-cloud-btn');
-
             if (databaseSiswa.isCloudActive && databaseSiswa.cloudUser) {
-                // UI status Cloud Aktif
                 badge.className = "text-[9px] font-bold bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full flex items-center gap-1";
                 dot.className = "w-1.5 h-1.5 rounded-full bg-emerald-400";
                 text.innerText = `Connected: ${databaseSiswa.cloudUser}`;
@@ -806,7 +821,6 @@
                 topBtn.className = "flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition shadow-sm cursor-pointer whitespace-nowrap";
                 topBtnTxt.innerText = "Akun Cloud Terhubung";
             } else {
-                // UI status Offline
                 badge.className = "text-[9px] font-bold bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-full flex items-center gap-1";
                 dot.className = "w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse";
                 text.innerText = "Offline/Lokal";
@@ -819,17 +833,14 @@
         function prosesAuth(tipe) {
             const email = document.getElementById('auth-email').value.trim();
             const password = document.getElementById('auth-password').value;
-
             if (!email || !password) {
                 alert("Email dan Password harus diisi!");
                 return;
             }
-
-            // Simulasi API Request ke Cloud Server
             alert(tipe === 'login' ? 'Mencoba sinkronisasi kredensial server...' : 'Mendaftarkan ruang database baru di cloud...');
             
             databaseSiswa.isCloudActive = true;
-            databaseSiswa.cloudUser = email.split('@')[0]; // Ambil nama depan email sebagai username display
+            databaseSiswa.cloudUser = email.split('@')[0];
             
             localStorage.setItem('si_pai_data_storage_v3', JSON.stringify(databaseSiswa));
             updateCloudUIState();
@@ -842,7 +853,6 @@
             localStorage.setItem('si_pai_data_storage_v3', JSON.stringify(databaseSiswa)); 
             
             if (databaseSiswa.isCloudActive) {
-                // Simulasi loading push cloud
                 const btn = document.querySelector("button[onclick='simpanKeCloud()']");
                 btn.innerText = "Pushing...";
                 btn.disabled = true;
