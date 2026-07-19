@@ -81,7 +81,7 @@
             
             <!-- NAVIGATION TABS -->
             <div class="bg-white p-2 rounded-xl border border-slate-200/80 shadow-sm flex flex-wrap gap-1">
-                <button onclick="gantiTab('sekolah')" id="tab-sekolah" class="flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer bg-emerald-600 text-white shadow-sm">
+                <button onclick="gantiTab('sekolah')" id="tab-sekolah" class="flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-50">
                     <i class="fa-solid fa-school text-xs"></i> Sekolah
                 </button>
                 <button onclick="gantiTab('siswa')" id="tab-siswa" class="flex-1 min-w-[65px] flex flex-col items-center gap-1 py-2 rounded-lg text-[10px] font-bold transition-all cursor-pointer text-slate-600 hover:bg-slate-50">
@@ -109,9 +109,15 @@
 
                 <!-- SUB-PANEL: DATA SEKOLAH -->
                 <div id="form-sub-sekolah" class="flex flex-col gap-4">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Nama Instansi / Sekolah</label>
-                        <input type="text" id="cfg-nama-sekolah" value="SD Negeri Nusantara" oninput="simpanConfigSekolah()" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="col-span-2">
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Nama Instansi / Sekolah</label>
+                            <input type="text" id="cfg-nama-sekolah" value="SD Negeri Nusantara" oninput="simpanConfigSekolah()" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Tahun Ajaran</label>
+                            <input type="text" id="cfg-tahun-ajaran" value="2026/2027" placeholder="e.g. 2026/2027" oninput="simpanConfigSekolah()" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-bold text-center outline-none focus:ring-2 focus:ring-emerald-500/20">
+                        </div>
                     </div>
                     <div class="border-t border-slate-100 pt-3">
                         <label class="block text-xs font-bold text-slate-800 uppercase mb-2 text-emerald-700">Identitas Kepala Sekolah</label>
@@ -129,7 +135,7 @@
                     </div>
                 </div>
 
-                <!-- SUB-PANEL: INPUT SISWA BATCH / COPY-PASTE (BARU) -->
+                <!-- SUB-PANEL: INPUT SISWA BATCH / COPY-PASTE -->
                 <div id="form-sub-siswa" class="hidden flex flex-col gap-4">
                     <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 p-3 rounded-lg flex items-start gap-2">
                         <i class="fa-solid fa-paste text-xs mt-0.5"></i>
@@ -282,9 +288,15 @@
                                 <span class="text-[10px] text-slate-400 block font-bold uppercase">Nama Sekolah:</span>
                                 <span id="lbl-sekolah" class="text-sm font-bold text-slate-900">SD Negeri Nusantara</span>
                             </div>
-                            <div class="p-3 bg-white border border-slate-100 rounded-lg">
-                                <span class="text-[10px] text-slate-400 block font-bold uppercase">Rombel Terpilih:</span>
-                                <span id="lbl-rombel-aktif" class="text-sm font-bold text-emerald-700">Kelas 1 A</span>
+                            <div class="p-3 bg-white border border-slate-100 rounded-lg flex items-center justify-between">
+                                <div>
+                                    <span class="text-[10px] text-slate-400 block font-bold uppercase">Rombel Terpilih:</span>
+                                    <span id="lbl-rombel-aktif" class="text-sm font-bold text-emerald-700">Kelas 1 A</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-[10px] text-slate-400 block font-bold uppercase">Tahun Ajaran:</span>
+                                    <span id="lbl-tahun-ajaran" class="text-xs font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded">2026/2027</span>
+                                </div>
                             </div>
                             <div class="p-3 bg-white border border-slate-100 rounded-lg flex flex-col gap-0.5">
                                 <span class="text-[10px] text-slate-400 font-bold uppercase">Kepala Sekolah:</span>
@@ -300,7 +312,7 @@
                     </div>
                 </div>
 
-                <!-- SCREEN: TABEL DATA SISWA (BARU) -->
+                <!-- SCREEN: TABEL DATA SISWA -->
                 <div id="screen-siswa" class="p-6 flex-1 flex flex-col gap-4 hidden">
                     <div class="overflow-x-auto custom-scrollbar border border-slate-100 rounded-xl">
                         <table class="w-full text-left text-xs border-collapse">
@@ -348,9 +360,9 @@
                                     <th class="p-3.5">Nama Siswa</th>
                                     <th class="p-3.5">Jenis</th>
                                     <th class="p-3.5">Materi / Bab</th>
-                                    <th class="p-3.5 text-center">Nilai</th>
-                                    <th class="p-3.5 text-center">Predikat</th>
-                                    <th class="p-3.5 text-center">Aksi</th>
+                                    <th class="p-3.5 text-center w-20">Nilai</th>
+                                    <th class="p-3.5 text-center w-20">Predikat</th>
+                                    <th class="p-3.5 text-center w-20">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody id="tabel-body-nilai" class="divide-y divide-slate-100 font-medium text-slate-700"></tbody>
@@ -404,11 +416,12 @@
 
         let databaseSiswa = {
             kelas: "1-A",
-            daftarSiswa: [], // Penyimpanan database siswa baru {id, rombel, nama, jk}
+            daftarSiswa: [],
             absensi: [],
             nilai: [],
             configSekolah: {
                 namaSekolah: "SD Negeri Nusantara",
+                tahunAjaran: "2026/2027",
                 namaKepsek: "H. Ahmad Syarif, M.Pd.",
                 nipKepsek: "19750824 200003 1 002",
                 namaGuru: "Aminah S.Pd.I.",
@@ -423,11 +436,12 @@
                 try {
                     databaseSiswa = JSON.parse(localData);
                     if(!databaseSiswa.daftarSiswa) databaseSiswa.daftarSiswa = [];
+                    if(!databaseSiswa.configSekolah.tahunAjaran) databaseSiswa.configSekolah.tahunAjaran = "2026/2027";
                 } catch(e) {}
             }
             
-            // Sync profil awal
             document.getElementById('cfg-nama-sekolah').value = databaseSiswa.configSekolah.namaSekolah;
+            document.getElementById('cfg-tahun-ajaran').value = databaseSiswa.configSekolah.tahunAjaran;
             document.getElementById('cfg-nama-kepsek').value = databaseSiswa.configSekolah.namaKepsek;
             document.getElementById('cfg-nip-kepsek').value = databaseSiswa.configSekolah.nipKepsek;
             document.getElementById('cfg-nama-guru').value = databaseSiswa.configSekolah.namaGuru;
@@ -439,12 +453,14 @@
 
         function simpanConfigSekolah() {
             databaseSiswa.configSekolah.namaSekolah = document.getElementById('cfg-nama-sekolah').value;
+            databaseSiswa.configSekolah.tahunAjaran = document.getElementById('cfg-tahun-ajaran').value;
             databaseSiswa.configSekolah.namaKepsek = document.getElementById('cfg-nama-kepsek').value;
             databaseSiswa.configSekolah.nipKepsek = document.getElementById('cfg-nip-kepsek').value;
             databaseSiswa.configSekolah.namaGuru = document.getElementById('cfg-nama-guru').value;
             databaseSiswa.configSekolah.nipGuru = document.getElementById('cfg-nip-guru').value;
             
             document.getElementById('lbl-sekolah').innerText = databaseSiswa.configSekolah.namaSekolah;
+            document.getElementById('lbl-tahun-ajaran').innerText = databaseSiswa.configSekolah.tahunAjaran;
             document.getElementById('lbl-kepsek').innerText = databaseSiswa.configSekolah.namaKepsek;
             document.getElementById('lbl-nip-kepsek').innerText = "NIP. " + databaseSiswa.configSekolah.nipKepsek;
             document.getElementById('lbl-guru').innerText = databaseSiswa.configSekolah.namaGuru;
@@ -471,14 +487,41 @@
                 }
             });
 
+            const inputJudul = document.getElementById('judul-panel-input');
+            const inputDeskripsi = document.getElementById('deskripsi-panel-input');
             const monitorJudul = document.getElementById('judul-live-monitor');
             const monitorSub = document.getElementById('subjudul-live-monitor');
             
-            if(target === 'sekolah') { monitorJudul.innerText = "Profil Satuan Pendidikan"; monitorSub.innerText = "Data utama identitas instansi."; }
-            else if(target === 'siswa') { monitorJudul.innerText = "Manajemen Database Siswa Perkelas"; monitorSub.innerText = "Kelola data nama dan gender rombel aktif."; }
-            else if(target === 'absensi') { monitorJudul.innerText = "Jurnal Absensi Harian"; monitorSub.innerText = "Rekam riwayat kehadiran."; }
-            else if(target === 'nilai') { monitorJudul.innerText = "Rekapitulasi Nilai Asesmen PAI"; monitorSub.innerText = "Nilai formatif & sumatif."; }
-            else { monitorJudul.innerText = "Dokumen Lembar Modul Ajar"; monitorSub.innerText = "Pratinjau berkas fisik siap cetak."; }
+            if(target === 'sekolah') { 
+                inputJudul.innerHTML = `<i class="fa-solid fa-school text-emerald-600"></i> Profil Lembaga & Guru`;
+                inputDeskripsi.innerText = "Atur identitas instansi dan penandatangan dokumen.";
+                monitorJudul.innerText = "Profil Satuan Pendidikan"; 
+                monitorSub.innerText = "Data utama identitas instansi."; 
+            }
+            else if(target === 'siswa') { 
+                inputJudul.innerHTML = `<i class="fa-solid fa-users text-emerald-600"></i> Manajemen Data Siswa`;
+                inputDeskripsi.innerText = "Tempel data siswa massal per kelas paralel.";
+                monitorJudul.innerText = "Manajemen Database Siswa Perkelas"; 
+                monitorSub.innerText = "Kelola data nama dan gender rombel aktif."; 
+            }
+            else if(target === 'absensi') { 
+                inputJudul.innerHTML = `<i class="fa-solid fa-clipboard-user text-emerald-600"></i> Input Absensi`;
+                inputDeskripsi.innerText = "Rekam presensi harian siswa.";
+                monitorJudul.innerText = "Bagian Jurnal Absensi Harian"; 
+                monitorSub.innerText = "Rekam riwayat kehadiran."; 
+            }
+            else if(target === 'nilai') { 
+                inputJudul.innerHTML = `<i class="fa-solid fa-star text-emerald-600"></i> Input Nilai PAI`;
+                inputDeskripsi.innerText = "Masukkan skor asesmen formatif & sumatif.";
+                monitorJudul.innerText = "Rekapitulasi Nilai Asesmen PAI"; 
+                monitorSub.innerText = "Nilai formatif & sumatif."; 
+            }
+            else { 
+                inputJudul.innerHTML = `<i class="fa-solid fa-file-invoice text-emerald-600"></i> Struktur Modul Ajar`;
+                inputDeskripsi.innerText = "Pilih CP, TP, dan Target Alokasi JP.";
+                monitorJudul.innerText = "Dokumen Lembar Modul Ajar"; 
+                monitorSub.innerText = "Pratinjau berkas fisik siap cetak."; 
+            }
         }
 
         function sinkronisasiKelasGlobal(rombelVal) {
@@ -495,7 +538,6 @@
             renderTabelNilai();
         }
 
-        // BULK PARSER ENGINE (Fungsi Deteksi Copy Paste Excel)
         function prosesBulkInputSiswa() {
             const areaTeks = document.getElementById('siswa-bulk-input').value;
             if(!areaTeks.trim()) { alert("Kotak input masih kosong!"); return; }
@@ -509,7 +551,6 @@
                 let nama = "";
                 let jk = "L";
                 
-                // Cek jika disalin dari Excel (Pemisah biasanya menggunakan Karakter Tab '\t')
                 if(baris.includes('\t')) {
                     const kolom = baris.split('\t');
                     nama = kolom[0].trim();
@@ -517,14 +558,14 @@
                         let valJk = kolom[1].trim().toUpperCase();
                         if(valJk.startsWith('P') || valJk.includes('PEREMPUAN')) jk = "P";
                     }
-                } else if(baris.includes(',')) { // Pendekatan alternatif via koma
+                } else if(baris.includes(',')) {
                     const kolom = baris.split(',');
                     nama = kolom[0].trim();
                     if(kolom[1]) {
                         let valJk = kolom[1].trim().toUpperCase();
                         if(valJk.startsWith('P')) jk = "P";
                     }
-                } else { // Jika hanya menulis nama saja tanpa jenis kelamin
+                } else {
                     nama = baris.trim();
                 }
                 
@@ -603,7 +644,6 @@
             });
         }
 
-        // ABSENSI CONTROLLER
         function tambahDataAbsensi() {
             const nama = document.getElementById('absensi-nama-select').value;
             const status = document.getElementById('absensi-status').value;
@@ -650,7 +690,6 @@
             });
         }
 
-        // NILAI CONTROLLER
         function tambahDataNilai() {
             const nama = document.getElementById('nilai-nama-select').value;
             const jenis = document.getElementById('nilai-jenis').value;
@@ -754,7 +793,7 @@
                     <div class="text-center border-b-2 border-slate-800 pb-3 flex flex-col gap-1">
                         <h2 class="font-bold text-sm uppercase">MODUL AJAR KURIKULUM MERDEKA PAI & BP</h2>
                         <h3 class="font-bold text-xs uppercase text-emerald-800">${conf.namaSekolah}</h3>
-                        <p class="text-[10px] font-bold">KELAS ${tingkat} ${paralelName} / SEMESTER GANJIL</p>
+                        <p class="text-[10px] font-bold">KELAS ${tingkat} ${paralelName} / TAHUN AJARAN ${conf.tahunAjaran || '-'}</p>
                     </div>
                     <div class="grid grid-cols-2 gap-2 text-[10px] bg-slate-50 p-2 rounded border">
                         <div>Materi: <strong>${topik}</strong></div>
