@@ -505,15 +505,103 @@
         }
 
         function sinkronisasiKelasGlobal(val) {
-            document.getElementById("select-kelas").value = val;
-            document.getElementById("select-kelas-perangkat").value = val;
-            
-            // Set default paralel ke opsi A saat kelas utama berubah
-            document.getElementById("filter-kelas-siswa").value = val + "A";
-            
-            updateOtomatisCP();
-            gantiDataKelas();
-        }
+    if (!val) return;
+    
+    // DATA MATERI POKOK PER KELAS SESUAI SALINAN KEPUTUSAN BPKDM LENGKAP
+    const DATA_BPKDM_PAI = {
+        "1": [
+            "Bab 1: Aku Cinta Al-Qur'an (Surah Al-Fatihah, Hijaiyah, Harakat)",
+            "Bab 2: Mengenal Rukun Iman (Mengimani Allah SWT)",
+            "Bab 3: Kasih Sayang (Sifat Allah SWT, Nabi Muhammad SAW, & Sesama)",
+            "Bab 4: Bersih Itu Sehat (Istinja', Wudu, Kebersihan Lingkungan)",
+            "Bab 5: Kisah Nabi Adam AS (Penciptaan Manusia Pertama)",
+            "Bab 6: Surah An-Nas (Melafalkan, Menghafal, Pesan Pokok)",
+            "Bab 7: Mengenal Allah SWT (Asmaul Husna: Al-Hafiz & Al-Wali)",
+            "Bab 8: Aku Anak Mandiri (Mandiri, Percaya Diri, Disiplin)",
+            "Bab 9: Ayo Belajar dan Berdoa (Adab & Doa Harian Belajar)",
+            "Bab 10: Kisah Nabi Idris AS (Keteladanan Nabi yang Cerdas)"
+        ],
+        "2": [
+            "Bab 1: Senangnya Belajar Surah Al-A'laq",
+            "Bab 2: Allah SWT Maha Pencipta (Asmaul Husna: Al-Malik, Al-Quddus, As-Salam)",
+            "Bab 3: Hidup Bersih dan Tertib (Di Rumah & Sekolah)",
+            "Bab 4: Mari Berwudu (Tata Cara, Niat, Doa, Hal yang Membatalkan)",
+            "Bab 5: Kisah Nabi Nuh AS (Kesabaran & Ketaatan)",
+            "Bab 6: Ayo Belajar Surah An-Nasr",
+            "Bab 7: Allah SWT Maha Mengetahui (Asmaul Husna: Al-Alim & Al-Khabir)",
+            "Bab 8: Senangnya Berakhlak Terpuji (Jujur, Tanggung Jawab, Peduli)",
+            "Bab 9: Ibadah Salat (Pengertian, Gerakan, Bacaan Salat Wajib)",
+            "Bab 10: Kisah Nabi Ibrahim AS & Nabi Ismail AS (Keteladanan Berkurban)"
+        ],
+        "3": [
+            "Bab 1: Asyiknya Belajar Surah Al-Qadr",
+            "Bab 2: Allah SWT Maha Sempurna (Sifat Wajib & Mustahil, Asmaul Husna: Al-Ahad, As-Samad)",
+            "Bab 3: Bersyukur kepada Allah SWT (Makna & Implementasi Syukur)",
+            "Bab 4: Ketentuan Salat (Syarat Sah, Rukun, Hal yang Membatalkan)",
+            "Bab 5: Kisah Nabi Muhammad SAW (Percaya Diri & Mandiri Berdagang)",
+            "Bab 6: Belajar Surah Al-Kausar",
+            "Bab 7: Indahnya Nama-nama Allah SWT (Asmaul Husna: Al-Wahhab, Al-Alim, As-Sami')",
+            "Bab 8: Perilaku Terpuji (Rendah Hati, Dermawan, Pemaaf)",
+            "Bab 9: Zikir dan Doa (Tata Cara Setelah Salat)",
+            "Bab 10: Kisah Nabi Luth AS & Nabi Ya'qub AS (Menyampaikan Kebenaran & Kesabaran)"
+        ],
+        "4": [
+            "Bab 1: Al-Qur'an Surah Al-Hujurat Ayat 13 (Keragaman Manusia)",
+            "Bab 2: Mengenal Asmaul Husna (Al-Malik, Al-Aziz, Al-Quddus, As-Salam, Al-Mu'min)",
+            "Bab 3: Aku Anak Saleh (Amanah, Jujur, Disiplin di Rumah & Sekolah)",
+            "Bab 4: Mari Berpuasa (Ketentuan Ramadhan, Syarat Wajib, Hikmah)",
+            "Bab 5: Asal-Usul Penyebaran Islam (Sejarah Wali Songo & Dakwah)",
+            "Bab 6: Melafalkan Surah At-Tin",
+            "Bab 7: Beriman kepada Rasul Allah (Sifat Wajib Rasul & Ulul Azmi)",
+            "Bab 8: Menghindari Akhlak Tercela (Sombong, Iri Dengki, Berbohong)",
+            "Bab 9: Ketentuan Zakat (Zakat Fitrah & Zakat Mal/Harta)",
+            "Bab 10: Kisah Nabi Ayub AS & Nabi Musa AS (Menghadapi Cobaan & Keadilan)"
+        ],
+        "5": [
+            "Bab 1: Mari Mengaji Surah Al-'Alaq & Al-Qadr (Hukum Bacaan Tajwid)",
+            "Bab 2: Percaya kepada Hari Akhir (Kiamat & Hikmah Beriman)",
+            "Bab 3: Indahnya Nama Allah SWT (Al-Qayyum, Al-Muhyi, Al-Mumit, Al-Ba'its)",
+            "Bab 4: Berbagai Ketentuan Salat Sunah (Rawatib, Tarawih, Witir, Jamaah)",
+            "Bab 5: Kisah Keteladanan Nabi Daud AS & Nabi Sulaiman AS (Kebijaksanaan & Syukur)",
+            "Bab 6: Indahnya Saling Menghargai (Q.S. Al-Kafirun & Toleransi)",
+            "Bab 7: Mari Berinfak dan Sedekah (Manfaat bagi Masyarakat)",
+            "Bab 8: Senang Menuntut Ilmu (Dalil & Keutamaan Menuntut Ilmu)",
+            "Bab 9: Perilaku Terpuji (Tawadu, Ikhlas, Pemaaf)",
+            "Bab 10: Khulafaur Rasyidin (Abu Bakar, Umar, Utsman, Ali R.A)"
+        ],
+        "6": [
+            "Bab 1: Belajar Al-Qur'an Hadis (Surah Ad-Dhuha & Keutamaan Memberi)",
+            "Bab 2: Lebih Dekat dengan Allah SWT (Al-Ghaffar, Al-Afwu, As-Shamad, Al-Muqtadir, Al-Muqaddim, Al-Baqi)",
+            "Bab 3: Qada dan Qadar (Takdir Allah SWT)",
+            "Bab 4: Zakat, Infak, dan Sedekah (Penerapan di Masyarakat)",
+            "Bab 5: Keteladanan Sahabat Nabi (Umar bin Khattab & Abu Bakar)",
+            "Bab 6: Menyikapi Keberagaman (Q.S. Al-Hujurat Ayat 13 & Hadis)",
+            "Bab 7: Ayo Membayar Zakat (Fikih Zakat Mal, Fitrah & Mustahik)",
+            "Bab 8: Indahnya Berakhlak Mulia (Adab Bertamu, Medsos, & Menjaga Lisan)",
+            "Bab 9: Meneladani Rasulullah SAW (Membangun Masyarakat Madinah)",
+            "Bab 10: Tokoh Islam di Nusantara (Ulama dalam Perkembangan Islam Indonesia)"
+        ]
+    };
+
+    const daftarBab = DATA_BPKDM_PAI[val];
+    if (!daftarBab) return;
+
+    // Otomatis deteksi elemen laci dropdown materi/bab Anda
+    const selectMateri = document.getElementById("pilihan-bab") || 
+                         document.getElementById("select-materi-pokok") || 
+                         document.getElementById("materi-pokok") ||
+                         document.getElementById("select-elemen-inti");
+
+    if (selectMateri) {
+        selectMateri.innerHTML = '<option value="">-- Pilih Materi Pokok / Bab --</option>';
+        daftarBab.forEach((materi, index) => {
+            let opt = document.createElement("option");
+            opt.value = `bab_${index + 1}`;
+            opt.innerText = materi;
+            selectMateri.appendChild(opt);
+        });
+    }
+}
 
         // GENERATE MODUL AJAR DEEP LEARNING
         function generateModulDeepLearning() {
