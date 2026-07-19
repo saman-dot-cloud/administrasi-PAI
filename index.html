@@ -152,14 +152,14 @@
                     </button>
                 </div>
 
-                <!-- SUB-PANEL: MODUL AJAR DEEP LEARNING -->
+                <!-- SUB-PANEL: MODUL AJAR DEEP LEARNING (INTEGRASI TP DINAMIS) -->
                 <div id="form-sub-modul" class="hidden flex flex-col gap-4">
                     <div class="bg-amber-50 border border-amber-200 text-amber-800 p-3 rounded-lg flex items-start gap-2.5">
                         <i class="fa-solid fa-wand-magic-sparkles text-sm mt-0.5"></i>
-                        <p class="text-[11px] leading-relaxed font-medium">Fitur ini otomatis memetakan Alur <strong>Deep Learning</strong> (Mindful, Meaningful, Joyful) berdasarkan regulasi Kurikulum Merdeka PAI terbaru.</p>
+                        <p class="text-[11px] leading-relaxed font-medium">Fitur ini otomatis memetakan Alur <strong>Deep Learning</strong>. Elemen dan CP terkunci dari BPKDM[cite: 2], sementara TP dapat Anda buat secara mandiri.</p>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Elemen Inti PAI</label>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Elemen Inti PAI <span class="text-[10px] text-rose-500 font-bold">(Terkunci BPKDM)</span></label>
                         <select id="select-elemen-inti" onchange="updateOtomatisCP()" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-semibold bg-white outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition">
                             <option value="Al-Qur'an Hadis">Al-Qur'an Hadis</option>
                             <option value="Akidah">Akidah</option>
@@ -170,16 +170,29 @@
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Topik / Materi Pelajaran</label>
-                        <!-- PENTING: Perbaikan Dropdown Mandiri Dropdown Bab -->
                         <select id="select-materi-pokok" onchange="document.getElementById('input-topik-materi').value = this.options[this.selectedIndex].text" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-semibold bg-white outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition">
                             <option value="">-- Pilih Materi Pokok / Bab --</option>
                         </select>
                         <input type="hidden" id="input-topik-materi" value="">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Capaian Pembelajaran (CP)</label>
-                        <textarea id="textarea-cp" rows="3" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs font-medium bg-slate-50 text-slate-600 outline-none resize-none" readonly></textarea>
+                        <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Capaian Pembelajaran (CP) <span class="text-[10px] text-rose-500 font-bold">(Terkunci BPKDM)</span></label>
+                        <textarea id="textarea-cp" rows="3" class="w-full border border-slate-200 rounded-lg p-2.5 text-xs font-medium bg-slate-100 text-slate-600 outline-none resize-none" readonly></textarea>
                     </div>
+                    
+                    <!-- FITUR BARU: WADAH INPUT TP DINAMIS -->
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="block text-xs font-bold text-slate-600 uppercase">Tujuan Pembelajaran (TP) Kustom</label>
+                            <button type="button" onclick="tambahBarisTP('')" class="text-[10px] font-bold text-emerald-600 hover:text-emerald-700 cursor-pointer">
+                                <i class="fa-solid fa-circle-plus"></i> Tambah Baris TP
+                            </button>
+                        </div>
+                        <div id="container-tp-dinamis" class="flex flex-col gap-2 max-h-40 overflow-y-auto custom-scrollbar p-0.5">
+                            <!-- Input TP akan disisipkan di sini secara dinamis -->
+                        </div>
+                    </div>
+
                     <div>
                         <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Alokasi Waktu (JP)</label>
                         <input type="text" id="modul-jp" value="2 JP (2 x 35 Menit)" class="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition">
@@ -324,7 +337,7 @@
 
     <!-- CORE LOGIC & CORE DATA BPKDM 2026 -->
     <script>
-        // DATA REGULASI PAI NASIONAL KEPUTUSAN BPKDM 2026
+        // DATA REGULASI PAI NASIONAL KEPUTUSAN BPKDM 2026[cite: 2]
         const DATA_BPKDM_PAI = {
             "1": {
                 "Al-Qur'an Hadis": {
@@ -372,7 +385,7 @@
             "5": {
                 "Al-Qur'an Hadis": { "cp": "Fase C - Kelas 5: Membaca Surah Al-Ma'un dan Al-Fil dengan tajwid yang benar serta memahami kandungannya.", "bab": ["Bab 1: Menghayati Kandungan Surah Al-Ma'un", "Bab 6: Tadarus Surah Al-Fil"] },
                 "Akidah": { "cp": "Fase C - Kelas 5: Memahami makna al-Asma' al-Husna: al-Jamil, al-Ghaffar, al-Wahhab, dan al-Basit.", "bab": ["Bab 2: Meneladani Asmaulhusna Mulia", "Bab 7: Beriman Kepada Hari Akhir / Kiamat"] },
-                "Akhlak": { "cp": "Fase C - Kelas 5: Membiasakan sikap hidup hemat, peduli sesama, dan menjauhi gibah.", "bab": ["Bab 3: Hidup Bersahaja & Menjauhi Gibah", "Bab 8: Sopan Santun Di Media Sosial"] },
+                "Akhlak": { "cp": "Fase C - Kelas 5: Membiasakan sikap hidup hemat, peduli sesama, and menjauhi gibah.", "bab": ["Bab 3: Hidup Bersahaja & Menjauhi Gibah", "Bab 8: Sopan Santun Di Media Sosial"] },
                 "Fikih": { "cp": "Fase C - Kelas 5: Memahami ketentuan ibadah kurban dan ketentuan makanan halal-haram.", "bab": ["Bab 4: Hikmah Ibadah Kurban di Hari Raya", "Bab 9: Memilih Makanan Halal & Thayyib"] },
                 "Sejarah Peradaban Islam": { "cp": "Fase C - Kelas 5: Mengidentifikasi perjuangan Umar bin Khattab dan Utsman bin Affan.", "bab": ["Bab 5: Ketegasan Khalifah Umar bin Khattab", "Bab 10: Kedermawanan Khalifah Utsman bin Affan"] }
             },
@@ -444,19 +457,33 @@
             }
         }
 
-        // PERBAIKAN 1: SINKRONISASI KELAS GLOBAL (Akurat tanpa merusak Elemen Inti)
+        // SINKRONISASI KELAS GLOBAL[cite: 2]
         function sinkronisasiKelasGlobal(kelas) {
             databaseSiswa.kelas = kelas;
             simpanKeLocalStorage();
             
-            // Panggil updateOtomatisCP untuk memetakan data BPKDM terbaru
             updateOtomatisCP();
             
             renderTabelAbsensi();
             renderTabelNilai();
         }
 
-        // PERBAIKAN 2: UPDATE OTOMATIS CP & BAB MATERI (Dinamis untuk semua Kelas 1-6)
+        // FUNGSI LOGIKAL BARU: TAMBAH BARIS INPUT TP DINAMIS PADA DOM
+        function tambahBarisTP(isiTeks = "") {
+            const container = document.getElementById('container-tp-dinamis');
+            const divBaris = document.createElement('div');
+            divBaris.className = "flex items-center gap-2 group-tp-input";
+            
+            divBaris.innerHTML = `
+                <input type="text" placeholder="Ketik indikator TP kustom kelas..." value="${isiTeks}" class="input-tp-item flex-1 border border-slate-200 rounded-lg p-2 text-xs font-medium outline-none focus:ring-2 focus:ring-emerald-500/20">
+                <button type="button" onclick="this.parentElement.remove()" class="text-rose-500 hover:text-rose-700 text-xs p-1 cursor-pointer">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            `;
+            container.appendChild(divBaris);
+        }
+
+        // UPDATE OTOMATIS CP & RESET TP DINAMIS[cite: 2]
         function updateOtomatisCP() {
             const kelas = databaseSiswa.kelas;
             const elemen = document.getElementById('select-elemen-inti').value;
@@ -464,14 +491,15 @@
             const selectMateri = document.getElementById('select-materi-pokok');
             const inputHiddenTopik = document.getElementById('input-topik-materi');
             
-            // Validasi keberadaan data di objek regulasi BPKDM 2026
+            // Bersihkan wadah input TP lama setiap ganti elemen/kelas
+            const containerTp = document.getElementById('container-tp-dinamis');
+            containerTp.innerHTML = "";
+            
             if (DATA_BPKDM_PAI[kelas] && DATA_BPKDM_PAI[kelas][elemen]) {
                 const dataPelajaran = DATA_BPKDM_PAI[kelas][elemen];
                 
-                // Isi Capaian Pembelajaran secara realtime
                 textareaCp.value = dataPelajaran.cp;
                 
-                // Segarkan opsi pilihan Bab/Materi Pokok tanpa menimpa dropdown lain
                 selectMateri.innerHTML = '<option value="">-- Pilih Materi Pokok / Bab --</option>';
                 dataPelajaran.bab.forEach((babMateri) => {
                     const opt = document.createElement('option');
@@ -480,7 +508,6 @@
                     selectMateri.appendChild(opt);
                 });
                 
-                // Set default pilihan pertama aktif
                 if (dataPelajaran.bab.length > 0) {
                     selectMateri.selectedIndex = 1;
                     inputHiddenTopik.value = dataPelajaran.bab[0];
@@ -490,6 +517,9 @@
                 selectMateri.innerHTML = '<option value="Materi Mandiri">Materi Mandiri / Tambahan</option>';
                 inputHiddenTopik.value = "Materi Mandiri";
             }
+
+            // Inisiasi awal 1 baris kosong agar siap diisi pengguna
+            tambahBarisTP("");
         }
 
         // DATA HANDLER: ABSENSI
@@ -616,13 +646,33 @@
             });
         }
 
-        // GENERATE MODUL AJAR DENGAN ALUR DEEP LEARNING (MINDFUL, MEANINGFUL, JOYFUL)
+        // GENERATE MODUL AJAR DENGAN INTEGRASI DATA TP DINAMIS USER
         function generateModulDeepLearning() {
             const kelas = databaseSiswa.kelas;
             const elemen = document.getElementById('select-elemen-inti').value;
             const topik = document.getElementById('input-topik-materi').value || "Materi Pokok PAI";
             const cp = document.getElementById('textarea-cp').value;
             const jp = document.getElementById('modul-jp').value;
+            
+            // Mengambil semua nilai input TP dinamis yang tidak kosong
+            const inputElements = document.querySelectorAll('.input-tp-item');
+            let listTpHtml = "";
+            let counterTp = 0;
+            
+            inputElements.forEach((el) => {
+                const nilaiTeks = el.value.trim();
+                if(nilaiTeks !== "") {
+                    counterTp++;
+                    listTpHtml += `<li class="ml-4 list-decimal text-slate-700 mb-1">${nilaiTeks}</li>`;
+                }
+            });
+            
+            // Jika kosong, beri fallback teks manual
+            if(counterTp === 0) {
+                listTpHtml = `<p class="text-rose-600 italic text-[11px]">Tujuan Pembelajaran belum didefinisikan secara khusus oleh guru.</p>`;
+            } else {
+                listTpHtml = `<ol class="flex flex-col gap-0.5 mt-1">${listTpHtml}</ol>`;
+            }
             
             const areaPreview = document.getElementById('pratinjau-modul-dokumen');
             
@@ -642,12 +692,18 @@
                     </div>
 
                     <div class="flex flex-col gap-1">
-                        <h4 class="font-bold text-slate-900 border-b border-slate-200 pb-0.5 text-xs uppercase tracking-wider"><i class="fa-solid fa-crosshairs text-emerald-600"></i> I. Capaian Pembelajaran (CP) Elementer</h4>
+                        <h4 class="font-bold text-slate-900 border-b border-slate-200 pb-0.5 text-xs uppercase tracking-wider"><i class="fa-solid fa-crosshairs text-emerald-600"></i> I. Capaian Pembelajaran (CP) BPKDM</h4>
                         <p class="text-slate-600 italic leading-relaxed text-[11px]">${cp}</p>
                     </div>
 
+                    <!-- INJEKSI BARU: DISPLAY TUJUAN PEMBELAJARAN DINAMIS -->
+                    <div class="flex flex-col gap-1">
+                        <h4 class="font-bold text-slate-900 border-b border-slate-200 pb-0.5 text-xs uppercase tracking-wider"><i class="fa-solid fa-bullseye text-teal-600"></i> II. Tujuan Pembelajaran (TP) Kustom</h4>
+                        <div class="text-[11px] leading-relaxed">${listTpHtml}</div>
+                    </div>
+
                     <div class="flex flex-col gap-2">
-                        <h4 class="font-bold text-slate-900 border-b border-slate-200 pb-0.5 text-xs uppercase tracking-wider"><i class="fa-solid fa-graduation-cap text-emerald-600"></i> II. Alur Pembelajaran Berbasis Kriteria Deep Learning</h4>
+                        <h4 class="font-bold text-slate-900 border-b border-slate-200 pb-0.5 text-xs uppercase tracking-wider"><i class="fa-solid fa-graduation-cap text-emerald-600"></i> III. Alur Pembelajaran Berbasis Kriteria Deep Learning</h4>
                         
                         <div class="flex flex-col gap-2.5 mt-1">
                             <div class="bg-emerald-50/70 border-l-4 border-emerald-600 p-2.5 rounded-r-lg">
@@ -668,7 +724,7 @@
                     </div>
 
                     <div class="flex flex-col gap-1">
-                        <h4 class="font-bold text-slate-900 border-b border-slate-200 pb-0.5 text-xs uppercase tracking-wider"><i class="fa-solid fa-chart-simple text-emerald-600"></i> III. Rencana Asesmen Otentik</h4>
+                        <h4 class="font-bold text-slate-900 border-b border-slate-200 pb-0.5 text-xs uppercase tracking-wider"><i class="fa-solid fa-chart-simple text-emerald-600"></i> IV. Rencana Asesmen Otentik</h4>
                         <p class="text-slate-600 leading-relaxed text-[11px]">Menggunakan teknik penilaian formatif berbasis rubrik jurnal sikap (Karakter Profil Pelajar Pancasila) dan sumatif berbasis portofolio pengerjaan lembar kerja mandiri.</p>
                     </div>
 
@@ -718,8 +774,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-        // PERBAIKAN 3: KEAMANAN FIREBASE CONFIG (Mencegah Hardcoded API Key terekspos di sisi Client)
-        // Menggunakan Fallback Runtime Injection Environment 
+        // KEAMANAN FIREBASE CONFIG (Mencegah Hardcoded API Key terekspos di sisi Client)[cite: 2]
         const getSecureConfig = () => {
             const runtimeEnv = window.__ENV__ || {};
             return {
@@ -732,7 +787,6 @@
             };
         };
 
-        // Inisialisasi Firebase dengan objek konfigurasi terenkapsulasi
         const app = initializeApp(getSecureConfig());
         const auth = getAuth(app);
 
